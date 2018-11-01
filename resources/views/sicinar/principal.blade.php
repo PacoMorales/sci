@@ -96,7 +96,7 @@
           <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
               <li class="header">MENÚ PRINCIPAL</li>
-            @if($rango>=2 AND $rango<=3)
+            @if($rango>=1 AND $rango<=4)
               <li class="treeview">
                 <a href="#">
                   <i class="fa fa-gears"></i> <span>Procesos</span>
@@ -106,11 +106,13 @@
                 </a>
                 <ul class="treeview-menu">
                   <li><a href="{{ route('nuevoProceso') }}"><i class="fa fa-circle-o"></i> Nuevo Proceso</a></li>
+                  @if($rango>1)
                   <li><a href="{{ route('verProcesos') }}"><i class="fa fa-circle-o"></i> Ver Procesos</a></li>
+                  @endif
                 </ul>
               </li>
             @endif
-            @if($rango>=1 AND $rango<=3)
+            @if($rango>=1 AND $rango<=4)
               <li>
                 <a href="{{ route('cuestionario') }}">
                   <i class="fa fa-edit"></i> <span>Cuestionario</span>
@@ -120,7 +122,7 @@
                 </a>
               </li>
             @endif
-            @if($rango>=1 AND $rango<=3)
+            @if($rango>=1 AND $rango<=4)
               <li class="header">ELEMENTOS AUXILIARES</li>
               <li>
                 <a href="{{ route('evidencias') }}">

@@ -132,13 +132,16 @@
                     </select>
                 </div>
               </div><br>
-              <!--<div class="row">
+            @if($rango > 1)
+              <div class="row">
                 <div class="col-xs-11">
                   <label >Unidad responsable</label>
                     <select class="form-control m-bot15" name="unidad" id="unidad">
                     </select>
                 </div>
-              </div>-->
+              </div>
+            @endif
+            <br>
             <div class="col-xs-12">
               <div class="box-header with-border">
                 <h2 class="box-title" style="color:gray;">Criterios de Selección</h2>

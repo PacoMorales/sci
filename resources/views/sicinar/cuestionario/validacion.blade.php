@@ -56,10 +56,14 @@
                     <b style="color:green;">Secretaría Responsable:</b>
                       {{$estructura}}
                   </div>
+                  <div class="col-xs-12">
+                    <b style="color:green;">Unidad Administrativa Responsable:</b>
+                      {{$dependencia}}
+                  </div>
                 </div>
               </div><br>
               <div class="row">
-                <div class="col-xs-6">
+                <!--<div class="col-xs-6">
                   <label >* Unidad responsable</label>
                     <select class="form-control m-bot15" name="unidad" id="unidad" required>
                       <option disabled="disabled">Unidad Responsable</option>
@@ -71,7 +75,7 @@
                         @endif
                       @endforeach
                     </select>
-                </div>
+                </div>-->
                 <div class="col-xs-6">
                   <label >* Proceso a evaluar</label>
                     <select class="form-control m-bot15" name="proceso" id="proceso" required>

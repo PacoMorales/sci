@@ -42,11 +42,13 @@
               <table id="tabla1" class="table table-striped table-bordered table-sm">
                 <thead style="color: brown;" class="justify">
                   <tr>
+                    <th>Clave</th>
                     <th>Proceso</th>
                     <th>Tipo</th>
-                    <th>Secretaria</th>
-                    <th>Unidad</th>
+                    <th>Secretaria Responsable</th>
+                    <th>Unidad  Responsable</th>
                     <th>Responsable</th>
+                    <th>Evaluado</th>
                     <th>A</th>
                     <th>B</th>
                     <th>C</th>
@@ -60,6 +62,7 @@
                 <tbody>
                   @foreach($procesos as $proceso)
                     <tr>
+                      <td>{{$proceso->cve_proceso}}</td>
                       <td>{{$proceso->desc_proceso}}</td>
                       @foreach($tipos as $tipo)
                         @if($proceso->cve_tipo_proc == $tipo->cve_tipo_proc)
@@ -78,15 +81,19 @@
                       @foreach($dependencias as $dependencia)
                         @if(rtrim($dependencia->depen_id," ") == $proceso->cve_dependencia)
                           <td>{{$dependencia->depen_desc}}</td>
-                          <!--<td>ENCONTRO</td>-->
                           @break
                         @endif
-                        @if($loop->last)
-                          <td>NO ENCONTRO</td>
-                        @endif
+                        <!--@if($loop->last)
+                          <td>NO ASIGNADO</td>
+                        @endif-->
                       @endforeach
 
                       <td>{{$proceso->responsable}}</td>
+                      @if($proceso->status_1 == 'N')
+                        <th><a href="#" class="btn btn-warning" title="Status: No Evaluado"><i class="fa fa-times"></i></a></th>
+                      @else
+                        <th><a href="#" class="btn btn-primary" title="Status: Evaluado"><i class="fa fa-check"></i></a></th>
+                      @endif
                       @if($proceso->cve_crit_sproc_a == 0)
                         <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
                       @else

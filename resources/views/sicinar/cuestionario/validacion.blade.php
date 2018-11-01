@@ -122,17 +122,29 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          @if($servidor->id_sp == $cuest->id_sp)
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @else
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -156,19 +168,29 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                         <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          @if($servidor->id_sp == $cuest->id_sp)
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @else
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <!--<option value="{{$grado->cve_grado_cump}}" selected="true">{{$grado->cve_grado_cump}} este {{$cuest->num_meec}}</option>-->
-                            <option value="{{$grado->cve_grado_cump}}" selected="true">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} este no {{$cuest->num_meec}}</option>
-                            <!--<option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>-->
+                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -192,17 +214,29 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          @if($servidor->id_sp == $cuest->id_sp)
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @else
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          @if($grado->cve_grado_cump == $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected="true">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          @if($grado->cve_grado_cump === $cuest->num_meec)
+                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -226,17 +260,29 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          @if($servidor->id_sp == $cuest->id_sp)
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @else
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          @if($grado->cve_grado_cump == $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected="true">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          @if($grado->cve_grado_cump === $cuest->num_meec)
+                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -260,17 +306,29 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          @if($servidor->id_sp == $cuest->id_sp)
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @else
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          @if($grado->cve_grado_cump == $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected="true">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          @if($grado->cve_grado_cump === $cuest->num_meec)
+                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>

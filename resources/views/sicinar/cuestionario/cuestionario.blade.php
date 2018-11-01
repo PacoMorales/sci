@@ -115,14 +115,22 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$pregunta->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -145,14 +153,22 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$pregunta->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -175,14 +191,22 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$pregunta->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -205,14 +229,22 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$pregunta->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -235,14 +267,22 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-5">
                       <label style="color:gray;">{{$pregunta->preg_eci}}</label>
                     </div>
                     <div class="col-xs-4">
+                      <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
+                        <option selected="true" disabled="disabled">Responsable</option>
+                        @foreach($servidores as $servidor)
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">{{$grado->cve_grado_cump}} - {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>

@@ -17,6 +17,7 @@ use App\ngciModel;
 use App\evidenciasModel;
 use App\ced_evaluacionModel;
 use App\grado_cumpModel;
+use App\servidorespubModel;
 
 class cuestionarioController extends Controller
 {
@@ -37,16 +38,23 @@ class cuestionarioController extends Controller
         $estructuras = estructurasModel::Estructuras();
         $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
-        $grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        //$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
+                                ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
+                                ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
+                                ->get();
+        //dd($grados->all());
         $procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','N%')->get();
         $unidades = dependenciasModel::Unidades($id_estructura);
+        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+        //dd($servidores->all());
         //dd($unidades->all());
         if($procesos->count() == 0){
         	$proc = 0;
         }/*else{
         	dd($procesos);
         }*/
-        return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','procesos','proc','unidades','id_estructura','dependencia'));
+        return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','procesos','proc','unidades','id_estructura','dependencia','servidores'));
     }
 
     public function actionAltaCuestionario(cuestionarioRequest $request){
@@ -99,7 +107,18 @@ class cuestionarioController extends Controller
 	        	if($i == 31){$nuevo->NUM_MEEC=$request->evaluacion31;}else if($i == 32){$nuevo->NUM_MEEC=$request->evaluacion32;}else if($i == 33){$nuevo->NUM_MEEC=$request->evaluacion33;}
 	        	$nuevo->RESPONSABLE = strtoupper($request->titular);
 	        	$nuevo->OBJ_EVAL = strtoupper($request->objetivo);
-	        	//$nuevo->STATUS_1 = strtoupper('V');
+	        	  //VALOR DEL SERVIDOR PUBLICO
+                if($i == 1){$nuevo->ID_SP=$request->responsable1;}else if($i == 2){$nuevo->ID_SP=$request->responsable2;}else if($i == 3){$nuevo->ID_SP=$request->responsable3;} else
+                if($i == 4){$nuevo->ID_SP=$request->responsable4;}else if($i == 5){$nuevo->ID_SP=$request->responsable5;}else if($i == 6){$nuevo->ID_SP=$request->responsable6;} else
+                if($i == 7){$nuevo->ID_SP=$request->responsable7;}else if($i == 8){$nuevo->ID_SP=$request->responsable8;}else if($i == 9){$nuevo->ID_SP=$request->responsable9;} else
+                if($i == 10){$nuevo->ID_SP=$request->responsable10;}else if($i == 11){$nuevo->ID_SP=$request->responsable11;}else if($i == 12){$nuevo->ID_SP=$request->responsable12;} else
+                if($i == 13){$nuevo->ID_SP=$request->responsable13;}else if($i == 14){$nuevo->ID_SP=$request->responsable14;}else if($i == 15){$nuevo->ID_SP=$request->responsable15;} else
+                if($i == 16){$nuevo->ID_SP=$request->responsable16;}else if($i == 17){$nuevo->ID_SP=$request->responsable17;}else if($i == 18){$nuevo->ID_SP=$request->responsable18;} else
+                if($i == 19){$nuevo->ID_SP=$request->responsable19;}else if($i == 20){$nuevo->ID_SP=$request->responsable20;}else if($i == 21){$nuevo->ID_SP=$request->responsable21;} else
+                if($i == 22){$nuevo->ID_SP=$request->responsable22;}else if($i == 23){$nuevo->ID_SP=$request->responsable23;}else if($i == 24){$nuevo->ID_SP=$request->responsable24;} else
+                if($i == 25){$nuevo->ID_SP=$request->responsable25;}else if($i == 26){$nuevo->ID_SP=$request->responsable26;}else if($i == 27){$nuevo->ID_SP=$request->responsable27;} else
+                if($i == 28){$nuevo->ID_SP=$request->responsable28;}else if($i == 29){$nuevo->ID_SP=$request->responsable29;}else if($i == 30){$nuevo->ID_SP=$request->responsable30;} else
+                if($i == 31){$nuevo->ID_SP=$request->responsable31;}else if($i == 32){$nuevo->ID_SP=$request->responsable32;}else if($i == 33){$nuevo->ID_SP=$request->responsable33;}
 	        	$nuevo->USU = $nombre;
 	        	$nuevo->PW = $pass;
 	        	$nuevo->IP = $ip;
@@ -112,9 +131,14 @@ class cuestionarioController extends Controller
 	        	$estructuras = estructurasModel::Estructuras();
         		$preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         		$apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
-        		$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        		//$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+                $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
+                                ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
+                                ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
+                                ->get();
+                $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
                 toastr()->error('Ha ocurrido algo inesperado al almacenar la pregunta '.$i.'.','Ocurrio algo inesperado!',['positionClass' => 'toast-bottom-right']);
-        		return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','id_estructura','dependencia'));
+        		return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','id_estructura','dependencia','servidores'));
 	        }
 	    }
 	    //id del proceso
@@ -154,18 +178,23 @@ class cuestionarioController extends Controller
     	$estructuras = estructurasModel::Estructuras();
         $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
-        $grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        //$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
+                                ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
+                                ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
+                                ->get();
         $unidades = dependenciasModel::Unidades($id_estructura);
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','N%')->get();
         if($procesos->count() == 0){
         	$proc = 0;
         }
+        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
         //dd($id_proceso);
         $process = procesosModel::where('CVE_PROCESO',$id_proceso)->update(['STATUS_1'=>'E']);
         //dd($process->all());
         session()->forget('idproc');
         toastr()->success('La evaluación se ha almacenado.','Bien!',['positionClass' => 'toast-bottom-right']);
-        return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','unidades','procesos','proc','id_estructura','dependencia'));
+        return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     }
 
     public function actionVerificar($id){
@@ -185,7 +214,11 @@ class cuestionarioController extends Controller
     	$estructuras = estructurasModel::Estructuras();
         $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
-        $grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        //$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
+                                ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
+                                ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
+                                ->get();
     	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
     	$unidades = dependenciasModel::Unidades($id_estructura);
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','%V%')->get();
@@ -193,7 +226,8 @@ class cuestionarioController extends Controller
         	$proc = 0;
         }
     	$num_eval_aux = $id;
-    	return view('sicinar.cuestionario.validacion',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia'));
+        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+    	return view('sicinar.cuestionario.validacion',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     }
 
     public function actionVerificando(cuestionarioRequest $request, $id){
@@ -225,12 +259,21 @@ class cuestionarioController extends Controller
         					$request->evaluacion21,$request->evaluacion22,$request->evaluacion23,$request->evaluacion24,
         					$request->evaluacion25,$request->evaluacion26,$request->evaluacion27,$request->evaluacion28,
         					$request->evaluacion29,$request->evaluacion30,$request->evaluacion31,$request->evaluacion32,$request->evaluacion33];
+        $responsables = [$request->responsable1,$request->responsable2,$request->responsable3,$request->responsable4,
+                            $request->responsable5,$request->responsable6,$request->responsable7,$request->responsable8,
+                            $request->responsable9,$request->responsable10,$request->responsable11,$request->responsable12,
+                            $request->responsable13,$request->responsable14,$request->responsable15,$request->responsable16,
+                            $request->responsable17,$request->responsable18,$request->responsable19,$request->responsable20,
+                            $request->responsable21,$request->responsable22,$request->responsable23,$request->responsable24,
+                            $request->responsable25,$request->responsable26,$request->responsable27,$request->responsable28,
+                            $request->responsable29,$request->responsable30,$request->responsable31,$request->responsable32,$request->responsable33];
         for($i=1;$i<=$total;$i++){
 	        $cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)
 	        									->where('NUM_ECI',$i)
 	        									->update([
 	        										'MES'=>$mes_aux,
 	        										'NUM_MEEC'=>$evaluaciones[($i-1)],
+                                                    'ID_SP'=>$responsables[($i-1)],
 	        										'RESPONSABLE'=>strtoupper($request->titular),
 	        										'USU_M'=>$nombre,
 	        										'PW_M'=>$pass,
@@ -245,7 +288,11 @@ class cuestionarioController extends Controller
     	$estructuras = estructurasModel::Estructuras();
         $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
-        $grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        //$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
+                                ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
+                                ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
+                                ->get();
     	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
     	$unidades = dependenciasModel::Unidades($id_estructura);
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','%N%')->get();
@@ -253,8 +300,9 @@ class cuestionarioController extends Controller
         	$proc = 0;
         }
         $process = procesosModel::where('CVE_PROCESO',$request->proceso)->update(['CVE_DEPENDENCIA'=>$request->unidad,'RESPONSABLE'=>strtoupper($request->titular),'STATUS_1'=>'E']);
+        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
         toastr()->success('La evaluación se ha almacenado.','Bien!',['positionClass' => 'toast-bottom-right']);
-        return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','unidades','procesos','proc','id_estructura','dependencia'));
+        return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     }
 
     public function actionListaEvidencias(){

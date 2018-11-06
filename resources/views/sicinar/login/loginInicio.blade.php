@@ -3,7 +3,8 @@
 @section('title','Iniciar Sesión')
 
 @section('content')
-<body class="hold-transition login-page">
+<!--<body class="hold-transition login-page">-->
+<body class="hold-transition">
   <img src="{{ asset('images/Logo-Gobierno.png') }}" border="1" width="200" height="60" style="margin-left: 200px;margin-right: 50%">
   <img src="{{ asset('images/Edomex.png') }}" border="1" width="80" height="60">
 <!--<body>-->
@@ -24,7 +25,7 @@
     <div class="login-logo">
       <a href="#"><b style="color:green;">SCI</b></a>
       <!--<b style="color:blue;"><h3>SISTEMA DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS</h3></b>-->
-      <h4 style="color:gray;">SISTEMA DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS</h4>
+      <h4 style="color:LightSteelBlue;">SISTEMA DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS</h4>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -61,7 +62,7 @@
     <div class="login-logo"><br><br>
       <!--<a href="#"><b>SEDESEM</b></a>-->
       <!--<b style="color:blue;"><h3>SISTEMA DE CONTROL INTERNO Y ADMINISTRACIÓN DE RIESGOS</h3></b>-->
-      <h4 style="color:gray;">SECRETARIA DE DESARROLLO SOCIAL</h4>
+      <h4 style="color:LightSkyBlue;">SECRETARIA DE DESARROLLO SOCIAL</h4>
     </div>
   </div>
 

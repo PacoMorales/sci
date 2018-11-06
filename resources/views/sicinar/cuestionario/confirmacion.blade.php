@@ -18,7 +18,7 @@
   <div class="content-wrapper" id="principal">
     <section class="content-header">
       <h1>
-        Cédula de Evaluación en materia de Control Interno<br>con base en el Manual Administrativo de Aplicación General
+        Cédula de Evaluación en materia de Control Interno<small>con base en el Manual Administrativo de Aplicación General</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Menú</a></li>

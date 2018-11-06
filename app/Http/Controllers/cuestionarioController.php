@@ -18,6 +18,8 @@ use App\evidenciasModel;
 use App\ced_evaluacionModel;
 use App\grado_cumpModel;
 use App\servidorespubModel;
+use App\ponderacionModel;
+use App\m_evaelemcontrolModel;
 
 class cuestionarioController extends Controller
 {
@@ -141,6 +143,80 @@ class cuestionarioController extends Controller
         		return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','id_estructura','dependencia','servidores'));
 	        }
 	    }
+        //ponderacion de la evaluación
+        $apartado1 = 0; 
+        $apartado2 = 0; 
+        $apartado3 = 0; 
+        $apartado4 = 0; 
+        $apartado5 = 0;
+        $m_eval = m_evaelemcontrolModel::select('CVE_GRADO_CUMP','PORC_MEEC')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        for($i=1;$i<=33;$i++){
+            if($i>=1 AND $i<=8){
+                if($i == 1){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion1){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 2){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion2){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 3){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion3){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 4){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion4){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 5){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion5){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 6){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion6){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 7){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion7){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 8){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion8){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}
+            }else
+            if($i>=9 AND $i<=12){
+                if($i == 9){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion9){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}else
+                if($i == 10){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion10){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}else
+                if($i == 11){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion11){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}else
+                if($i == 12){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion12){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}
+            }else
+            if($i>=13 AND $i<=24){
+                if($i == 13){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion13){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 14){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion14){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 15){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion15){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 16){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion16){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 17){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion17){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 18){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion18){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 19){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion19){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 20){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion20){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 21){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion21){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 22){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion22){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 23){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion23){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 24){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion24){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}
+            }else
+            if($i>=25 AND $i<=30){
+                if($i == 25){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion25){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 26){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion26){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 27){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion27){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 28){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion28){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 29){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion29){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 30){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion30){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}
+            }if($i>=31 AND $i<=33){
+                if($i == 31){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion31){$apartado5 = $apartado5 + $eval->porc_meec; break;}}}else
+                if($i == 32){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion32){$apartado5 = $apartado5 + $eval->porc_meec; break;}}}else
+                if($i == 33){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion33){$apartado5 = $apartado5 + $eval->porc_meec; break;}}}
+            }
+        }
+        //dd('apartado1:'.$apartado1.'. apartado2:'.$apartado2.'. apartado3:'.$apartado3.'. apartado4:'.$apartado4.'. apartado5:'.$apartado5);
+        //dd('apartado1:'.($apartado1/8).'. apartado2:'.($apartado2/4).'. apartado3:'.($apartado3/12).'. apartado4:'.($apartado4/6).'. apartado5:'.($apartado5/3).'.');
+        $pond = new ponderacionModel();
+        $pond->N_PERIODO = $per_aux;
+        $pond->ESTRUCGOB_ID = $id_estructura;
+        $pond->CVE_DEPENDENCIA = $id_dependencia;
+        $pond->CVE_PROCESO = $request->proceso;
+        $pond->NUM_EVAL = $max;
+        $pond->POND_NGCI1 = ($apartado1/8);
+        $pond->POND_NGCI2 = ($apartado2/4);
+        $pond->POND_NGCI3 = ($apartado3/12);
+        $pond->POND_NGCI4 = ($apartado4/6);
+        $pond->POND_NGCI5 = ($apartado5/3);
+        $pond->USU = $nombre;
+        $pond->PW = $pass;
+        $pond->IP = $ip;
+        $pond->FECHA_REG = $hoy;
+        $pond->USU_M = $nombre;
+        $pond->PW_M = $pass;
+        $pond->IP_M = $ip;
+        $pond->FECHA_M = $hoy;
+        $pond->save();
+
 	    //id del proceso
 	    session()->put('idproc',$request->proceso);
         //ACTUALIZAR PROCESO
@@ -220,6 +296,7 @@ class cuestionarioController extends Controller
                                 ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
                                 ->get();
     	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
+        //dd($cuestionario[0]);
     	$unidades = dependenciasModel::Unidades($id_estructura);
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','%V%')->get();
         if($procesos->count() == 0){
@@ -299,7 +376,67 @@ class cuestionarioController extends Controller
         if($procesos->count() == 0){
         	$proc = 0;
         }
-        $process = procesosModel::where('CVE_PROCESO',$request->proceso)->update(['CVE_DEPENDENCIA'=>$request->unidad,'RESPONSABLE'=>strtoupper($request->titular),'STATUS_1'=>'E']);
+
+        //ponderacion de la evaluación
+        $apartado1 = 0; 
+        $apartado2 = 0; 
+        $apartado3 = 0; 
+        $apartado4 = 0; 
+        $apartado5 = 0;
+        $m_eval = m_evaelemcontrolModel::select('CVE_GRADO_CUMP','PORC_MEEC')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        for($i=1;$i<=33;$i++){
+            if($i>=1 AND $i<=8){
+                if($i == 1){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion1){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 2){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion2){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 3){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion3){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 4){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion4){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 5){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion5){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 6){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion6){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 7){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion7){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}else
+                if($i == 8){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion8){$apartado1 = $apartado1 + $eval->porc_meec; break;}}}
+            }else
+            if($i>=9 AND $i<=12){
+                if($i == 9){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion9){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}else
+                if($i == 10){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion10){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}else
+                if($i == 11){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion11){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}else
+                if($i == 12){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion12){$apartado2 = $apartado2 + $eval->porc_meec; break;}}}
+            }else
+            if($i>=13 AND $i<=24){
+                if($i == 13){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion13){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 14){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion14){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 15){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion15){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 16){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion16){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 17){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion17){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 18){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion18){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 19){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion19){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 20){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion20){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 21){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion21){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 22){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion22){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 23){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion23){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}else
+                if($i == 24){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion24){$apartado3 = $apartado3 + $eval->porc_meec; break;}}}
+            }else
+            if($i>=25 AND $i<=30){
+                if($i == 25){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion25){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 26){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion26){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 27){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion27){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 28){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion28){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 29){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion29){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}else
+                if($i == 30){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion30){$apartado4 = $apartado4 + $eval->porc_meec; break;}}}
+            }if($i>=31 AND $i<=33){
+                if($i == 31){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion31){$apartado5 = $apartado5 + $eval->porc_meec; break;}}}else
+                if($i == 32){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion32){$apartado5 = $apartado5 + $eval->porc_meec; break;}}}else
+                if($i == 33){foreach($m_eval as $eval){if($eval->cve_grado_cump == $request->evaluacion33){$apartado5 = $apartado5 + $eval->porc_meec; break;}}}
+            }
+        }
+        //dd('apartado1:'.$apartado1.'. apartado2:'.$apartado2.'. apartado3:'.$apartado3.'. apartado4:'.$apartado4.'. apartado5:'.$apartado5);
+        //dd('apartado1:'.($apartado1/8).'. apartado2:'.($apartado2/4).'. apartado3:'.($apartado3/12).'. apartado4:'.($apartado4/6).'. apartado5:'.($apartado5/3).'.');
+        $pond = ponderacionModel::where('CVE_PROCESO',$request->proceso)->update(['POND_NGCI1' => ($apartado1/8),
+                                                                                    'POND_NGCI2' => ($apartado2/4),
+                                                                                    'POND_NGCI3' => ($apartado3/12),
+                                                                                    'POND_NGCI4' => ($apartado4/6),
+                                                                                    'POND_NGCI5' => ($apartado5/3)]);
+
+        $process = procesosModel::where('CVE_PROCESO',$request->proceso)->update(['CVE_DEPENDENCIA'=>$id_dependencia,'RESPONSABLE'=>strtoupper($request->titular),'STATUS_1'=>'E']);
         $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
         toastr()->success('La evaluación se ha almacenado.','Bien!',['positionClass' => 'toast-bottom-right']);
         return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','unidades','procesos','proc','id_estructura','dependencia','servidores'));

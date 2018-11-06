@@ -83,9 +83,9 @@
                           <td>{{$dependencia->depen_desc}}</td>
                           @break
                         @endif
-                        <!--@if($loop->last)
+                        @if($loop->last)
                           <td>NO ASIGNADO</td>
-                        @endif-->
+                        @endif
                       @endforeach
 
                       <td>{{$proceso->responsable}}</td>

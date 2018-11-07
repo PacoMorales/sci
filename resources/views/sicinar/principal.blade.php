@@ -108,6 +108,7 @@
                   <li><a href="{{ route('nuevoProceso') }}"><i class="fa fa-circle-o"></i> Nuevo Proceso</a></li>
                   @if($rango>1)
                   <li><a href="{{ route('verProcesos') }}"><i class="fa fa-circle-o"></i> Ver Procesos</a></li>
+                  <li><a href="{{ route('evalProcesos') }}"><i class="fa fa-circle-o"></i> Evaluaciones</a></li>
                   @endif
                 </ul>
               </li>

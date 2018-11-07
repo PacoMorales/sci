@@ -9,6 +9,7 @@ use App\critseccModel;
 use App\tipoprocesoModel;
 use App\dependenciasModel;
 use App\procesosModel;
+use App\ponderacionModel;
 use App\Http\Requests\procesoRequest;
 
 class procesosController extends Controller
@@ -133,6 +134,36 @@ class procesosController extends Controller
         //dd($id_estructura);
         $rango = session()->get('rango');
         return view('sicinar.procesos.graficaProcesos',compact('nombre','usuario','estructura','rango'));
+    }
+
+    public function actionEvalProcesos(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $dependencia = session()->get('nombre_dependencia');
+        $id_dependencia = session()->get('dependencia');
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = ponderacionModel::count();
+        $procesos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
+                                        ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
+                                        ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
+                                        ->paginate(15);
+        //dd($procesos);
+        if($id_estructura == '0')
+            $dependencias = dependenciasModel::Unidades('21500');
+        else
+            $dependencias = dependenciasModel::Unidades($id_estructura);
+        //dd($dependencias);
+        $estructuras = estructurasModel::Estructuras();
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        return view('sicinar.procesos.evalProcesos',compact('nombre','usuario','estructura','rango','procesos','total','estructuras','dependencias','tipos'));
     }
 
     public function actionUnidades(Request $request, $id){

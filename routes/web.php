@@ -33,6 +33,7 @@ Route::group(['prefix' => 'control-interno'], function(){
 	Route::get('procesos/unidades/{id}','procesosController@actionUnidades')->name('unidades');
 	Route::get('cuestionario/unidades/{id}','procesosController@actionUnidades');
 	Route::get('procesos/ver/todos','procesosController@actionVerProcesos')->name('verProcesos');
+	Route::get('procesos/ver/todos/evaluaciones','procesosController@actionEvalProcesos')->name('evalProcesos');
 	//Route::get('catalogo/padrinos/{folio}','METADATO_PADRINOS_Controller@create')->name('padrinos.tabla');
 	//Route::get('catalogo/padrino/mantenimiento/','METADATO_PADRINOS_Controller@generarTabla')->name('padrino.ver');
 });

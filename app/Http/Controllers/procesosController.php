@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ngciModel;
 use Illuminate\Http\Request;
 use App\usuarioModel;
 use App\estructurasModel;
@@ -13,6 +14,7 @@ use App\ponderacionModel;
 use App\Http\Requests\procesoRequest;
 use App\Exports\ExcelExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class procesosController extends Controller
 {
@@ -165,7 +167,8 @@ class procesosController extends Controller
         //dd($dependencias);
         $estructuras = estructurasModel::Estructuras();
         $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
-        return view('sicinar.procesos.evalProcesos',compact('nombre','usuario','estructura','rango','procesos','total','estructuras','dependencias','tipos'));
+        $apartados = ngciModel::select('DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
+        return view('sicinar.procesos.evalProcesos',compact('nombre','usuario','estructura','rango','procesos','total','estructuras','dependencias','tipos','apartados'));
     }
 
     public function actionUnidades(Request $request, $id){
@@ -173,8 +176,16 @@ class procesosController extends Controller
     	$nuevo = new procesosModel();
     }
 
-    public function export()
-    {
+    public function export(){
         return Excel::download(new ExcelExport, 'Procesos_'.date('d-m-Y').'.xlsx');
+    }
+
+    public function generarPDF(){
+        $datos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
+                                ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
+                                ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
+                                ->get();
+        $pdf = PDF::loadView('sicinar.procesos.procesosPDF', $datos);
+        return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
     }
 }

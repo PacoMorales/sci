@@ -49,14 +49,14 @@
                     <th>Unidad  Responsable</th>
                     <th>Responsable</th>
                     <th>Evaluado</th>
-                    <th>A</th>
-                    <th>B</th>
-                    <th>C</th>
-                    <th>D</th>
-                    <th>E</th>
-                    <th>F</th>
-                    <th>G</th>
-                    <th>H</th>
+                    <th>Criterio A</th>
+                    <th>Criterio B</th>
+                    <th>Criterio C</th>
+                    <th>Criterio D</th>
+                    <th>Criterio E</th>
+                    <th>Criterio F</th>
+                    <th>Criterio G</th>
+                    <th>Criterio H</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -90,49 +90,49 @@
 
                       <td>{{$proceso->responsable}}</td>
                       @if($proceso->status_1 == 'N')
-                        <th><a href="#" class="btn btn-warning" title="Status: No Evaluado"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-danger" title="Status: No Evaluado"><i class="fa fa-times"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-primary" title="Status: Evaluado"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-success" title="Status: Evaluado"><i class="fa fa-check"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_a == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_b == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_c == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_d == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_e == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_f == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_g == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       @if($proceso->cve_crit_sproc_h == 0)
-                        <th><a href="#" class="btn btn-danger" title="Status: Inactivo"><i class="fa fa-times"></i></a></th>
+                        <th><a href="#" class="btn btn-info" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
                       @else
-                        <th><a href="#" class="btn btn-success" title="Status: Activo"><i class="fa fa-check"></i></a></th>
+                        <th><a href="#" class="btn btn-primary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
                       @endif
                       
                     </tr>

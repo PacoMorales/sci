@@ -86,15 +86,19 @@
                       @endif
                     </select>
                 </div>
+                  <div class="col-xs-6">
+                    <label >* Nombre del Enlace</label>
+                      <input type="text" class="form-control" name="titular" id="titular" placeholder="* Nombre del Enlace" onkeypress="return soloAlfa(event)" required>
+                  </div>
               </div>
               <br>
               <div class="row">
                 <div class="col-xs-6">
-                  <label >* Nombre del Titular</label>
+                  <label >* Nombre del Titular de la Dependencia / Organismo Auxiliar</label>
                   <input type="text" class="form-control" name="titular" id="titular" placeholder="* Nombre del Titular de la Dependencia / Organismo Auxiliar" onkeypress="return soloAlfa(event)" required>
                 </div>
                 <div class="col-xs-6">
-                  <label >* Objetivo de la Evaluación</label>
+                  <label >* Objetivo General de la Evaluación</label>
                   <input type="text" class="form-control" name="objetivo" id="objetivo" placeholder="* Objetivo General de la Evaluación" onkeypress="return general(event)" required>
                 </div>
               </div>
@@ -130,7 +134,7 @@
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -168,7 +172,7 @@
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -206,7 +210,7 @@
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -244,7 +248,7 @@
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -282,7 +286,7 @@
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
                         <option selected="true" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
-                          <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                          <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>

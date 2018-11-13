@@ -37,25 +37,24 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Procesos evaluados: {{$total}}</h3>
-              <small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  XLSX</a></small>
+              <small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('pdf') }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
+              <small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  EXCEL</a></small>
               <!--<small class="pull-right"><a class="btn btn-danger" href="#" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>-->
-              <small class="pull-right" style="margin-right: 5px;">Exportar a Excel </small>
+              <small class="pull-right" style="margin-right: 5px;">Exportar </small>
             </div>
             <div class="box-body">
               <table id="tabla1" class="table table-striped table-bordered table-sm">
                 <thead style="color: brown;" class="justify">
                   <tr>
-                    <th>Clave</th>
-                    <th>Proceso</th>
-                    <th>Tipo</th>
-                    <th>Secretaria Responsable</th>
-                    <th>Unidad Responsable</th>
-                    <th>Responsable</th>
-                    <th>Secc. 1</th>
-                    <th>Secc. 2</th>
-                    <th>Secc. 3</th>
-                    <th>Secc. 4</th>
-                    <th>Secc. 5</th>
+                    <th>CLAVE</th>
+                    <th>PROCESO</th>
+                    <th>TIPO</th>
+                    <th>SECRETARÍA RESPONSABLE</th>
+                    <th>UNIDAD RESPONSABLE</th>
+                    <th>RESPONSABLE</th>
+                    @foreach($apartados as $apartado)
+                      <th>{{$apartado->desc_ngci}}</th>
+                    @endforeach
                   </tr>
                 </thead>
                 <tbody>

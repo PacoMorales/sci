@@ -142,9 +142,9 @@
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                            <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -188,9 +188,9 @@
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -234,9 +234,9 @@
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -280,9 +280,9 @@
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -326,9 +326,9 @@
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
                           @if($grado->cve_grado_cump === $cuest->num_meec)
-                            <option value="{{$grado->cve_grado_cump}}" selected>Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->desc_grado_cump}}</option>
                           @else
-                            <option value="{{$grado->cve_grado_cump}}">Evaluación: {{$grado->cve_grado_cump}} - Valor: {{ $grado->porc_meec}} - Nivel: {{$grado->desc_grado_cump}}</option>
+                                  <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                           @endif
                         @endforeach
                       </select>

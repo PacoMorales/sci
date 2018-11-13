@@ -80,6 +80,7 @@ class usuariosController extends Controller
     public function actionCerrarSesion(){
         session()->forget('userlog','passlog','usuario','estructura','ip','rango','id_estructura');
         //REGRESA AL LOGIN PRINCIPAL
+        //return view('sicinar.login.terminada');
         return view('sicinar.login.loginInicio');
     }
 

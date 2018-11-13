@@ -36,5 +36,5 @@ Route::group(['prefix' => 'control-interno'], function(){
 	Route::get('procesos/ver/todos/evaluaciones','procesosController@actionEvalProcesos')->name('evalProcesos');
 
 	Route::get('downloadExcel','procesosController@export')->name('download');
-	Route::get('generarPDF','procesosController@generarPDF')->name('pdf');
+	Route::get('generaPDF','procesosController@generarPDF')->name('pdf');
 });

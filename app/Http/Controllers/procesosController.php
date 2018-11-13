@@ -175,6 +175,6 @@ class procesosController extends Controller
 
     public function export()
     {
-        return Excel::download(new ExcelExport, 'procesos.xlsx');
+        return Excel::download(new ExcelExport, 'Procesos_'.date('d-m-Y').'.xlsx');
     }
 }

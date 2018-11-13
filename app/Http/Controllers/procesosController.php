@@ -11,6 +11,8 @@ use App\dependenciasModel;
 use App\procesosModel;
 use App\ponderacionModel;
 use App\Http\Requests\procesoRequest;
+use App\Exports\ExcelExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class procesosController extends Controller
 {
@@ -169,5 +171,10 @@ class procesosController extends Controller
     public function actionUnidades(Request $request, $id){
     	return (response()->json(dependenciasModel::Unidades($id)));
     	$nuevo = new procesosModel();
+    }
+
+    public function export()
+    {
+        return Excel::download(new ExcelExport, 'procesos.xlsx');
     }
 }

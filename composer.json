@@ -11,6 +11,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.6",
+        "maatwebsite/excel": "^3.1",
         "proengsoft/laravel-jsvalidation": ">2.2.0",
         "propaganistas/laravel-fakeid": "^4.0",
         "yajra/laravel-oci8": "5.6.*",

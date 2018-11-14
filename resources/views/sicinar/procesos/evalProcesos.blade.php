@@ -22,8 +22,8 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Lista de Procesos Evaluados
-        <small> en sistema</small>
+        Procesos Evaluados
+        <small> por sistema</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Menú</a></li>
@@ -34,13 +34,97 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title"><b>Ponderación de Normas General de Control Interno (NGCI)</b></h3>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-xs-12">
+                  <!--<b style="color:red;">¡Importante!</b><br>-->
+                  <b>Ponderación = Σ {valoraciones | valoración ∈ NGCI } / total de elementos de control  ∈ NGCI</b><br>
+                  Ponderación = sumatoria de todo el conjunto de valoraciones, tal que, cada valoración pertenece a NGCI, dividido entre la cantidad total de elementos de control que pertenecen a cada NGCI.<br>
+                  (La siguiente tabla es una ponderación ejemplo).
+                </div>
+              </div>
+              <table id="tabla1" class="table table-striped table-bordered table-sm">
+                <thead style="color: brown;" class="justify">
+                  <tr>
+                    <th>NGCI</th>
+                    <th>Suma total de valoraciones (%)</th>
+                    <th>Cantidad de elementos de control</th>
+                    <th>Ponderación (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1.- AMBIENTE DE CONTROL</td>
+                    <td>400 %</td>
+                    <td>8</td>
+                    <td>50 %</td>
+                  </tr>
+                  <tr>
+                    <td>2.- ADMINISTRACIÓN DE RIEZGOS</td>
+                    <td>216.6 %</td>
+                    <td>4</td>
+                    <td>54.15 %</td>
+                  </tr>
+                  <tr>
+                    <td>3.- ACTIVIDADES DE CONTROL</td>
+                    <td>716.6 %</td>
+                    <td>12</td>
+                    <td>59.71 %</td>
+                  </tr>
+                  <tr>
+                    <td>4.- INFORMAR Y COMUNICAR</td>
+                    <td>299.9 %</td>
+                    <td>6</td>
+                    <td>49.98 %</td>
+                  </tr>
+                  <tr>
+                    <td>5.- SUPERVISION Y MEJORA CONTINUA</td>
+                    <td>200 %</td>
+                    <td>3</td>
+                    <td>66.66 %</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div class="row">
+                <div class="col-xs-12">
+                  <b>Semáforos</b><br>
+                  Si la <b>ponderación</b> es mayor o igual a 0.0% y menor o igual a 16.7%, resaltará en color <b style="color:red;">rojo</b>.<br>
+                  Si la <b>ponderación</b> es mayor o igual a 16.8% y menor o igual a 33.3%, resaltará en color <b style="color:orange;">naranja</b>.<br>
+                  Si la <b>ponderación</b> es mayor o igual a 33.4% y menor o igual a 50.0%, se resaltará en color <b style="color:green;">verde</b>.<br>
+                  Si la <b>ponderación</b> es mayor o igual a 50.1% y menor o igual a 66.7%, se resaltará en color <b style="color:blue;">azul</b>.<br>
+                  Si la <b>ponderación</b> es mayor o igual a 66.8% y menor o igual a 83.3%, se resaltará en color <b style="color:deepskyblue;">azul claro</b>.<br>
+                  Si la <b>ponderación</b> es mayor o igual a 83.4% y menor o igual a 100.0%, se resaltará en color <b style="color:gray;">gris</b>.<br>
+                </div>
+              </div>
+              <!--<div class="margin">
+                <div class="btn-group">
+                  <div class="col-md-6">
+                    <a href="#" class="btn btn-success"><span>Confirmar </span><i class="fa fa-check"></i></a>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="#" class="btn btn-info"><span>Verificar </span><i class="fa fa-share"></i></a>
+                  </div>
+                  <br>
+                </div>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Procesos evaluados: {{$total}}</h3>
-              <small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('pdf') }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
+              <h3 class="box-title"><b>Ponderación de Normas General de Control Interno (NGCI)</b></h3>
+              <br>Cantidad total de procesos evaluados: {{$total}}
+              <!--<small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('pdf') }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
               <small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  EXCEL</a></small>
-              <!--<small class="pull-right"><a class="btn btn-danger" href="#" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>-->
-              <small class="pull-right" style="margin-right: 5px;">Exportar </small>
+              <small class="pull-right" style="margin-right: 5px;">Exportar </small>-->
             </div>
             <div class="box-body">
               <table id="tabla1" class="table table-striped table-bordered table-sm">
@@ -87,71 +171,123 @@
                       @endforeach
 
                       <td>{{$proceso->responsable}}</td>
-                      @if($proceso->pond_ngci1 <= 59.99)
-                        <th><a href="#" class="btn btn-danger" title="Bajo"><b>{{$proceso->pond_ngci1}}%</b></a></th>
+                      @if($proceso->pond_ngci1 >= 0 AND $proceso->pond_ngci1 <= 16.79)
+                        <th><a href="#" class="btn btn-danger"><b>{{$proceso->pond_ngci1}}%</b></a></th>
                       @else
-                        @if($proceso->pond_ngci1 >= 60.00 AND $proceso->pond_ngci1 <= 79.99)
-                          <th><a href="#" class="btn btn-warning" title="Medio"><b>{{$proceso->pond_ngci1}}%</b></a></th>
+                        @if($proceso->pond_ngci1 >= 16.80 AND $proceso->pond_ngci1 <= 33.39)
+                          <th><a href="#" class="btn btn-warning"><b>{{$proceso->pond_ngci1}}%</b></a></th>
                         @else
-                          @if($proceso->pond_ngci1 >= 80.00)
-                            <th><a href="#" class="btn btn-success" title="Alto"><b>{{$proceso->pond_ngci1}}%</b></a></th>
-                            <!--<th>{{$proceso->pond_ngci1}}</th>-->
+                          @if($proceso->pond_ngci1 >= 33.40 AND $proceso->pond_ngci1 <= 50.09)
+                            <th><a href="#" class="btn btn-success"><b>{{$proceso->pond_ngci1}}%</b></a></th>
                           @else
-                            <th>{{$proceso->pond_ngci1}}</th>
+                            @if($proceso->pond_ngci1 >= 50.1 AND $proceso->pond_ngci1 <= 66.79)
+                              <th><a href="#" class="btn btn-primary"><b>{{$proceso->pond_ngci1}}%</b></a></th>
+                            @else
+                              @if($proceso->pond_ngci1 >= 66.8 AND $proceso->pond_ngci1 <= 83.39)
+                                <th><a href="#" class="btn btn-info"><b>{{$proceso->pond_ngci1}}%</b></a></th>
+                              @else
+                                @if($proceso->pond_ngci1 >= 83.4 AND $proceso->pond_ngci1 <= 100)
+                                  <th><a href="#" class="btn btn-default"><b>{{$proceso->pond_ngci1}}%</b></a></th>
+                                @else
+                                @endif
+                              @endif
+                            @endif
                           @endif
                         @endif
                       @endif
-                      @if($proceso->pond_ngci2 <= 59.99)
-                        <th><a href="#" class="btn btn-danger" title="Bajo"><b>{{$proceso->pond_ngci2}}%</b></a></th>
+                      @if($proceso->pond_ngci2 >= 0 AND $proceso->pond_ngci2 <= 16.79)
+                        <th><a href="#" class="btn btn-danger"><b>{{$proceso->pond_ngci2}}%</b></a></th>
                       @else
-                        @if($proceso->pond_ngci2 >= 60.00 AND $proceso->pond_ngci2 <= 79.99)
-                          <th><a href="#" class="btn btn-warning" title="Medio"><b>{{$proceso->pond_ngci2}}%</b></a></th>
+                        @if($proceso->pond_ngci2 >= 16.80 AND $proceso->pond_ngci2 <= 33.39)
+                          <th><a href="#" class="btn btn-warning"><b>{{$proceso->pond_ngci2}}%</b></a></th>
                         @else
-                          @if($proceso->pond_ngci2 >= 80.00)
-                            <th><a href="#" class="btn btn-success" title="Alto"><b>{{$proceso->pond_ngci2}}%</b></a></th>
-                            <!--<th>{{$proceso->pond_ngci1}}</th>-->
+                          @if($proceso->pond_ngci2 >= 33.40 AND $proceso->pond_ngci2 <= 50.09)
+                            <th><a href="#" class="btn btn-success"><b>{{$proceso->pond_ngci2}}%</b></a></th>
                           @else
-                            <th>{{$proceso->pond_ngci2}}</th>
+                            @if($proceso->pond_ngci2 >= 50.1 AND $proceso->pond_ngci2 <= 66.79)
+                              <th><a href="#" class="btn btn-primary"><b>{{$proceso->pond_ngci2}}%</b></a></th>
+                            @else
+                              @if($proceso->pond_ngci2 >= 66.8 AND $proceso->pond_ngci2 <= 83.39)
+                                <th><a href="#" class="btn btn-info"><b>{{$proceso->pond_ngci2}}%</b></a></th>
+                              @else
+                                @if($proceso->pond_ngci2 >= 83.4 AND $proceso->pond_ngci2 <= 100)
+                                  <th><a href="#" class="btn btn-default"><b>{{$proceso->pond_ngci2}}%</b></a></th>
+                                @else
+                                @endif
+                              @endif
+                            @endif
                           @endif
                         @endif
                       @endif
-                      @if($proceso->pond_ngci3 <= 59.99)
-                        <th><a href="#" class="btn btn-danger" title="Bajo"><b>{{$proceso->pond_ngci3}}%</b></a></th>
+                      @if($proceso->pond_ngci3 >= 0 AND $proceso->pond_ngci3 <= 16.79)
+                        <th><a href="#" class="btn btn-danger"><b>{{$proceso->pond_ngci3}}%</b></a></th>
                       @else
-                        @if($proceso->pond_ngci3 >= 60.00 AND $proceso->pond_ngci3 <= 79.99)
-                          <th><a href="#" class="btn btn-warning" title="Medio"><b>{{$proceso->pond_ngci3}}%</b></a></th>
+                        @if($proceso->pond_ngci3 >= 16.80 AND $proceso->pond_ngci3 <= 33.39)
+                          <th><a href="#" class="btn btn-warning"><b>{{$proceso->pond_ngci3}}%</b></a></th>
                         @else
-                          @if($proceso->pond_ngci3 >= 80.00)
-                            <th><a href="#" class="btn btn-success" title="Alto"><b>{{$proceso->pond_ngci3}}%</b></a></th>
-                            <!--<th>{{$proceso->pond_ngci1}}</th>-->
+                          @if($proceso->pond_ngci3 >= 33.40 AND $proceso->pond_ngci3 <= 50.09)
+                            <th><a href="#" class="btn btn-success"><b>{{$proceso->pond_ngci3}}%</b></a></th>
                           @else
-                            <th>{{$proceso->pond_ngci3}}</th>
+                            @if($proceso->pond_ngci3 >= 50.1 AND $proceso->pond_ngci3 <= 66.79)
+                              <th><a href="#" class="btn btn-primary"><b>{{$proceso->pond_ngci3}}%</b></a></th>
+                            @else
+                              @if($proceso->pond_ngci3 >= 66.8 AND $proceso->pond_ngci3 <= 83.39)
+                                <th><a href="#" class="btn btn-info"><b>{{$proceso->pond_ngci3}}%</b></a></th>
+                              @else
+                                @if($proceso->pond_ngci3 >= 83.4 AND $proceso->pond_ngci3 <= 100)
+                                  <th><a href="#" class="btn btn-default"><b>{{$proceso->pond_ngci3}}%</b></a></th>
+                                @else
+                                @endif
+                              @endif
+                            @endif
                           @endif
                         @endif
                       @endif
-                      @if($proceso->pond_ngci4 <= 59.99)
-                        <th><a href="#" class="btn btn-danger" title="Bajo"><b>{{$proceso->pond_ngci4}}%</b></a></th>
+                      @if($proceso->pond_ngci4 >= 0 AND $proceso->pond_ngci4 <= 16.79)
+                        <th><a href="#" class="btn btn-danger"><b>{{$proceso->pond_ngci4}}%</b></a></th>
                       @else
-                        @if($proceso->pond_ngci4 >= 60.00 AND $proceso->pond_ngci4 <= 79.99)
-                          <th><a href="#" class="btn btn-warning" title="Medio"><b>{{$proceso->pond_ngci4}}%</b></a></th>
+                        @if($proceso->pond_ngci4 >= 16.80 AND $proceso->pond_ngci4 <= 33.39)
+                          <th><a href="#" class="btn btn-warning"><b>{{$proceso->pond_ngci4}}%</b></a></th>
                         @else
-                          @if($proceso->pond_ngci4 >= 80.00)
-                            <th><a href="#" class="btn btn-success" title="Alto"><b>{{$proceso->pond_ngci4}}%</b></a></th>
+                          @if($proceso->pond_ngci4 >= 33.40 AND $proceso->pond_ngci4 <= 50.09)
+                            <th><a href="#" class="btn btn-success"><b>{{$proceso->pond_ngci4}}%</b></a></th>
                           @else
-                            <th>{{$proceso->pond_ngci4}}</th>
+                            @if($proceso->pond_ngci4 >= 50.1 AND $proceso->pond_ngci4 <= 66.79)
+                              <th><a href="#" class="btn btn-primary"><b>{{$proceso->pond_ngci4}}%</b></a></th>
+                            @else
+                              @if($proceso->pond_ngci4 >= 66.8 AND $proceso->pond_ngci4 <= 83.39)
+                                <th><a href="#" class="btn btn-info"><b>{{$proceso->pond_ngci4}}%</b></a></th>
+                              @else
+                                @if($proceso->pond_ngci4 >= 83.4 AND $proceso->pond_ngci4 <= 100)
+                                  <th><a href="#" class="btn btn default"><b>{{$proceso->pond_ngci4}}%</b></a></th>
+                                @else
+                                @endif
+                              @endif
+                            @endif
                           @endif
                         @endif
                       @endif
-                      @if($proceso->pond_ngci5 <= 59.99)
-                        <th><a href="#" class="btn btn-danger" title="Bajo"><b>{{$proceso->pond_ngci5}}%</b></a></th>
+                      @if($proceso->pond_ngci5 >= 0 AND $proceso->pond_ngci5 <= 16.79)
+                        <th><a href="#" class="btn btn-danger"><b>{{$proceso->pond_ngci5}}%</b></a></th>
                       @else
-                        @if($proceso->pond_ngci5 >= 60.00 AND $proceso->pond_ngci5 <= 79.99)
-                          <th><a href="#" class="btn btn-warning" title="Medio"><b>{{$proceso->pond_ngci5}}%</b></a></th>
+                        @if($proceso->pond_ngci5 >= 16.80 AND $proceso->pond_ngci5 <= 33.39)
+                          <th><a href="#" class="btn btn-warning"><b>{{$proceso->pond_ngci5}}%</b></a></th>
                         @else
-                          @if($proceso->pond_ngci5 >= 80.00)
-                            <th><a href="#" class="btn btn-success" title="Alto"><b>{{$proceso->pond_ngci5}}%</b></a></th>
+                          @if($proceso->pond_ngci5 >= 33.40 AND $proceso->pond_ngci5 <= 50.09)
+                            <th><a href="#" class="btn btn-success"><b>{{$proceso->pond_ngci5}}%</b></a></th>
                           @else
-                            <th>{{$proceso->pond_ngci5}}</th>
+                            @if($proceso->pond_ngci5 >= 50.1 AND $proceso->pond_ngci5 <= 66.79)
+                              <th><a href="#" class="btn btn-primary"><b>{{$proceso->pond_ngci5}}%</b></a></th>
+                            @else
+                              @if($proceso->pond_ngci5 >= 66.8 AND $proceso->pond_ngci5 <= 83.39)
+                                <th><a href="#" class="btn btn-info"><b>{{$proceso->pond_ngci5}}%</b></a></th>
+                              @else
+                                @if($proceso->pond_ngci5 >= 83.4 AND $proceso->pond_ngci5 <= 100)
+                                  <th><a href="#" class="btn btn-default"><b>{{$proceso->pond_ngci5}}%</b></a></th>
+                                @else
+                                @endif
+                              @endif
+                            @endif
                           @endif
                         @endif
                       @endif

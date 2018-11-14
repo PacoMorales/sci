@@ -86,10 +86,6 @@
                       @endif
                     </select>
                 </div>
-                  <div class="col-xs-6">
-                    <label >* Nombre del Enlace</label>
-                      <input type="text" class="form-control" name="titular" id="titular" placeholder="* Nombre del Enlace" onkeypress="return soloAlfa(event)" required>
-                  </div>
               </div>
               <br>
               <div class="row">
@@ -98,9 +94,13 @@
                   <input type="text" class="form-control" name="titular" id="titular" placeholder="* Nombre del Titular de la Dependencia / Organismo Auxiliar" onkeypress="return soloAlfa(event)" required>
                 </div>
                 <div class="col-xs-6">
+                  <label >* Nombre del Enlace</label>
+                  <input type="text" class="form-control" name="enlace" id="enlace" placeholder="* Nombre del Enlace" onkeypress="return soloAlfa(event)" required>
+                </div>
+                <!--<div class="col-xs-6">
                   <label >* Objetivo General de la Evaluación</label>
                   <input type="text" class="form-control" name="objetivo" id="objetivo" placeholder="* Objetivo General de la Evaluación" onkeypress="return general(event)" required>
-                </div>
+                </div>-->
               </div>
               <br>
             </div>

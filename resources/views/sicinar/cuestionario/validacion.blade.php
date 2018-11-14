@@ -97,13 +97,17 @@
               <br>
               <div class="row">
                 <div class="col-xs-6">
-                  <label >* Nombre del Titular</label>
+                  <label >* Nombre del Titular de la Dependencia / Organismo Auxiliar</label>
                   <input type="text" class="form-control" name="titular" id="titular" value="{{$cuestionario[0]->responsable}}" placeholder="* Nombre del Titular de la Dependencia / Organismo Auxiliar" onkeypress="return soloAlfa(event)" required>
                 </div>
-                <div class="col-xs-6">
+                  <div class="col-xs-6">
+                      <label >* Nombre del Enlace</label>
+                      <input type="text" class="form-control" name="enlace" id="enlace" value="{{$cuestionario[0]->enlace}}" placeholder="* Nombre del Enlace" onkeypress="return soloAlfa(event)" required>
+                  </div>
+                <!--<div class="col-xs-6">
                   <label >* Objetivo de la Evaluación</label>
                   <input type="text" class="form-control" name="objetivo" id="objetivo" value="{{$cuestionario[0]->obj_eval}}" placeholder="* Objetivo General de la Evaluación" onkeypress="return general(event)" required>
-                </div>
+                </div>-->
               </div>
               <br>
             </div>

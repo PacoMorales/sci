@@ -108,7 +108,8 @@ class cuestionarioController extends Controller
 	        	if($i == 28){$nuevo->NUM_MEEC=$request->evaluacion28;}else if($i == 29){$nuevo->NUM_MEEC=$request->evaluacion29;}else if($i == 30){$nuevo->NUM_MEEC=$request->evaluacion30;} else
 	        	if($i == 31){$nuevo->NUM_MEEC=$request->evaluacion31;}else if($i == 32){$nuevo->NUM_MEEC=$request->evaluacion32;}else if($i == 33){$nuevo->NUM_MEEC=$request->evaluacion33;}
 	        	$nuevo->RESPONSABLE = strtoupper($request->titular);
-	        	$nuevo->OBJ_EVAL = strtoupper($request->objetivo);
+	        	$nuevo->OBJ_EVAL = strtoupper('Fortalecer el Sistema de Control Interno en los Entes Publicos para proporcionar una seguridad razonable sobre la consecucion de las metas y objetivos institucionales y la salvaguarda de los recursos publicos, asi como para prevenir actos contrarios a la integridad.');
+	        	$nuevo->ENLACE = strtoupper($request->enlace);
 	        	  //VALOR DEL SERVIDOR PUBLICO
                 if($i == 1){$nuevo->ID_SP=$request->responsable1;}else if($i == 2){$nuevo->ID_SP=$request->responsable2;}else if($i == 3){$nuevo->ID_SP=$request->responsable3;} else
                 if($i == 4){$nuevo->ID_SP=$request->responsable4;}else if($i == 5){$nuevo->ID_SP=$request->responsable5;}else if($i == 6){$nuevo->ID_SP=$request->responsable6;} else
@@ -352,6 +353,7 @@ class cuestionarioController extends Controller
 	        										'NUM_MEEC'=>$evaluaciones[($i-1)],
                                                     'ID_SP'=>$responsables[($i-1)],
 	        										'RESPONSABLE'=>strtoupper($request->titular),
+	        										'ENLACE'=>strtoupper($request->enlace),
 	        										'USU_M'=>$nombre,
 	        										'PW_M'=>$pass,
 	        										'IP_M'=>$ip,

@@ -12,9 +12,9 @@ class cuestionarioRequest extends FormRequest
             'titular.min'         => 'El nombre del Titular debe ser de mínimo 1 caracter.',
             'titular.max'         => 'El nombre del Titular debe ser de máximo 80 caracteres.',
             'titular.required'    => 'El nombre del Titular es necesario para registrarlo al sistema.',
-            'objetivo.min'            => 'El objetivo debe ser de mínimo 1 caracteres.',
-            'objetivo.max'            => 'El objetivo debe ser de máximo 80 caracteres.',
-            'objetivo.required'       => 'El objetivo es necesario para consolidar la evaluación.',
+            //'objetivo.min'            => 'El objetivo debe ser de mínimo 1 caracteres.',
+            //'objetivo.max'            => 'El objetivo debe ser de máximo 80 caracteres.',
+            //'objetivo.required'       => 'El objetivo es necesario para consolidar la evaluación.',
             'proceso.required'        => 'El proceso es necesario para identificar llevar a cabo la evaluación.',
             //'unidad.required'            => 'La unidad es necesaria para identificar al proceso.',
             'evaluacion1.required'              => 'La evaluación es necesaria para la evaluación.',
@@ -71,7 +71,7 @@ class cuestionarioRequest extends FormRequest
     {
         return [
             'titular'    => 'min:1|max:80|required',
-            'objetivo'   => 'min:1|max:80|required',
+            //'objetivo'   => 'min:1|max:80|required',
             'proceso' => 'required',
             //'unidad'     => 'required',
             'evaluacion1' => 'required',

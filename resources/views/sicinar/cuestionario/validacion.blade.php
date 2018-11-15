@@ -134,9 +134,9 @@
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
                           @if($servidor->id_sp == $cuest->id_sp)
-                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @else
-                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -180,9 +180,9 @@
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
                           @if($servidor->id_sp == $cuest->id_sp)
-                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @else
-                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -226,9 +226,9 @@
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
                           @if($servidor->id_sp == $cuest->id_sp)
-                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @else
-                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -272,9 +272,9 @@
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
                           @if($servidor->id_sp == $cuest->id_sp)
-                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @else
-                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @endif
                         @endforeach
                       </select>
@@ -318,9 +318,9 @@
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
                           @if($servidor->id_sp == $cuest->id_sp)
-                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}"selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @else
-                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                            <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                           @endif
                         @endforeach
                       </select>

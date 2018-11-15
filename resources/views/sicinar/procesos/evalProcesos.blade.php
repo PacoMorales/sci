@@ -36,7 +36,7 @@
         <div class="col-md-12">
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title"><b>Ponderación de Normas General de Control Interno (NGCI)</b></h3>
+              <h3 class="box-title"><b>Ponderación de Normas Generales de Control Interno (NGCI)</b></h3>
             </div>
             <div class="box-body">
               <div class="row">
@@ -120,7 +120,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"><b>Ponderación de Normas General de Control Interno (NGCI)</b></h3>
+              <h3 class="box-title"><b>Ponderación de Normas Generales de Control Interno (NGCI)</b></h3>
               <br>Cantidad total de procesos evaluados: {{$total}}
               <!--<small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('pdf') }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
               <small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  EXCEL</a></small>
@@ -130,12 +130,15 @@
               <table id="tabla1" class="table table-striped table-bordered table-sm">
                 <thead style="color: brown;" class="justify">
                   <tr>
-                    <th>CLAVE</th>
-                    <th>PROCESO</th>
-                    <th>TIPO</th>
-                    <th>SECRETARÍA RESPONSABLE</th>
-                    <th>UNIDAD RESPONSABLE</th>
-                    <th>RESPONSABLE</th>
+                    <th rowspan="2">CLAVE</th>
+                    <th rowspan="2">PROCESO</th>
+                    <th rowspan="2">TIPO</th>
+                    <th rowspan="2">SECRETARÍA RESPONSABLE</th>
+                    <th rowspan="2">UNIDAD RESPONSABLE</th>
+                    <th rowspan="2">RESPONSABLE</th>
+                    <th colspan="5">NORMAS GENERALES DE CONTROL INTERNO (NGCI)</th>
+                  </tr>
+                  <tr>
                     @foreach($apartados as $apartado)
                       <th>{{$apartado->desc_ngci}}</th>
                     @endforeach

@@ -126,7 +126,7 @@
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
-                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -164,7 +164,7 @@
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
-                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -202,7 +202,7 @@
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
-                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -240,7 +240,7 @@
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
-                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -278,7 +278,7 @@
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
-                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}</option>
+                          <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
                       </select>
                     </div>

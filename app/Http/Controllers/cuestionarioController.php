@@ -48,7 +48,7 @@ class cuestionarioController extends Controller
         //dd($grados->all());
         $procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','N%')->get();
         $unidades = dependenciasModel::Unidades($id_estructura);
-        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
         //dd($servidores->all());
         //dd($unidades->all());
         if($procesos->count() == 0){
@@ -265,7 +265,7 @@ class cuestionarioController extends Controller
         if($procesos->count() == 0){
         	$proc = 0;
         }
-        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
         //dd($id_proceso);
         $process = procesosModel::where('CVE_PROCESO',$id_proceso)->update(['STATUS_1'=>'E']);
         //dd($process->all());
@@ -304,7 +304,7 @@ class cuestionarioController extends Controller
         	$proc = 0;
         }
     	$num_eval_aux = $id;
-        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
     	return view('sicinar.cuestionario.validacion',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     }
 
@@ -439,7 +439,7 @@ class cuestionarioController extends Controller
                                                                                     'POND_NGCI5' => ($apartado5/3)]);
 
         $process = procesosModel::where('CVE_PROCESO',$request->proceso)->update(['CVE_DEPENDENCIA'=>$id_dependencia,'RESPONSABLE'=>strtoupper($request->titular),'STATUS_1'=>'E']);
-        $servidores = servidorespubModel::select('ID_SP','NOMBRE_COMPLETO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
         toastr()->success('La evaluación se ha almacenado.','Bien!',['positionClass' => 'toast-bottom-right']);
         return view('sicinar.cuestionario.cuestionario',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     }

@@ -90,7 +90,7 @@
               <br>
               <div class="row">
                 <div class="col-xs-6">
-                  <label >* Nombre del Titular de la Dependencia / Organismo Auxiliar</label>
+                  <label >* Nombre del Titular de la Unidad Administrativa / Organismo Auxiliar</label>
                   <input type="text" class="form-control" name="titular" id="titular" placeholder="* Nombre del Titular de la Dependencia / Organismo Auxiliar" onkeypress="return soloAlfa(event)" required>
                 </div>
                 <div class="col-xs-6">

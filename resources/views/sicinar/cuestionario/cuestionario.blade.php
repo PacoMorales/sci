@@ -38,7 +38,7 @@
               <div class="row">
                 <div class="col-xs-5">
                   <b style="color:red;">¡Importante!</b><br>
-                    Los campos marcados con un asterisco(*) son obligatorios.
+                    Los campos marcados con un asterisco(*) son obligatorios.<br>
                     No son válidos caracteres (,'"!#$%&/()=?¡{}[]).
                 </div>
               </div>

@@ -38,7 +38,8 @@
               <div class="row">
                 <div class="col-xs-5">
                   <b style="color:red;">¡Importante!</b><br>
-                Los campos marcados con un asterisco(*) son obligatorios.
+                    Los campos marcados con un asterisco(*) son obligatorios.
+                    No son válidos caracteres (,'"!#$%&/()=?¡{}[]).
                 </div>
               </div>
             </div>
@@ -78,7 +79,7 @@
                     <select class="form-control m-bot15" name="proceso" id="proceso" required>
                       <option selected="true" disabled="disabled">Proceso</option>
                       @if($proc == 0)
-                          <option disabled="disabled">NO HAY PROCESOS DADOS DE ALTA PARA ESTA SECRETARIA</option>
+                          <option disabled="disabled">NO HAY PROCESOS EN LISTA DE ESPERA PARA EVALUACIÓN</option>
                       @else
                         @foreach($procesos as $proceso)
                           <option value="{{ $proceso->cve_proceso }}">{{$proceso->desc_proceso}}</option>

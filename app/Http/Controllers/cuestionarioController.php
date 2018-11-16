@@ -261,7 +261,8 @@ class cuestionarioController extends Controller
                                 ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
                                 ->get();
         $unidades = dependenciasModel::Unidades($id_estructura);
-    	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','N%')->get();
+/*AAAAAAAAAAAAAAAAAAQQQQQUUUUUUUUUUUUUUUUUUIIIIIIIIIIIIIIII*/
+    	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','N%')->get();
         if($procesos->count() == 0){
         	$proc = 0;
         }
@@ -299,7 +300,7 @@ class cuestionarioController extends Controller
     	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
         //dd($cuestionario[0]);
     	$unidades = dependenciasModel::Unidades($id_estructura);
-    	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','%V%')->get();
+    	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','%V%')->get();
         if($procesos->count() == 0){
         	$proc = 0;
         }
@@ -374,7 +375,7 @@ class cuestionarioController extends Controller
                                 ->get();
     	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
     	$unidades = dependenciasModel::Unidades($id_estructura);
-    	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('STATUS_1','like','%N%')->get();
+    	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','%N%')->get();
         if($procesos->count() == 0){
         	$proc = 0;
         }

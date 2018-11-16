@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class dependenciasModel extends Model
 {
-    protected $table = "LU_DEPENDENCIAS";
+    protected $table = "LU_DEPENDENCIAS_AUX";
     protected  $primaryKey = 'DEPEN_ID';
     public $timestamps = false;
     public $incrementing = false;

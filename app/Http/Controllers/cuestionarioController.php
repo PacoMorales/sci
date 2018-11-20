@@ -438,7 +438,8 @@ class cuestionarioController extends Controller
                                                                                     'POND_NGCI2' => ($apartado2/4),
                                                                                     'POND_NGCI3' => ($apartado3/12),
                                                                                     'POND_NGCI4' => ($apartado4/6),
-                                                                                    'POND_NGCI5' => ($apartado5/3)]);
+                                                                                    'POND_NGCI5' => ($apartado5/3),
+                                                                                    'TOTAL' => ((($apartado1/8)+($apartado2/4)+($apartado3/12)+($apartado4/6)+($apartado5/3))/5)]);
 
         $process = procesosModel::where('CVE_PROCESO',$request->proceso)->update(['CVE_DEPENDENCIA'=>$id_dependencia,'RESPONSABLE'=>strtoupper($request->titular),'STATUS_1'=>'E']);
         $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();

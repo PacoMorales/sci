@@ -208,6 +208,7 @@ class cuestionarioController extends Controller
         $pond->POND_NGCI3 = ($apartado3/12);
         $pond->POND_NGCI4 = ($apartado4/6);
         $pond->POND_NGCI5 = ($apartado5/3);
+        $pond->TOTAL = (($pond->POND_NGCI1+$pond->POND_NGCI2+$pond->POND_NGCI3+$pond->POND_NGCI4+$pond->POND_NGCI5)/5);
         $pond->USU = $nombre;
         $pond->PW = $pass;
         $pond->IP = $ip;

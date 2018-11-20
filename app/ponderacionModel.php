@@ -29,6 +29,7 @@ class ponderacionModel extends Model
 	    'USU_M',
 	    'PW_M',
 	    'IP_M',
-	    'FECHA_M'
+	    'FECHA_M',
+        'TOTAL'
     ];
 }

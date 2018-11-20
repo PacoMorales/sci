@@ -189,6 +189,16 @@ class procesosController extends Controller
         return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
     }
 
+    public function verPDF(){
+        $proceso = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
+                                    ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
+                                    ->where('SCI_PROCESOS.CVE_PROCESO',8)
+                                    ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
+                                    ->get();
+        //dd($proceso);
+        return view('sicinar.pdf.cedulaEvaluacion');
+    }
+
     public function joinin(){
         $registros;
         $datos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')

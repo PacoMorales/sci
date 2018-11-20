@@ -39,3 +39,4 @@ Route::group(['prefix' => 'control-interno'], function(){
 	Route::get('generaPDF','procesosController@generarPDF')->name('pdf');
 });
 Route::get('join','procesosController@joinin')->name('join');
+Route::get('ver/pdf','procesosController@verPDF')->name('verpdf');

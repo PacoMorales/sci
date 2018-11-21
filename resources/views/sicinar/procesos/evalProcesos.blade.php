@@ -122,8 +122,7 @@
             <div class="box-header">
               <h3 class="box-title"><b>Ponderación de Normas Generales de Control Interno (NGCI)</b></h3>
               <br>Cantidad total de procesos evaluados: {{$total}}
-              <!--<small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('generarpdf',$procesos[0]->cve_proceso) }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
-              <small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  EXCEL</a></small>
+              <!--<small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  EXCEL</a></small>
               <small class="pull-right" style="margin-right: 5px;">Exportar </small>-->
             </div>
             <div class="box-body">
@@ -143,7 +142,7 @@
                       <th>{{$apartado->desc_ngci}}</th>
                     @endforeach
                       <th>TOTAL</th>
-                      <!--<th>CÉDULA</th>-->
+                      <th>CÉDULA</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -296,8 +295,31 @@
                           @endif
                         @endif
                       @endif
-                      <td><b>{{$proceso->total}}%</b></td>
-                      <!--<td><a href="{{route('Verpdf',$proceso->cve_proceso)}}" class="btn btn-danger"><i class="fa fa-file-text-o"></i></a></td>-->
+                      @if($proceso->total >= 0 AND $proceso->total <= 16.79)
+                        <th><a href="#" class="btn btn-danger"><b>{{$proceso->total}}%</b></a></th>
+                      @else
+                        @if($proceso->total >= 16.80 AND $proceso->total <= 33.39)
+                          <th><a href="#" class="btn btn-warning"><b>{{$proceso->total}}%</b></a></th>
+                        @else
+                          @if($proceso->total >= 33.40 AND $proceso->total <= 50.09)
+                            <th><a href="#" class="btn btn-success"><b>{{$proceso->total}}%</b></a></th>
+                          @else
+                            @if($proceso->total >= 50.1 AND $proceso->total <= 66.79)
+                              <th><a href="#" class="btn btn-primary"><b>{{$proceso->total}}%</b></a></th>
+                            @else
+                              @if($proceso->total >= 66.8 AND $proceso->total <= 83.39)
+                                <th><a href="#" class="btn btn-info"><b>{{$proceso->total}}%</b></a></th>
+                              @else
+                                @if($proceso->total >= 83.4 AND $proceso->total <= 100)
+                                  <th><a href="#" class="btn btn-default"><b>{{$proceso->total}}%</b></a></th>
+                                @else
+                                @endif
+                              @endif
+                            @endif
+                          @endif
+                        @endif
+                      @endif
+                      <td><a href="{{route('Verpdf',$proceso->cve_proceso)}}" class="btn btn-warning" title="Ver Cédula de Evaluación"><i class="fa fa-file-text-o"></i></a></td>
                     </tr>
                   @endforeach
                 </tbody>

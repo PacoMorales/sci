@@ -107,8 +107,21 @@
                 <ul class="treeview-menu">
                   <li><a href="{{ route('nuevoProceso') }}"><i class="fa fa-circle-o"></i> Nuevo Proceso</a></li>
                   @if($rango>1)
-                  <li><a href="{{ route('verProcesos') }}"><i class="fa fa-circle-o"></i> Ver Procesos</a></li>
-                  <li><a href="{{ route('evalProcesos') }}"><i class="fa fa-circle-o"></i> Evaluaciones</a></li>
+                  <!--<li><a href="{{ route('verProcesos') }}"><i class="fa fa-circle-o"></i> Ver Procesos</a></li>-->
+                    <li class="treeview">
+                      <a href="#"><i class="fa fa-circle-o"></i> Ver Procesos
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li><a href="{{ route('verProcesos') }}"><i class="fa fa-square-o"></i> Todos</a></li>
+                        <li><a href="{{ route('verProcesosSust')  }}"><i class="fa fa-square-o"></i> Procesos sustantivos</a></li>
+                        <li><a href="{{ route('verProcesosAdmin')  }}"><i class="fa fa-square-o"></i> Procesos administrativos</a></li>
+                        <li><a href="{{ route('verProcesosInst')  }}"><i class="fa fa-square-o"></i> Procesos institucionales</a></li>
+                      </ul>
+                    </li>
+                  <li><a href="{{ route('evalProcesos') }}"><i class="fa fa-circle-o"></i> Evaluados</a></li>
                   @endif
                 </ul>
               </li>
@@ -143,7 +156,7 @@
           <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
           </div>
-          <strong>Elaboró <a href="#">UDITI</a>.</strong> Todos los derechos reservados.
+          <strong>Desarrolló <a href="#">Unidad de Desarrollo Institucional y Tecnologías de la Información (UDITI)</a>.</strong> Todos los derechos reservados.
         </footer>
       </div>
       <!-- jQuery 3 -->

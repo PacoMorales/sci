@@ -125,7 +125,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 3::::::::::::::::::::::::: -->
-    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[2]->cve_ngci}}.- {{$apartados[2]->desc_ngci}}</h5></th>
@@ -298,22 +298,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
         <tr>
             <td></td>
             <td></td>

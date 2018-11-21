@@ -28,14 +28,14 @@
         </thead>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 1::::::::::::::::::::::::: -->
-    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[0]->cve_ngci}}.- {{$apartados[0]->desc_ngci}}</h5></th>
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;width: 400px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;width: 300px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Área responsable / Evidencia</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Persona Responsable</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Evaluación</b></th>
@@ -49,7 +49,7 @@
             @if($pregunta->num_eci >= 1 AND $pregunta->num_eci <= 8)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 400px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 300px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -83,7 +83,7 @@
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;width: 400px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;width: 300px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Área responsable / Evidencia</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Persona Responsable</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Evaluación</b></th>
@@ -97,7 +97,7 @@
             @if($pregunta->num_eci >= 9 AND $pregunta->num_eci <= 12)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 400px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 300px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -125,14 +125,14 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 3::::::::::::::::::::::::: -->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[2]->cve_ngci}}.- {{$apartados[2]->desc_ngci}}</h5></th>
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;width: 400px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;width: 300px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Área responsable / Evidencia</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Persona Responsable</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Evaluación</b></th>
@@ -146,7 +146,7 @@
             @if($pregunta->num_eci >= 13 AND $pregunta->num_eci <= 24)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 400px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 300px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -181,7 +181,7 @@
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;width: 400px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;width: 300px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Área responsable / Evidencia</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Persona Responsable</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Evaluación</b></th>
@@ -195,7 +195,7 @@
             @if($pregunta->num_eci >= 25 AND $pregunta->num_eci <= 30)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 400px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 300px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -230,7 +230,7 @@
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;width: 400px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;width: 300px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Área responsable / Evidencia</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Persona Responsable</b></th>
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Evaluación</b></th>
@@ -244,7 +244,7 @@
             @if($pregunta->num_eci >= 31 AND $pregunta->num_eci <= 33)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 400px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 300px;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -298,14 +298,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
         <tr>
             <td></td>
             <td></td>

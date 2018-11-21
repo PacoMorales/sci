@@ -2,7 +2,7 @@
 
 @section('content')
     <!--<h1 class="page-header">Listado de productos</h1>-->
-    <table class="table table-hover table-striped" align="center">
+    <table style="page-break-inside: avoid;" class="table table-hover table-striped" align="center">
         <thead>
         <tr>
             <th style="font-size: x-small;background-color:gray; width:700px; text-align:center;"><h4 style="color:white;">Cédula de Evaluación en materia de Control Interno con base en <br> el  Manual Administrativo de Aplicación General</h4></th>
@@ -28,7 +28,7 @@
         </thead>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 1::::::::::::::::::::::::: -->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[0]->cve_ngci}}.- {{$apartados[0]->desc_ngci}}</h5></th>
@@ -76,7 +76,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 2::::::::::::::::::::::::: -->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[1]->cve_ngci}}.- {{$apartados[1]->desc_ngci}}</h5></th>
@@ -125,7 +125,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 3::::::::::::::::::::::::: -->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[2]->cve_ngci}}.- {{$apartados[2]->desc_ngci}}</h5></th>
@@ -174,7 +174,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 4::::::::::::::::::::::::: -->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[3]->cve_ngci}}.- {{$apartados[3]->desc_ngci}}</h5></th>
@@ -223,7 +223,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 5::::::::::::::::::::::::: -->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h4 style="color:white;">{{$apartados[4]->cve_ngci}}.- {{$apartados[4]->desc_ngci}}</h4></th>
@@ -278,7 +278,7 @@
         </tr>
         </tfoot>
     </table>
-    <table class="table table-hover table-striped" align="center">
+    <table style="page-break-inside: avoid;" class="table table-hover table-striped" align="center">
         <thead>
         <tr>
             <th style="width:700px;"><b style="font-size: x-small;">Nombre del Coordinador de Control Interno:</b></th>
@@ -290,7 +290,7 @@
         </tr>
         </thead>
     </table>
-    <table class="table table-hover table-striped" align="center">
+    <table style="page-break-inside: avoid;" class="table table-hover table-striped" align="center">
         <thead>
         <tr>
             <th style="background-color:gray; width:700px;"><b style="color:white;font-size: x-small;">Nombre del Personal que participa en la Evaluación</b></th>

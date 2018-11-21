@@ -49,7 +49,7 @@
             @if($pregunta->num_eci >= 1 AND $pregunta->num_eci <= 8)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -97,7 +97,7 @@
             @if($pregunta->num_eci >= 9 AND $pregunta->num_eci <= 12)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -146,7 +146,7 @@
             @if($pregunta->num_eci >= 13 AND $pregunta->num_eci <= 24)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -195,7 +195,7 @@
             @if($pregunta->num_eci >= 25 AND $pregunta->num_eci <= 30)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>
@@ -251,7 +251,7 @@
             @if($pregunta->num_eci >= 31 AND $pregunta->num_eci <= 33)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
                             <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$servidor->unid_admon}}</b></td>

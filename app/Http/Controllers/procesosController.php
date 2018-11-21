@@ -223,46 +223,7 @@ class procesosController extends Controller
         $pdf->setPaper('A4', 'portrait');
         //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
         return $pdf->stream();
-        //font-size: small
         //return view('sicinar.pdf.cedPDF',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
         //return view('sicinar.pdf.cedulaEvaluacion',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
-    }
-
-    public function joinin(){
-        //$registros;
-        $datos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
-                                ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
-                                ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
-                                ->get();
-        //dd($datos[0]);
-        $estructuras = estructurasModel::Estructuras();
-        //dd($estructuras);
-        $total = $datos->count();
-        for($i=0;$i<$total;$i++){
-            foreach($estructuras as $estructura){
-                if(strpos($estructura->estrucgob_id,$datos[$i]->estrucgob_id) !== false){
-                    $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like',$datos[$i]->estrucgob_id.'%')->where('CLASIFICGOB_ID',1)->get();
-                    foreach($dependencias as $dependencia){
-                        if(strpos($dependencia->depen_id, $datos[$i]->estrucgob_id) !== false){
-                            $registros[$i] = [
-                                'ESTRUCGOB_ID' => $estructura->estrucgob_desc,
-                                'CVE_DEPENDENCIA' => $dependencia->depen_desc
-                            ];
-                            break;
-                        }
-                    }
-                    //dd($estructura->estrucgob_id.' contenedor de  '.$datos[$i]->estrucgob_id);
-                }
-            }
-        }
-        dd($registros);
-        foreach($datos as $dato){
-            foreach($estructuras as $estructura){
-                if(strpos($estructura->estrucgob_id,$dato->estrucgob_id) !== false){
-                    dd($estructura->estrucgob_id.' contiene a '.$dato->estrucgob_id);
-                }
-            }
-        }
-        dd($estructuras);
     }
 }

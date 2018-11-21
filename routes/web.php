@@ -37,7 +37,6 @@ Route::group(['prefix' => 'control-interno'], function(){
 
 	Route::get('downloadExcel','procesosController@export')->name('download');
 	Route::get('generarPDF/{id}','procesosController@generarPDF')->name('generarpdf');
-    Route::get('join','procesosController@joinin')->name('join');
     Route::get('ver/pdf/{id}','procesosController@verPDF')->name('Verpdf');
 });
 

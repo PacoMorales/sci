@@ -122,7 +122,7 @@
             <div class="box-header">
               <h3 class="box-title"><b>Ponderación de Normas Generales de Control Interno (NGCI)</b></h3>
               <br>Cantidad total de procesos evaluados: {{$total}}
-              <!--<small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('pdf') }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
+              <!--<small class="pull-right"><a class="btn btn-danger btn-xs" href="{{ route('generarpdf',$procesos[0]->cve_proceso) }}" style="margin-right: 5px;"><i class="fa fa-file-pdf-o"></i>  PDF</a></small>
               <small class="pull-right"><a class="btn btn-success btn-xs" href="{{ route('download') }}" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i>  EXCEL</a></small>
               <small class="pull-right" style="margin-right: 5px;">Exportar </small>-->
             </div>
@@ -136,12 +136,14 @@
                     <th rowspan="2">SECRETARÍA RESPONSABLE</th>
                     <th rowspan="2">UNIDAD RESPONSABLE</th>
                     <th rowspan="2">RESPONSABLE</th>
-                    <th colspan="5">NORMAS GENERALES DE CONTROL INTERNO (NGCI)</th>
+                    <th colspan="6" style="text-align:center;">NORMAS GENERALES DE CONTROL INTERNO (NGCI)</th>
                   </tr>
                   <tr>
                     @foreach($apartados as $apartado)
                       <th>{{$apartado->desc_ngci}}</th>
                     @endforeach
+                      <th>TOTAL</th>
+                      <!--<th>CÉDULA</th>-->
                   </tr>
                 </thead>
                 <tbody>
@@ -294,6 +296,8 @@
                           @endif
                         @endif
                       @endif
+                      <td><b>{{$proceso->total}}%</b></td>
+                      <!--<td><a href="{{route('Verpdf',$proceso->cve_proceso)}}" class="btn btn-danger"><i class="fa fa-file-text-o"></i></a></td>-->
                     </tr>
                   @endforeach
                 </tbody>

@@ -11,6 +11,11 @@ use App\tipoprocesoModel;
 use App\dependenciasModel;
 use App\procesosModel;
 use App\ponderacionModel;
+use App\eciModel;
+use App\ced_evaluacionModel;
+use App\m_evaelemcontrolModel;
+use App\servidorespubModel;
+use App\grado_cumpModel;
 use App\Http\Requests\procesoRequest;
 use App\Exports\ExcelExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -125,21 +130,6 @@ class procesosController extends Controller
         return view('sicinar.procesos.verProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
     }
 
-    public function FunctionName(){
-        $nombre = session()->get('userlog');
-        $pass = session()->get('passlog');
-        if($nombre == NULL AND $pass == NULL){
-            return view('sicinar.login.expirada');
-        }
-        $usuario = session()->get('usuario');
-        $estructura = session()->get('estructura');
-        $id_estruc = session()->get('id_estructura');
-        $id_estructura = rtrim($id_estruc," ");
-        //dd($id_estructura);
-        $rango = session()->get('rango');
-        return view('sicinar.procesos.graficaProcesos',compact('nombre','usuario','estructura','rango'));
-    }
-
     public function actionEvalProcesos(){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
@@ -156,7 +146,7 @@ class procesosController extends Controller
         $rango = session()->get('rango');
         $total = ponderacionModel::count();
         $procesos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
-                                        ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
+                                        ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5','SCI_PONDERACION.TOTAL')
                                         ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
                                         ->paginate(15);
         //dd($procesos);
@@ -180,27 +170,62 @@ class procesosController extends Controller
         return Excel::download(new ExcelExport, 'Procesos_'.date('d-m-Y').'.xlsx');
     }
 
-    public function generarPDF(){
-        $datos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
-                                ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
-                                ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
-                                ->get();
-        $pdf = PDF::loadView('sicinar.procesos.procesosPDF', $datos);
+    public function generarPDF($id){
+        $proceso = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
+            ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5','SCI_PONDERACION.TOTAL')
+            ->where('SCI_PROCESOS.CVE_PROCESO',$id)
+            ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
+            ->get();
+        $unidades = dependenciasModel::select('DEPEN_DESC')->where('DEPEN_ID','LIKE',$proceso[0]->cve_dependencia.'%')->first();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON','DEPEN_ID')->get();
+        $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
+        $preguntas = ced_evaluacionModel::join('SCI_ECI','SCI_CED_EVALUACION.NUM_ECI','=','SCI_ECI.NUM_ECI')
+            ->select('SCI_CED_EVALUACION.ID_SP','SCI_ECI.NUM_ECI','SCI_ECI.PREG_ECI','SCI_CED_EVALUACION.NUM_ECI','SCI_CED_EVALUACION.CVE_NGCI','SCI_CED_EVALUACION.NUM_MEEC','SCI_CED_EVALUACION.FECHA_REG')
+            ->where('SCI_CED_EVALUACION.CVE_PROCESO','=',$id)
+            ->get();
+        $valores = m_evaelemcontrolModel::select('NUM_MEEC','PORC_MEEC')->orderBy('NUM_MEEC','ASC')->get();
+        $grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->get();
+        //return view('sicinar.pdf.cedulaEvaluacion',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
+        //ini_set("memory_limit", "999M");
+        //ini_set("max_execution_time", "999");
+        $pdf = PDF::loadView('sicinar.pdf.cedPDF', compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
         return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
     }
 
-    public function verPDF(){
+    public function verPDF($id){
+        set_time_limit(0);
+        ini_set("memory_limit",-1);
+        ini_set('max_execution_time', 0);
         $proceso = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
-                                    ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
-                                    ->where('SCI_PROCESOS.CVE_PROCESO',8)
+                                    ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5','SCI_PONDERACION.TOTAL')
+                                    ->where('SCI_PROCESOS.CVE_PROCESO',$id)
                                     ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
                                     ->get();
-        //dd($proceso);
-        return view('sicinar.pdf.cedulaEvaluacion');
+        $unidades = dependenciasModel::select('DEPEN_DESC')->where('DEPEN_ID','LIKE',$proceso[0]->cve_dependencia.'%')->first();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON','DEPEN_ID')->get();
+        $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
+        $preguntas = ced_evaluacionModel::join('SCI_ECI','SCI_CED_EVALUACION.NUM_ECI','=','SCI_ECI.NUM_ECI')
+                                            ->select('SCI_CED_EVALUACION.ID_SP','SCI_ECI.NUM_ECI','SCI_ECI.PREG_ECI','SCI_CED_EVALUACION.NUM_ECI','SCI_CED_EVALUACION.CVE_NGCI','SCI_CED_EVALUACION.NUM_MEEC','SCI_CED_EVALUACION.FECHA_REG')
+                                            ->where('SCI_CED_EVALUACION.CVE_PROCESO','=',$id)
+                                            ->get();
+        $valores = m_evaelemcontrolModel::select('NUM_MEEC','PORC_MEEC')->orderBy('NUM_MEEC','ASC')->get();
+        $grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->get();
+        //ini_set("memory_limit", "999M");
+        //ini_set("max_execution_time", "999");
+
+        //ini_set('max_execution_time', 300);
+        //ini_set("memory_limit","512M");
+
+        //ini_set('max_execution_time', 300);
+        $pdf = PDF::loadView('sicinar.pdf.cedulaEvaluacion', compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
+        $pdf->setPaper('A4', 'landscape');
+        //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
+        return $pdf->stream();
+        //return view('sicinar.pdf.cedulaEvaluacion',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
     }
 
     public function joinin(){
-        $registros;
+        //$registros;
         $datos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
                                 ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5')
                                 ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')

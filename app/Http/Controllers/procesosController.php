@@ -219,11 +219,13 @@ class procesosController extends Controller
         //ini_set("memory_limit","512M");
 
         //ini_set('max_execution_time', 300);
-        //$pdf = PDF::loadView('sicinar.pdf.cedPDF', compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
-        //$pdf->setPaper('A4', 'portrait');
+        $pdf = PDF::loadView('sicinar.pdf.cedPDF', compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
+        $pdf->setPaper('A4', 'portrait');
         //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
-        //return $pdf->stream();
-        return view('sicinar.pdf.cedPDF',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
+        return $pdf->stream();
+        //SCI_PROCTRAB_CI
+        //SCI_ACCIONES_MEJORA
+        //return view('sicinar.pdf.cedPDF',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
         //return view('sicinar.pdf.cedulaEvaluacion',compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
     }
 }

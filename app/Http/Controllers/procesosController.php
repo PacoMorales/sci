@@ -189,7 +189,9 @@ class procesosController extends Controller
         //ini_set("memory_limit", "999M");
         //ini_set("max_execution_time", "999");
         $pdf = PDF::loadView('sicinar.pdf.cedPDF', compact('preguntas','apartados','valores','unidades','proceso','servidores','grados'));
-        return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
+        //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
     }
 
     public function verPDF($id){

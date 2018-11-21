@@ -28,7 +28,7 @@
         </thead>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 1::::::::::::::::::::::::: -->
-    <table class="table table-hover" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[0]->cve_ngci}}.- {{$apartados[0]->desc_ngci}}</h5></th>
@@ -76,7 +76,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 2::::::::::::::::::::::::: -->
-    <table class="table table-hover" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[1]->cve_ngci}}.- {{$apartados[1]->desc_ngci}}</h5></th>
@@ -125,7 +125,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 3::::::::::::::::::::::::: -->
-    <table class="table table-hover" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[2]->cve_ngci}}.- {{$apartados[2]->desc_ngci}}</h5></th>
@@ -174,7 +174,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 4::::::::::::::::::::::::: -->
-    <table class="table table-hover" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h5 style="color:white;">{{$apartados[3]->cve_ngci}}.- {{$apartados[3]->desc_ngci}}</h5></th>
@@ -223,7 +223,7 @@
         </tbody>
     </table>
     <!-- :::::::::::::::::::::::APARTADO 5::::::::::::::::::::::::: -->
-    <table class="table table-hover" align="center">
+    <table class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="8" style="background-color:black; width:800px;text-align:center;"><h4 style="color:white;">{{$apartados[4]->cve_ngci}}.- {{$apartados[4]->desc_ngci}}</h4></th>
@@ -239,13 +239,6 @@
             <th style="background-color:darkred;text-align:center;"><b style="color:white;font-size: x-small;">Clasificación</b></th>
         </tr>
         </thead>
-        <tfoot>
-        <tr>
-            <td colspan="5"></td>
-            <td colspan="2" style="background-color:darkgreen;text-align:center;"><b style="color:white;font-size: x-small;">TOTAL:</b></td>
-            <td colspan="1" style="background-color:darkgreen;text-align:center;"><b style="color:white;font-size: x-small;">{{$proceso[0]->total}}%</b></td>
-        </tr>
-        </tfoot>
         <tbody>
         @foreach($preguntas as $pregunta)
             @if($pregunta->num_eci >= 31 AND $pregunta->num_eci <= 33)
@@ -277,15 +270,22 @@
         @endforeach
 
         </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5"></td>
+            <td colspan="2" style="background-color:darkgreen;text-align:center;"><b style="color:white;font-size: x-small;">TOTAL:</b></td>
+            <td colspan="1" style="background-color:darkgreen;text-align:center;"><b style="color:white;font-size: x-small;">{{$proceso[0]->total}}%</b></td>
+        </tr>
+        </tfoot>
     </table>
     <table class="table table-hover table-striped" align="center">
         <thead>
         <tr>
-            <th style="width:900px;"><b style="font-size: x-small;">Nombre del Coordinador de Control Interno:</b></th>
+            <th style="width:700px;"><b style="font-size: x-small;">Nombre del Coordinador de Control Interno:</b></th>
             <th><b>Firma:</b></th>
         </tr>
         <tr>
-            <th style="width:900px;"><b style="font-size: x-small;">Nombre del Enlace del Sistema de Control Interno Institucional:</b></th>
+            <th style="width:700px;"><b style="font-size: x-small;">Nombre del Enlace del Sistema de Control Interno Institucional:</b></th>
             <th><b>Firma:</b></th>
         </tr>
         </thead>
@@ -293,7 +293,7 @@
     <table class="table table-hover table-striped" align="center">
         <thead>
         <tr>
-            <th style="background-color:gray; width:900px;"><b style="color:white;font-size: x-small;">Nombre del Personal que participa en la Evaluación</b></th>
+            <th style="background-color:gray; width:700px;"><b style="color:white;font-size: x-small;">Nombre del Personal que participa en la Evaluación</b></th>
             <th style="background-color:gray;"><b style="color:white;font-size: x-small;">Firma</b></th>
         </tr>
         </thead>

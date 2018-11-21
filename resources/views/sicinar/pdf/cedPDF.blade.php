@@ -48,23 +48,23 @@
         @foreach($preguntas as $pregunta)
             @if($pregunta->num_eci >= 1 AND $pregunta->num_eci <= 8)
                 <tr>
-                    <td style="background-color:darkgreen;text-align:center;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:center;"><b style="color:black;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
                         @endif
                     @endforeach
-                    <td style="background-color:orange;text-align:center;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
+                    <td style="background-color:orange;text-align:center;vertical-align: middle;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
                     @foreach($valores as $valor)
                         @if($valor->num_meec == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
                         @endif
                     @endforeach
                     @foreach($grados as $grado)
                         @if($grado->cve_grado_cump == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
                         @endif
                     @endforeach
                     @if($pregunta->num_eci == 1)
@@ -96,23 +96,23 @@
         @foreach($preguntas as $pregunta)
             @if($pregunta->num_eci >= 9 AND $pregunta->num_eci <= 12)
                 <tr>
-                    <<td style="background-color:darkgreen;text-align:center;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:center;"><b style="color:black;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
                         @endif
                     @endforeach
-                    <td style="background-color:orange;text-align:center;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
+                    <td style="background-color:orange;text-align:center;vertical-align: middle;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
                     @foreach($valores as $valor)
                         @if($valor->num_meec == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
                         @endif
                     @endforeach
                     @foreach($grados as $grado)
                         @if($grado->cve_grado_cump == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
                         @endif
                     @endforeach
                     @if($pregunta->num_eci == 9)
@@ -145,23 +145,23 @@
         @foreach($preguntas as $pregunta)
             @if($pregunta->num_eci >= 13 AND $pregunta->num_eci <= 24)
                 <tr>
-                    <td style="background-color:darkgreen;text-align:center;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:center;"><b style="color:black;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
                         @endif
                     @endforeach
-                    <td style="background-color:orange;text-align:center;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
+                    <td style="background-color:orange;text-align:center;vertical-align: middle;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
                     @foreach($valores as $valor)
                         @if($valor->num_meec == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
                         @endif
                     @endforeach
                     @foreach($grados as $grado)
                         @if($grado->cve_grado_cump == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
                         @endif
                     @endforeach
                     @if($pregunta->num_eci == 13)
@@ -194,23 +194,23 @@
         @foreach($preguntas as $pregunta)
             @if($pregunta->num_eci >= 25 AND $pregunta->num_eci <= 30)
                 <tr>
-                    <td style="background-color:darkgreen;text-align:center;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:center;"><b style="color:black;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
                         @endif
                     @endforeach
-                    <td style="background-color:orange;text-align:center;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
+                    <td style="background-color:orange;text-align:center;vertical-align: middle;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
                     @foreach($valores as $valor)
                         @if($valor->num_meec == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
                         @endif
                     @endforeach
                     @foreach($grados as $grado)
                         @if($grado->cve_grado_cump == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
                         @endif
                     @endforeach
                     @if($pregunta->num_eci == 25)
@@ -250,23 +250,23 @@
         @foreach($preguntas as $pregunta)
             @if($pregunta->num_eci >= 31 AND $pregunta->num_eci <= 33)
                 <tr>
-                    <td style="background-color:darkgreen;text-align:center;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
-                    <td style="text-align:center;"><b style="color:black;">{{$pregunta->preg_eci}}</b></td>
+                    <td style="background-color:darkgreen;text-align:center;vertical-align: middle;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size: x-small;">{{$pregunta->preg_eci}}</b></td>
                     @foreach($servidores as $servidor)
                         @if($servidor->id_sp == $pregunta->id_sp)
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
-                            <td style="text-align:center;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->unid_admon}}</td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;"></b>{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</td>
                         @endif
                     @endforeach
-                    <td style="background-color:orange;text-align:center;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
+                    <td style="background-color:orange;text-align:center;vertical-align: middle;"><b style="color:black;">{{$pregunta->num_meec}}</b></td>
                     @foreach($valores as $valor)
                         @if($valor->num_meec == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$valor->porc_meec}}%</b></td>
                         @endif
                     @endforeach
                     @foreach($grados as $grado)
                         @if($grado->cve_grado_cump == $pregunta->num_meec)
-                            <td style="text-align:center;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
+                            <td style="text-align:center;vertical-align: middle;"><b style="color:black;">{{$grado->desc_grado_cump}}</b></td>
                         @endif
                     @endforeach
                     @if($pregunta->num_eci == 31)

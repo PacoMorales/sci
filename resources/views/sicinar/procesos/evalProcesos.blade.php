@@ -22,8 +22,8 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Procesos Evaluados
-        <small> por sistema</small>
+        Instructivo del Proceso de Evaluación
+        <small> (Ejemplo)</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Menú</a></li>
@@ -107,7 +107,7 @@
           <div class="box">
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">Semáforos</h3>
+                <h3 class="box-title">Criterios de Rangos de Ponderación para determinar el color del semáforo.</h3>
                 <div class="box-body">
                   <div class="row">
                     <div class="col-xs-12">
@@ -132,7 +132,7 @@
           <div class="box">
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">Gráfica: Ponderación de NGCI</h3>
+                <h3 class="box-title">Gráfica de ejemplo: Ponderación de NGCI</h3>
                 <div class="box-tools pull-right">
                   <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
                   <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

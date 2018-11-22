@@ -86,47 +86,6 @@
                                         @else
                                             <th><a href="#" class="btn btn-success" title="Status: Evaluado"><i class="fa fa-check"></i></a></th>
                                         @endif
-                                        @if($proceso->cve_crit_sproc_a == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_b == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_c == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_d == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_e == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_f == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_g == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-                                        @if($proceso->cve_crit_sproc_h == 0)
-                                            <th><a href="#" class="btn btn-secondary" title="Status: No Seleccionado"><i class="fa fa-square-o"></i></a></th>
-                                        @else
-                                            <th><a href="#" class="btn btn-secondary" title="Status: Seleccionado"><i class="fa fa-check-square-o"></i></a></th>
-                                        @endif
-
                                     </tr>
                                 @endforeach
                                 </tbody>

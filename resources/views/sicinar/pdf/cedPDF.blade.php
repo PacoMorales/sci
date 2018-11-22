@@ -5,24 +5,24 @@
     <table class="table table-hover table-striped" align="center">
         <thead>
         <tr>
-            <th style="font-size: x-small;background-color:gray; width:700px; text-align:center;"><h4 style="color:white;">Cédula de Evaluación en materia de Control Interno con base en <br> el  Manual Administrativo de Aplicación General</h4></th>
-            <th><img src="{{ asset('images/Contraloria.png') }}" alt="EDOMEX" width="40px" height="40px" style="margin-left: 10px;"/>
-                <img src="{{ asset('images/Gobierno.png') }}" alt="EDOMEX" width="60px" height="40px"/></th>
+            <th><img src="{{ asset('images/Gobierno.png') }}" alt="EDOMEX" width="75px" height="55px" style="margin-right: 15px;"/></th>
+            <th style="background-color:gray; width:750px; text-align:center;"><h4 style="color:white;">Cédula de Evaluación en materia de Control Interno con base en <br> el  Manual Administrativo de Aplicación General</h4></th>
+            <th><img src="{{ asset('images/Contraloria.png') }}" alt="EDOMEX" width="55px" height="55px" style="margin-left: 15px;"/></th>
         </tr>
         <tr>
-            <td style="font-size: x-small;"><b>Gobierno del Estado de México</b></td>
-            <td style="font-size: x-small;"><b>Fecha de la Evaluación: {!! date('d/m/Y',strtotime($preguntas[0]->fecha_reg)) !!}</b></td>
+            <td colspan="2"><b>Gobierno del Estado de México</b></td>
+            <td><b>Fecha: {!! date('d/m/Y',strtotime($preguntas[0]->fecha_reg)) !!}</b></td>
         </tr>
         <tr>
-            <td style="font-size: x-small;"><b>Dependencia / Organismo Auxiliar: {{$unidades->depen_desc}}</b></td>
+            <td colspan="2"><b>Dependencia / Organismo Auxiliar: {{$unidades->depen_desc}}</b></td>
             <td></td>
         </tr>
         <tr>
-            <td style="font-size: x-small;"><b>Nombre del Titular de la Dependencia / Organismo Auxiliar: {{$proceso[0]->responsable}}</b></td>
+            <td colspan="2"><b>Nombre del Titular de la Dependencia / Organismo Auxiliar: {{$proceso[0]->responsable}}</b></td>
             <td></td>
         </tr>
         <tr>
-            <td style="font-size: x-small;"><b>Objetivo General de la Evaluación:</b> Fortalecer el Sistema de Control Interno en los Entes Públicos para proporcionar una seguridad razonable sobre la consecución de las metas y objetivos institucionales y la salvaguarda de los recursos públicos, así como para prevenir actos contrarios a la integridad.</td>
+            <td colspan="2"><b>Objetivo General de la Evaluación:</b> Fortalecer el Sistema de Control Interno en los Entes Públicos para proporcionar una seguridad razonable sobre la consecución de las metas y objetivos institucionales y la salvaguarda de los recursos públicos, así como para prevenir actos contrarios a la integridad.</td>
             <td></td>
         </tr>
         </thead>

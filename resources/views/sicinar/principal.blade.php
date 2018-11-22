@@ -136,7 +136,7 @@
                 </a>
               </li>
             @endif
-              @if($rango>=1 AND $rango<=4)
+              @if($rango>1 AND $rango<=4)
                 <li>
                   <a href="{{ route('verGraficas') }}">
                     <i class="fa fa-pie-chart"></i><span>Gráficas</span>

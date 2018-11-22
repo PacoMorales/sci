@@ -226,18 +226,6 @@ class cuestionarioController extends Controller
         return view('sicinar.cuestionario.confirmacion',compact('usuario','nombre','estructura','max','rango'));
     }
 
-    /*public function Val(){
-    	$nombre = session()->get('userlog');
-    	$pass = session()->get('passlog');
-        if($nombre == NULL AND $pass == NULL){
-            return view('sicinar.login.expirada');
-        }
-        $usuario = session()->get('usuario');
-        $estructura = session()->get('estructura');
-        $rango = session()->get('rango');
-        return view('sicinar.cuestionario.confirmacion',compact('usuario','nombre','estructura','rango'));
-    }*/
-
     public function actionConfirmado(){
     	$id_proceso = session()->get('idproc');
     	$nombre = session()->get('userlog');

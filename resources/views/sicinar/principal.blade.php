@@ -136,6 +136,16 @@
                 </a>
               </li>
             @endif
+              @if($rango>=1 AND $rango<=4)
+                <li>
+                  <a href="{{ route('verGraficas') }}">
+                    <i class="fa fa-pie-chart"></i><span>Gráficas</span>
+                    <span class="pull-right-container">
+                    <!--<small class="label pull-right bg-green">new</small>-->
+                  </span>
+                  </a>
+                </li>
+              @endif
             @if($rango>=1 AND $rango<=4)
               <li class="header">ELEMENTOS AUXILIARES</li>
               <li>

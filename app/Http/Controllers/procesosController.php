@@ -211,8 +211,6 @@ class procesosController extends Controller
         return view('sicinar.procesos.verProcesosInstitucionales',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
     }
 
-
-
     public function actionEvalProcesos(){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
@@ -277,5 +275,25 @@ class procesosController extends Controller
         return $pdf->stream('CedulaDeEvaluacion-Proceso'.$id);
         //SCI_PROCTRAB_CI
         //SCI_ACCIONES_MEJORA
+    }
+
+    public function Graficas(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+
+        $procesos = procesosModel::join('SCI_TIPO_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','=','SCI_TIPO_PROCESO.CVE_TIPO_PROC')
+            ->selectRaw('SCI_TIPO_PROCESO.DESC_TIPO_PROC AS TIPO, COUNT(SCI_PROCESOS.CVE_TIPO_PROC) AS TOTAL')
+            ->groupBy('SCI_TIPO_PROCESO.DESC_TIPO_PROC')
+            ->get();
+        //dd($procesos);
+        return view('sicinar.graficas.graficas',compact('procesos','nombre','usuario','estructura','id_estructura','rango'));
     }
 }

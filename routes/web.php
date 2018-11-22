@@ -32,6 +32,7 @@ Route::group(['prefix' => 'control-interno'], function(){
 	Route::post('procesos/nuevo/alta','procesosController@actionAltaProcesos')->name('altaProceso');
 	Route::get('procesos/unidades/{id}','procesosController@actionUnidades')->name('unidades');
 	Route::get('cuestionario/unidades/{id}','procesosController@actionUnidades');
+    Route::get('procesos/ver/graficas','procesosController@Graficas')->name('verGraficas');
 	Route::get('procesos/ver/todos','procesosController@actionVerProcesos')->name('verProcesos');
     Route::get('procesos/ver/sustantivos','procesosController@actionVerProcesosSustantivos')->name('verProcesosSust');
     Route::get('procesos/ver/administrativos','procesosController@actionVerProcesosAdministrativos')->name('verProcesosAdmin');

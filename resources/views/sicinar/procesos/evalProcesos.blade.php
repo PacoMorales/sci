@@ -37,6 +37,10 @@
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title"><b>Ponderación de Normas Generales de Control Interno (NGCI)</b></h3>
+                <div class="box-tools pull-right">
+                    <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
             </div>
             <div class="box-body">
               <div class="row">
@@ -128,7 +132,7 @@
           <div class="box">
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">Gráfica Ejemplo</h3>
+                <h3 class="box-title">Gráfica: Ponderación de NGCI</h3>
                 <div class="box-tools pull-right">
                   <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
                   <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -166,8 +170,8 @@
                     <th rowspan="2">CLAVE</th>
                     <th rowspan="2">PROCESO</th>
                     <th rowspan="2">TIPO</th>
-                    <th rowspan="2">DEPENDENCIA RESPONSABLE</th>
-                    <th rowspan="2">UNIDAD RESPONSABLE</th>
+                    <th rowspan="2">DEPEN. / ORG. AUX. RESPONSABLE</th>
+                    <th rowspan="2">U. ADMON. RESPONSABLE</th>
                     <th rowspan="2">RESPONSABLE</th>
                     <th colspan="6" style="text-align:center;">NORMAS GENERALES DE CONTROL INTERNO (NGCI)</th>
                   </tr>

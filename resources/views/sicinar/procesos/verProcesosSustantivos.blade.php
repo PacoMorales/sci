@@ -45,8 +45,8 @@
                                     <th>Clave</th>
                                     <th>Proceso</th>
                                     <th>Tipo</th>
-                                    <th>Secretaria Responsable</th>
-                                    <th>Unidad  Responsable</th>
+                                    <th>Depen. / Org. Aux. Responsable</th>
+                                    <th>U. Admon. Responsable</th>
                                     <th>Responsable</th>
                                     <th>Evaluado</th>
                                     <th>Criterio A</th>

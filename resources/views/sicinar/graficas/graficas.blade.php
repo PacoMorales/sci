@@ -18,8 +18,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                Gráficas
-                <small> de procesos dados de alta</small>
+                Dependencia: Secretaría de Desarrollo Social
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Menú</a></li>
@@ -32,7 +31,7 @@
                 <div class="col-md-8">
                     <div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Gráfica de Procesos</h3>
+                            <h3 class="box-title">Gráfica por Tipo de Procesos</h3>
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-xs-12">

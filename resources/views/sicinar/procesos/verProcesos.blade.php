@@ -45,10 +45,10 @@
                     <th>Clave</th>
                     <th>Proceso</th>
                     <th>Tipo</th>
-                    <th>Secretaria Responsable</th>
-                    <th>Unidad  Responsable</th>
+                    <th>Dependencia Responsable</th>
+                    <th>Unidad Responsable</th>
                     <th>Responsable</th>
-                    <th>Evaluado</th>
+                    <th>Proceso Evaluado</th>
                     <th>Criterio A</th>
                     <th>Criterio B</th>
                     <th>Criterio C</th>

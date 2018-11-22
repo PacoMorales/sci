@@ -29,7 +29,7 @@
     </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-11">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Listado de Evidencias</h3>
@@ -38,8 +38,8 @@
               <table id="tabla1" class="table table-striped table-bordered table-sm">
                 <thead style="color: brown;" class="justify">
                   <tr>
-                    <th>Número de Identificación</th>
-                    <th>Nombre de la Evidencia</th>
+                    <th>Num</th>
+                    <th>Evidencia</th>
                   </tr>
                 </thead>
                 <tbody>

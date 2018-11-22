@@ -42,8 +42,8 @@
               <div class="row">
                 <div class="col-xs-12">
                   <!--<b style="color:red;">¡Importante!</b><br>-->
-                  <b>Ponderación = Σ {valoraciones | valoración ∈ NGCI } / total de elementos de control  ∈ NGCI</b><br>
-                  Ponderación = sumatoria de todo el conjunto de valoraciones, tal que, cada valoración pertenece a NGCI, dividido entre la cantidad total de elementos de control que pertenecen a cada NGCI.<br>
+                  <b>% Ponderación = Σ {valoraciones | valoración ∈ NGCI } / Total de elementos de control  ∈ NGCI</b><br>
+                  Ponderación = sumatoria de todo el conjunto de valoraciones, tal que, cada valoración pertenece a NGCI, dividido entre la cantidad total de elementos de control (TEC) que pertenecen a cada NGCI.<br>
                   (La siguiente tabla es una ponderación ejemplo).
                 </div>
               </div>
@@ -51,7 +51,7 @@
                 <thead style="color: brown;" class="justify">
                   <tr>
                     <th>NGCI</th>
-                    <th>Suma total de valoraciones (%)</th>
+                    <th>Suma total de valoraciones</th>
                     <th>Cantidad de elementos de control</th>
                     <th>Ponderación (%)</th>
                   </tr>
@@ -59,59 +59,93 @@
                 <tbody>
                   <tr>
                     <td>1.- AMBIENTE DE CONTROL</td>
-                    <td>400 %</td>
+                    <td>400</td>
                     <td>8</td>
-                    <td>50 %</td>
+                    <td><a href="#" class="btn btn-success">50 %</a></td>
                   </tr>
                   <tr>
                     <td>2.- ADMINISTRACIÓN DE RIEZGOS</td>
-                    <td>216.6 %</td>
+                    <td>216.6</td>
                     <td>4</td>
-                    <td>54.15 %</td>
+                    <td><a href="#" class="btn btn-primary">54.15 %</a></td>
                   </tr>
                   <tr>
                     <td>3.- ACTIVIDADES DE CONTROL</td>
-                    <td>716.6 %</td>
+                    <td>716.6</td>
                     <td>12</td>
-                    <td>59.71 %</td>
+                    <td><a href="#" class="btn btn-primary">59.71 %</a></td>
                   </tr>
                   <tr>
                     <td>4.- INFORMAR Y COMUNICAR</td>
-                    <td>299.9 %</td>
+                    <td>299.9</td>
                     <td>6</td>
-                    <td>49.98 %</td>
+                    <td><a href="#" class="btn btn-success">49.98 %</a></td>
                   </tr>
                   <tr>
                     <td>5.- SUPERVISION Y MEJORA CONTINUA</td>
-                    <td>200 %</td>
+                    <td>200</td>
                     <td>3</td>
-                    <td>66.66 %</td>
+                    <td><a href="#" class="btn btn-primary">66.66 %</a></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="text-align:right;">TOTAL</td>
+                    <td colspan="2" style="text-align:left;">33</td>
                   </tr>
                 </tbody>
               </table>
               <br>
-              <div class="row">
-                <div class="col-xs-12">
-                  <b>Semáforos</b><br>
-                  Si la <b>ponderación</b> es mayor o igual a 0.0% y menor o igual a 16.7%, resaltará en color <b style="color:red;">rojo</b>.<br>
-                  Si la <b>ponderación</b> es mayor o igual a 16.8% y menor o igual a 33.3%, resaltará en color <b style="color:orange;">naranja</b>.<br>
-                  Si la <b>ponderación</b> es mayor o igual a 33.4% y menor o igual a 50.0%, se resaltará en color <b style="color:green;">verde</b>.<br>
-                  Si la <b>ponderación</b> es mayor o igual a 50.1% y menor o igual a 66.7%, se resaltará en color <b style="color:blue;">azul</b>.<br>
-                  Si la <b>ponderación</b> es mayor o igual a 66.8% y menor o igual a 83.3%, se resaltará en color <b style="color:deepskyblue;">azul claro</b>.<br>
-                  Si la <b>ponderación</b> es mayor o igual a 83.4% y menor o igual a 100.0%, se resaltará en color <b style="color:gray;">gris</b>.<br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box">
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title">Semáforos</h3>
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <br>Si la <b>ponderación</b> es mayor o igual a 0.0% y menor o igual a 16.7%, resaltará en color <b style="color:red;">rojo</b>.<br><br><br>
+                      Si la <b>ponderación</b> es mayor o igual a 16.8% y menor o igual a 33.3%, resaltará en color <b style="color:orange;">naranja</b>.<br><br><br>
+                      Si la <b>ponderación</b> es mayor o igual a 33.4% y menor o igual a 50.0%, se resaltará en color <b style="color:green;">verde</b>.<br><br><br>
+                      Si la <b>ponderación</b> es mayor o igual a 50.1% y menor o igual a 66.7%, se resaltará en color <b style="color:blue;">azul</b>.<br><br><br>
+                      Si la <b>ponderación</b> es mayor o igual a 66.8% y menor o igual a 83.3%, se resaltará en color <b style="color:deepskyblue;">azul claro</b>.<br><br><br>
+                      Si la <b>ponderación</b> es mayor o igual a 83.4% y menor o igual a 100.0%, se resaltará en color <b style="color:gray;">gris</b>.<br><br><br>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-tools pull-right">
+                  <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
               </div>
-              <!--<div class="margin">
-                <div class="btn-group">
-                  <div class="col-md-6">
-                    <a href="#" class="btn btn-success"><span>Confirmar </span><i class="fa fa-check"></i></a>
-                  </div>
-                  <div class="col-md-6">
-                    <a href="#" class="btn btn-info"><span>Verificar </span><i class="fa fa-share"></i></a>
-                  </div>
-                  <br>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box">
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title">Gráfica Ejemplo</h3>
+                <div class="box-tools pull-right">
+                  <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
-              </div>-->
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <b style="color:green;">1.- AMBIENTE DE CONTROL: 50%</b><br>
+                      <b style="color:dodgerblue;">2.- ADMINISTRACIÓN DE RIESGOS: 54.15%</b><br>
+                      <b style="color:dodgerblue;">3.- ACTIVIDADES DE CONTROL: 59.71%</b><br>
+                      <b style="color:green;">4.- INFORMAR Y COMUNICAR: 49.98%</b><br>
+                      <b style="color:dodgerblue;">5.- SUPERVISIÓN Y MEJORA CONTINUA: 66.66%</b><br>
+                    </div>
+                  </div><br>
+                  <canvas id="pieChart" style="height:250px"></canvas>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +166,7 @@
                     <th rowspan="2">CLAVE</th>
                     <th rowspan="2">PROCESO</th>
                     <th rowspan="2">TIPO</th>
-                    <th rowspan="2">SECRETARÍA RESPONSABLE</th>
+                    <th rowspan="2">DEPENDENCIA RESPONSABLE</th>
                     <th rowspan="2">UNIDAD RESPONSABLE</th>
                     <th rowspan="2">RESPONSABLE</th>
                     <th colspan="6" style="text-align:center;">NORMAS GENERALES DE CONTROL INTERNO (NGCI)</th>
@@ -334,7 +368,76 @@
 @endsection
 
 @section('request')
+  <script src="{{ asset('bower_components/chart.js/Chart.js') }}"></script>
 @endsection
 
 @section('javascrpt')
+  <script>
+      $(function(){
+          //-------------
+          //- PIE CHART -
+          //-------------
+          // Get context with jQuery - using jQuery's .get() method.
+          var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+          var pieChart       = new Chart(pieChartCanvas);
+          var PieData        = [
+              {
+                  value    : 50,
+                  color    : 'green',
+                  highlight: 'green',
+                  label    : 'AMBIENTE DE CONTROL'
+              },
+              {
+                  value    : 54.15,
+                  color    : 'dodgerblue',
+                  highlight: 'dodgerblue',
+                  label    : 'ADMINISTRACIÓN DE RIESGOS'
+              },
+              {
+                  value    : 59.71,
+                  color    : 'dodgerblue',
+                  highlight: 'dodgerblue',
+                  label    : 'ACTIVIDADES DE CONTROL'
+              },
+              {
+                  value    : 49.98,
+                  color    : 'green',
+                  highlight: 'green',
+                  label    : 'INFORMAR Y COMUNICAR'
+              },
+              {
+                  value    : 66.66,
+                  color    : 'dodgerblue',
+                  highlight: 'dodgerblue',
+                  label    : 'SUPERVISIÓN Y MEJORA CONTINUA'
+              }
+          ];
+          var pieOptions     = {
+              //Boolean - Whether we should show a stroke on each segment
+              segmentShowStroke    : true,
+              //String - The colour of each segment stroke
+              segmentStrokeColor   : '#fff',
+              //Number - The width of each segment stroke
+              segmentStrokeWidth   : 2,
+              //Number - The percentage of the chart that we cut out of the middle
+              percentageInnerCutout: 50, // This is 0 for Pie charts
+              //Number - Amount of animation steps
+              animationSteps       : 100,
+              //String - Animation easing effect
+              animationEasing      : 'easeOutBounce',
+              //Boolean - Whether we animate the rotation of the Doughnut
+              animateRotate        : true,
+              //Boolean - Whether we animate scaling the Doughnut from the centre
+              animateScale         : false,
+              //Boolean - whether to make the chart responsive to window resizing
+              responsive           : true,
+              // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+              maintainAspectRatio  : true
+              //String - A legend template
+          };
+          //Create pie or douhnut chart
+          // You can switch between pie and douhnut using the method below.
+          pieChart.Doughnut(PieData, pieOptions)
+      })
+  </script>
 @endsection

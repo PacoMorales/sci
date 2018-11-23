@@ -68,7 +68,7 @@
                     <td><a href="#" class="btn btn-success">50 %</a></td>
                   </tr>
                   <tr>
-                    <td>2.- ADMINISTRACIÓN DE RIEZGOS</td>
+                    <td>2.- ADMINISTRACIÓN DE RIESGOS</td>
                     <td>216.6</td>
                     <td>4</td>
                     <td><a href="#" class="btn btn-primary">54.15 %</a></td>

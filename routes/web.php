@@ -39,6 +39,10 @@ Route::group(['prefix' => 'control-interno'], function(){
     Route::get('procesos/ver/institucionales','procesosController@actionVerProcesosInstitucionales')->name('verProcesosInst');
 	Route::get('procesos/ver/todos/evaluaciones','procesosController@actionEvalProcesos')->name('evalProcesos');
     Route::get('procesos/gestion','procesosController@actionGestionProcesos')->name('procesosGestion');
+    Route::get('procesos/gestion/ver/{id}/informacion-general','procesosController@actionVerInfo')->name('procesoVerInfo');
+
+    Route::get('procesos/gestion/todos/{id}/activar','procesosController@actionActivarProcesos')->name('procesosGestionAct');
+    Route::get('procesos/gestion/todos/{id}/desactivar','procesosController@actionDesactivarProcesos')->name('procesosGestionDes');
 
 	Route::get('downloadExcel','procesosController@export')->name('download');
     Route::get('ver/pdf/{id}','procesosController@verPDF')->name('Verpdf');

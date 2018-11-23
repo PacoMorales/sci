@@ -25,6 +25,8 @@ class procesosModel extends Model
 	    'CVE_CRIT_SPROC_F',
 	    'CVE_CRIT_SPROC_G',
 	    'CVE_CRIT_SPROC_H',
+        'STATUS_1',
+        'STATUS_2',
 	    'USU',
 	    'PW',
 	    'IP',

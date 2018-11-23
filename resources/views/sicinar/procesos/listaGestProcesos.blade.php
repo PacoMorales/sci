@@ -45,10 +45,11 @@
                                     <th>Clave</th>
                                     <th>Proceso</th>
                                     <th>Tipo</th>
-                                    <th>Depen. / Org. Aux. Responsable</th>
                                     <th>U. Admon. Responsable</th>
                                     <th>Responsable</th>
                                     <th>Proceso Evaluado</th>
+                                    <th>Status</th>
+                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -59,13 +60,6 @@
                                         @foreach($tipos as $tipo)
                                             @if($proceso->cve_tipo_proc == $tipo->cve_tipo_proc)
                                                 <td>{{$tipo->desc_tipo_proc}}</td>
-                                                @break
-                                            @endif
-                                        @endforeach
-
-                                        @foreach($estructuras as $est)
-                                            @if(strpos((string)$est->estrucgob_id,(string)$proceso->estrucgob_id)!==false)
-                                                <td>{{$est->estrucgob_desc}}</td>
                                                 @break
                                             @endif
                                         @endforeach
@@ -82,10 +76,17 @@
 
                                         <td>{{$proceso->responsable}}</td>
                                         @if($proceso->status_1 == 'N')
-                                            <th><a href="#" class="btn btn-danger" title="Status: No Evaluado"><i class="fa fa-times"></i></a></th>
+                                            <td><a href="#" class="btn btn-danger" title="No Evaluado"><i class="fa fa-times"></i></a></td>
                                         @else
-                                            <th><a href="#" class="btn btn-success" title="Status: Evaluado"><i class="fa fa-check"></i></a></th>
+                                            <td><a href="#" class="btn btn-success" title="Evaluado"><i class="fa fa-check"></i></a></td>
                                         @endif
+
+                                        @if($proceso->status_2 == 'A')
+                                            <td><a href="{{route('procesosGestionDes',$proceso->cve_proceso)}}" class="btn btn-primary" title="Activo"><i class="fa fa-check-square-o"></i></a></td>
+                                        @else
+                                            <td><a href="{{route('procesosGestionAct',$proceso->cve_proceso)}}" class="btn btn-warning" title="Inactivo"><i class="fa fa-square-o"></i></a></td>
+                                        @endif
+                                        <td><a href="{{route('procesoVerInfo',$proceso->cve_proceso)}}" class="btn btn-default" title="Ver Información"><i class="fa fa-search"></i></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

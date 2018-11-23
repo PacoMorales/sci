@@ -126,6 +126,32 @@
                 </ul>
               </li>
             @endif
+              @if($rango>=4)
+                <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-folder"></i> <span>Gestión</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i> De Procesos
+                          <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="{{route('procesosGestion')}}"><i class="fa fa-square-o"></i> Todos</a></li>
+                          <li><a href="#"><i class="fa fa-square-o"></i> Procesos sustantivos</a></li>
+                          <li><a href="#"><i class="fa fa-square-o"></i> Procesos administrativos</a></li>
+                          <li><a href="#}}"><i class="fa fa-square-o"></i> Procesos institucionales</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#"><i class="fa fa-circle-o"></i>Por Unidad</a></li>
+                  </ul>
+                </li>
+              @endif
             @if($rango>=1 AND $rango<=4)
               <li>
                 <a href="{{ route('cuestionario') }}">

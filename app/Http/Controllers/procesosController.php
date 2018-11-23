@@ -84,6 +84,7 @@ class procesosController extends Controller
     	if($request->G != NULL){$nuevo->CVE_CRIT_SPROC_G = 1;}else{$nuevo->CVE_CRIT_SPROC_G = 0;}
     	if($request->H != NULL){$nuevo->CVE_CRIT_SPROC_H = 1;}else{$nuevo->CVE_CRIT_SPROC_H = 0;}
         $nuevo->STATUS_1 = 'N';
+        $nuevo->STATUS_2 = 'A';
     	$nuevo->USU = $nombre;
     	$nuevo->PW = $pass;
     	$nuevo->IP = $ip;
@@ -255,6 +256,11 @@ class procesosController extends Controller
         set_time_limit(0);
         ini_set("memory_limit",-1);
         ini_set('max_execution_time', 0);
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
         $proceso = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
                                     ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5','SCI_PONDERACION.TOTAL')
                                     ->where('SCI_PROCESOS.CVE_PROCESO',$id)
@@ -311,7 +317,7 @@ class procesosController extends Controller
         //dd($id_estructura);
         $rango = session()->get('rango');
         $total = procesosModel::count();
-        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1')->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->orderBy('CVE_PROCESO','ASC')->paginate(25);
         //dd($procesos);
         if($id_estructura == '0'){
             $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
@@ -321,13 +327,260 @@ class procesosController extends Controller
         //dd($dependencias->all());
         $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
         $estructuras = estructurasModel::Estructuras();
-        return view('sicinar.procesos.verProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+        return view('sicinar.procesos.listaGestProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
     }
 
-    public function actionActivarProcesos(){
-
+    public function actionActivarProcesos($id){
+        //dd('ACTIVAR');
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'A']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
     }
-    public function actionDesactivarProcesos(){
 
+    public function actionDesactivarProcesos($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'B']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionVerInfo($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+
+        //$preguntas = ced_evaluacionModel::select()->where()->get();
+
+        $procesos = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
+            ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5','SCI_PONDERACION.TOTAL')
+            ->where('SCI_PROCESOS.CVE_PROCESO',$id)
+            ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
+            ->get();
+        //dd($procesos);
+        if($procesos->count() <= 0){
+            toastr()->error('Este proceso no ha sido evaluado.','Sin Evaluación!',['positionClass' => 'toast-bottom-right']);
+            return back();
+        }
+        $unidades = dependenciasModel::select('DEPEN_DESC')->where('DEPEN_ID','LIKE',$procesos[0]->cve_dependencia.'%')->first();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON','DEPEN_ID')->get();
+        $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
+        $preguntas = ced_evaluacionModel::join('SCI_ECI','SCI_CED_EVALUACION.NUM_ECI','=','SCI_ECI.NUM_ECI')
+            ->select('SCI_CED_EVALUACION.NUM_ECI','SCI_CED_EVALUACION.CVE_NGCI','SCI_CED_EVALUACION.NUM_MEEC')
+            ->where('SCI_CED_EVALUACION.N_PERIODO','=',(int)date('Y'))
+            ->where('SCI_CED_EVALUACION.CVE_PROCESO','=',$id)
+            ->get();
+        //dd($preguntas);
+        $colores[0] = "red";
+        if($procesos[0]->pond_ngci1 >= 0 AND $procesos[0]->pond_ngci1 <= 16.79){
+            $colores[0] = "red";
+        }else{
+            if($procesos[0]->pond_ngci1 >= 16.80 AND $procesos[0]->pond_ngci1 <= 33.39){
+                $colores[0] = "orange";
+            }else{
+                if($procesos[0]->pond_ngci1 >= 33.40 AND $procesos[0]->pond_ngci1 <= 50.09){
+                    $colores[0] = "green";
+                }else{
+                    if($procesos[0]->pond_ngci1 >= 50.1 AND $procesos[0]->pond_ngci1 <= 66.79){
+                        $colores[0] = "blue";
+                    }else{
+                        if($procesos[0]->pond_ngci1 >= 66.8 AND $procesos[0]->pond_ngci1 <= 83.39){
+                            $colores[0] = "deepskyblue";
+                        }else{
+                            if($procesos[0]->pond_ngci1 >= 83.4 AND $procesos[0]->pond_ngci1 <= 100){
+                                $colores[0] = "gray";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if($procesos[0]->pond_ngci2 >= 0 AND $procesos[0]->pond_ngci2 <= 16.79){
+            $colores[1] = "red";
+        }else{
+            if($procesos[0]->pond_ngci2 >= 16.80 AND $procesos[0]->pond_ngci2 <= 33.39){
+                $colores[1] = "orange";
+            }else{
+                if($procesos[0]->pond_ngci2 >= 33.40 AND $procesos[0]->pond_ngci2 <= 50.09){
+                    $colores[1] = "green";
+                }else{
+                    if($procesos[0]->pond_ngci2 >= 50.1 AND $procesos[0]->pond_ngci2 <= 66.79){
+                        $colores[1] = "blue";
+                    }else{
+                        if($procesos[0]->pond_ngci2 >= 66.8 AND $procesos[0]->pond_ngci2 <= 83.39){
+                            $colores[1] = "deepskyblue";
+                        }else{
+                            if($procesos[0]->pond_ngci2 >= 83.4 AND $procesos[0]->pond_ngci2 <= 100){
+                                $colores[1] = "gray";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if($procesos[0]->pond_ngci3 >= 0 AND $procesos[0]->pond_ngci3 <= 16.79){
+            $colores[2] = "red";
+        }else{
+            if($procesos[0]->pond_ngci3 >= 16.80 AND $procesos[0]->pond_ngci3 <= 33.39){
+                $colores[2] = "orange";
+            }else{
+                if($procesos[0]->pond_ngci3 >= 33.40 AND $procesos[0]->pond_ngci3 <= 50.09){
+                    $colores[2] = "green";
+                }else{
+                    if($procesos[0]->pond_ngci3 >= 50.1 AND $procesos[0]->pond_ngci3 <= 66.79){
+                        $colores[2] = "blue";
+                    }else{
+                        if($procesos[0]->pond_ngci3 >= 66.8 AND $procesos[0]->pond_ngci3 <= 83.39){
+                            $colores[2] = "deepskyblue";
+                        }else{
+                            if($procesos[0]->pond_ngci3 >= 83.4 AND $procesos[0]->pond_ngci3 <= 100){
+                                $colores[2] = "gray";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if($procesos[0]->pond_ngci4 >= 0 AND $procesos[0]->pond_ngci4 <= 16.79){
+            $colores[3] = "red";
+        }else{
+            if($procesos[0]->pond_ngci4 >= 16.80 AND $procesos[0]->pond_ngci4 <= 33.39){
+                $colores[3] = "orange";
+            }else{
+                if($procesos[0]->pond_ngci4 >= 33.40 AND $procesos[0]->pond_ngci4 <= 50.09){
+                    $colores[3] = "green";
+                }else{
+                    if($procesos[0]->pond_ngci4 >= 50.1 AND $procesos[0]->pond_ngci4 <= 66.79){
+                        $colores[3] = "blue";
+                    }else{
+                        if($procesos[0]->pond_ngci4 >= 66.8 AND $procesos[0]->pond_ngci4 <= 83.39){
+                            $colores[3] = "deepskyblue";
+                        }else{
+                            if($procesos[0]->pond_ngci4 >= 83.4 AND $procesos[0]->pond_ngci4 <= 100){
+                                $colores[3] = "gray";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if($procesos[0]->pond_ngci5 >= 0 AND $procesos[0]->pond_ngci5 <= 16.79){
+            $colores[4] = "red";
+        }else{
+            if($procesos[0]->pond_ngci5 >= 16.80 AND $procesos[0]->pond_ngci5 <= 33.39){
+                $colores[4] = "orange";
+            }else{
+                if($procesos[0]->pond_ngci5 >= 33.40 AND $procesos[0]->pond_ngci5 <= 50.09){
+                    $colores[4] = "green";
+                }else{
+                    if($procesos[0]->pond_ngci5 >= 50.1 AND $procesos[0]->pond_ngci5 <= 66.79){
+                        $colores[4] = "blue";
+                    }else{
+                        if($procesos[0]->pond_ngci5 >= 66.8 AND $procesos[0]->pond_ngci5 <= 83.39){
+                            $colores[4] = "deepskyblue";
+                        }else{
+                            if($procesos[0]->pond_ngci5 >= 83.4 AND $procesos[0]->pond_ngci5 <= 100){
+                                $colores[4] = "gray";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $apartado1=0;$apartado2=0;$apartado3=0;$apartado4=0;$apartado5=0;
+        $valores = m_evaelemcontrolModel::select('NUM_MEEC','PORC_MEEC')->orderBy('NUM_MEEC','ASC')->get();
+        foreach($preguntas as $pregunta){
+            if($pregunta->cve_ngci == 1){
+                foreach($valores as $valor){
+                    if($valor->num_meec == $pregunta->num_meec){
+                        $apartado1 = $apartado1+(float)($valor->porc_meec);
+                        break;
+                    }
+                }
+            }else
+                if($pregunta->cve_ngci==2){
+                    foreach($valores as $valor){
+                        if($valor->num_meec == $pregunta->num_meec){
+                            $apartado2 = $apartado2+$valor->porc_meec;
+                            break;
+                        }
+                    }
+                }else
+                    if($pregunta->cve_ngci==3){
+                        foreach($valores as $valor){
+                            if($valor->num_meec == $pregunta->num_meec){
+                                $apartado3 = $apartado3+$valor->porc_meec;
+                                break;
+                            }
+                        }
+                    }else
+                        if($pregunta->cve_ngci==4){
+                            foreach($valores as $valor){
+                                if($valor->num_meec == $pregunta->num_meec){
+                                    $apartado4 = $apartado4+$valor->porc_meec;
+                                    break;
+                                }
+                            }
+                        }else
+                            if($pregunta->cve_ngci==5){
+                                foreach($valores as $valor){
+                                    if($valor->num_meec == $pregunta->num_meec){
+                                        $apartado5 = $apartado5+$valor->porc_meec;
+                                        break;
+                                    }
+                                }
+                            }
+        }
+        //dd($apartado2);
+        return view('sicinar.procesos.detalles.detalles',compact('nombre','usuario','estructura','id_estructura','rango','procesos','unidades','servidores','apartados','preguntas','valores','apartado1','apartado2','apartado3','apartado4','apartado5','colores'));
     }
 }

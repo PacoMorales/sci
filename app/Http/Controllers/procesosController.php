@@ -330,6 +330,88 @@ class procesosController extends Controller
         return view('sicinar.procesos.listaGestProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
     }
 
+    public function actionGestionProcesosAdm(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        //1 ADMINISTRATIVO, 2 SUSTANTIVO, 3 INSTITUCIONAL
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',1)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosAdm',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionGestionProcesosInst(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        //1 ADMINISTRATIVO, 2 SUSTANTIVO, 3 INSTITUCIONAL
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',3)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosInst',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionGestionProcesosSust(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        //1 ADMINISTRATIVO, 2 SUSTANTIVO, 3 INSTITUCIONAL
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',2)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosSust',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+
     public function actionActivarProcesos($id){
         //dd('ACTIVAR');
         $nombre = session()->get('userlog');
@@ -383,6 +465,172 @@ class procesosController extends Controller
         $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
         $estructuras = estructurasModel::Estructuras();
         return view('sicinar.procesos.listaGestProcesos',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionActivarProcesosAdm($id){
+        //dd('ACTIVAR');
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'A']);
+        //1 ADMINISTRATIVO, 2 SUSTANTIVO, 3 INSTITUCIONAL
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',1)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosAdm',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionDesactivarProcesosAdm($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'B']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',1)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosAdm',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionActivarProcesosSust($id){
+        //dd('ACTIVAR');
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'A']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',2)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosSust',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionDesactivarProcesosSust($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'B']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',2)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosSust',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionActivarProcesosInst($id){
+        //dd('ACTIVAR');
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'A']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',3)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosInst',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
+    }
+
+    public function actionDesactivarProcesosInst($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        //dd($id_estructura);
+        $rango = session()->get('rango');
+        $total = procesosModel::count();
+        $process = procesosModel::where('CVE_PROCESO',$id)->update(['STATUS_2'=>'B']);
+        $procesos = procesosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA','CVE_PROCESO','DESC_PROCESO','CVE_TIPO_PROC','RESPONSABLE','CVE_CRIT_SPROC_A','CVE_CRIT_SPROC_B','CVE_CRIT_SPROC_C','CVE_CRIT_SPROC_D','CVE_CRIT_SPROC_E','CVE_CRIT_SPROC_F','CVE_CRIT_SPROC_G','CVE_CRIT_SPROC_H','STATUS_1','STATUS_2')->where('CVE_TIPO_PROC',3)->orderBy('CVE_PROCESO','ASC')->paginate(25);
+        //dd($procesos);
+        if($id_estructura == '0'){
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();
+        }else{
+            $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('ESTRUCGOB_ID','like','%'.$id_estructura.'%')->get();
+        }
+        //dd($dependencias->all());
+        $tipos = tipoprocesoModel::select('CVE_TIPO_PROC','DESC_TIPO_PROC')->orderBy('CVE_TIPO_PROC','ASC')->get();
+        $estructuras = estructurasModel::Estructuras();
+        return view('sicinar.procesos.listaGestProcesosInst',compact('nombre','usuario','estructura','rango','procesos','total','tipos','estructuras','dependencias'));
     }
 
     public function actionVerInfo($id){

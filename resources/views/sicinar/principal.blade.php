@@ -136,19 +136,19 @@
                   </a>
                   <ul class="treeview-menu">
                       <li class="treeview">
-                        <a href="#"><i class="fa fa-circle-o"></i> De Procesos
+                        <a href="#"><i class="fa fa-circle-o"></i> Procesos
                           <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
                         </a>
                         <ul class="treeview-menu">
                           <li><a href="{{route('procesosGestion')}}"><i class="fa fa-square-o"></i> Todos</a></li>
-                          <li><a href="#"><i class="fa fa-square-o"></i> Procesos sustantivos</a></li>
-                          <li><a href="#"><i class="fa fa-square-o"></i> Procesos administrativos</a></li>
-                          <li><a href="#}}"><i class="fa fa-square-o"></i> Procesos institucionales</a></li>
+                          <li><a href="{{route('procesosGestionSust')}}"><i class="fa fa-square-o"></i> Procesos sustantivos</a></li>
+                          <li><a href="{{route('procesosGestionAdm')}}"><i class="fa fa-square-o"></i> Procesos administrativos</a></li>
+                          <li><a href="{{route('procesosGestionInst')}}"><i class="fa fa-square-o"></i> Procesos institucionales</a></li>
                         </ul>
                       </li>
-                      <li><a href="#"><i class="fa fa-circle-o"></i>Por Unidad</a></li>
+                      <li><a href="#"><i class="fa fa-circle-o"></i> Unidad</a></li>
                   </ul>
                 </li>
               @endif

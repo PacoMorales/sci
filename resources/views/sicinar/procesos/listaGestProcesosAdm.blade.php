@@ -1,6 +1,6 @@
 @extends('sicinar.principal')
 
-@section('title','Gestionar Procesos')
+@section('title','Gestionar Procesos Administrativos')
 
 @section('links')
     <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -22,7 +22,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                Gestión de Procesos
+                Gestión de Procesos Administrativos
                 <small> (Activar o desactivar procesos)</small>
             </h1>
             <ol class="breadcrumb">
@@ -82,9 +82,9 @@
                                         @endif
 
                                         @if($proceso->status_2 == 'A')
-                                            <td><a href="{{route('procesosGestionDes',$proceso->cve_proceso)}}" class="btn btn-success" title="Activo"><i class="fa fa-check-square-o"></i></a></td>
+                                            <td><a href="{{route('procesosGestionDesAdm',$proceso->cve_proceso)}}" class="btn btn-success" title="Activo"><i class="fa fa-check-square-o"></i></a></td>
                                         @else
-                                            <td><a href="{{route('procesosGestionAct',$proceso->cve_proceso)}}" class="btn btn-danger" title="Inactivo"><i class="fa fa-square-o"></i></a></td>
+                                            <td><a href="{{route('procesosGestionActAdm',$proceso->cve_proceso)}}" class="btn btn-danger" title="Inactivo"><i class="fa fa-square-o"></i></a></td>
                                         @endif
                                         <td><a href="{{route('procesoVerInfo',$proceso->cve_proceso)}}" class="btn btn-default" title="Ver Información"><i class="fa fa-search"></i></a></td>
                                     </tr>

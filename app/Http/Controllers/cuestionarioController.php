@@ -297,7 +297,7 @@ class cuestionarioController extends Controller
                                 ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
                                 ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
                                 ->get();
-    	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
+    	$cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->get();
         //dd($cuestionario);
     	$unidades = dependenciasModel::Unidades($id_estructura);
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','%V%')->get();
@@ -466,5 +466,55 @@ class cuestionarioController extends Controller
         $rango = session()->get('rango');
         $evidencias = evidenciasModel::orderBy('CVE_EVIDENCIA','ASC')->get();
         return view('sicinar.evidencias.listaEvidencias',compact('usuario','nombre','estructura','evidencias','rango'));
+    }
+
+    public function actionEditar(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $rango = session()->get('rango');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $dependencia = session()->get('nombre_dependencia');
+        $id_dependencia = session()->get('dependencia');
+
+        $procesos = procesosModel::select('CVE_PROCESO','DESC_PROCESO','STATUS_1','STATUS_2')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('STATUS_1','like','E%')
+            ->where('STATUS_2','like','A%')
+            ->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')
+            ->orderBy('CVE_PROCESO','ASC')
+            ->get();
+        if($procesos->count() <= 0){
+            toastr()->error('No haz evaluado ningun proceso.','Que mal!',['positionClass' => 'toast-bottom-right']);
+            return back();
+        }
+        return view('sicinar.cuestionario.editar',compact('nombre','usuario','estructura','rango','procesos'));
+    }
+
+    public function actionObtenerEvaluacion($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $rango = session()->get('rango');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $dependencia = session()->get('nombre_dependencia');
+        $id_dependencia = session()->get('dependencia');
+
+        $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->get();
+        dd($cuestionario);
+    }
+
+    public function actionEdicion(cuestionarioRequest $request, $id){
+
     }
 }

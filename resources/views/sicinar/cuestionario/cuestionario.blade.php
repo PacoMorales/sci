@@ -1,6 +1,6 @@
 @extends('sicinar.principal')
 
-@section('title','Cuestionario')
+@section('title','Cédula de Evaluación')
 
 @section('nombre')
 {{$nombre}}

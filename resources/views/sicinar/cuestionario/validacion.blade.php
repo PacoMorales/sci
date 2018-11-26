@@ -1,6 +1,6 @@
 @extends('sicinar.principal')
 
-@section('title','Verificando Cuestionario')
+@section('title','Verificando Evaluación')
 
 @section('nombre')
 {{$nombre}}

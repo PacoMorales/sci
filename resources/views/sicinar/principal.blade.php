@@ -126,7 +126,7 @@
                 </ul>
               </li>
             @endif
-              @if($rango>=4)
+              @if($rango>=3)
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-folder"></i> <span>Gestión</span>
@@ -153,13 +153,16 @@
                 </li>
               @endif
             @if($rango>=1 AND $rango<=4)
-              <li>
-                <a href="{{ route('cuestionario') }}">
-                  <i class="fa fa-edit"></i> <span>Cuestionario</span>
+              <li  class="treeview">
+                <a href="#"><i class="fa fa-edit"></i> <span>Cédula de Evaluación</span>
                   <span class="pull-right-container">
-                    <!--<small class="label pull-right bg-green">new</small>-->
+                    <i class="fa fa-angle-left pull-right"></i>
                   </span>
                 </a>
+                <ul class="treeview-menu">
+                  <li><a href="{{ route('cuestionario') }}"><i class="fa fa-circle-o"></i> Evaluar Proceso</a></li>
+                  <li><a href="{{ route('evalEditar') }}"><i class="fa fa-circle-o"></i> Editar Evaluación</a></li>
+                </ul>
               </li>
             @endif
               @if($rango>1 AND $rango<=4)

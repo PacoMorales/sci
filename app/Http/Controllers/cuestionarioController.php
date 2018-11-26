@@ -510,8 +510,27 @@ class cuestionarioController extends Controller
         $dependencia = session()->get('nombre_dependencia');
         $id_dependencia = session()->get('dependencia');
 
+        //$cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->get();
+        //dd($cuestionario);
+        $proc=1;
+        $estructuras = estructurasModel::Estructuras();
+        $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
+        $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
+        //$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
+        $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
+            ->select('SCI_GRADO_CUMP.CVE_GRADO_CUMP','SCI_GRADO_CUMP.DESC_GRADO_CUMP','SCI_M_EVAELEMCONTROL.PORC_MEEC')
+            ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
+            ->get();
         $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->get();
-        dd($cuestionario);
+        //dd($cuestionario);
+        $unidades = dependenciasModel::Unidades($id_estructura);
+        $procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','%V%')->get();
+        if($procesos->count() == 0){
+            $proc = 0;
+        }
+        $num_eval_aux = $id;
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
+        return view('sicinar.cuestionario.editarEval',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     }
 
     public function actionEdicion(cuestionarioRequest $request, $id){

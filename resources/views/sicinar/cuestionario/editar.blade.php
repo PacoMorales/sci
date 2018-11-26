@@ -52,8 +52,8 @@
                                             <td>{{$proceso->desc_proceso}}</td>
                                             <td><a href="#" class="btn btn-success" title="Evaluado"><i class="fa fa-check"></i></a></td>
                                             <td><a href="#" class="btn btn-success" title="Activo"><i class="fa fa-check"></i></a></td>
-                                            <td><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></a></td>
-                                            <!--<td><a href="{{route('SelecEvalEditar',$proceso->cve_proceso)}}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></a></td>-->
+                                            <!--<td><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></a></td>-->
+                                            <td><a href="{{route('SelecEvalEditar',$proceso->cve_proceso)}}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

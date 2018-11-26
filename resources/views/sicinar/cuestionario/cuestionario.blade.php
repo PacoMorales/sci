@@ -140,7 +140,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
                     </div>
                   </div>
                 </div>
@@ -181,7 +181,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
                     </div>
                   </div>
                 </div>
@@ -222,7 +222,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
                     </div>
                   </div>
                 </div>
@@ -263,7 +263,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
                     </div>
                   </div>
                 </div>
@@ -304,7 +304,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
                     </div>
                   </div>
                 </div>
@@ -379,7 +379,7 @@
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key);
        letras = "abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890,.;:-_<>!%()=?¡¿/*+";
-       especiales = "8-37-39-46";
+       especiales = "8-35-36-37-39-46";
 
        tecla_especial = false
        for(var i in especiales){

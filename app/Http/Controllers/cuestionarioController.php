@@ -355,7 +355,7 @@ class cuestionarioController extends Controller
             $request->evidencia25,$request->evidencia26,$request->evidencia27,$request->evidencia28,
             $request->evidencia29,$request->evidencia30,$request->evidencia31,$request->evidencia32,$request->evidencia33];
         for($i=1;$i<=$total;$i++){
-	        $cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)
+	        $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)
 	        									->where('NUM_ECI',$i)
 	        									->update([
 	        										'MES'=>$mes_aux,
@@ -496,7 +496,7 @@ class cuestionarioController extends Controller
         return view('sicinar.cuestionario.editar',compact('nombre','usuario','estructura','rango','procesos'));
     }
 
-    public function actionObtenerEvaluacion($id){
+    public function actionObtenerEvaluacionN1($id){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
         if($nombre == NULL AND $pass == NULL){
@@ -533,7 +533,7 @@ class cuestionarioController extends Controller
         return view('sicinar.cuestionario.edicion.editarN1',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia','servidores'));
     } //EDICION NORMA 1
 
-    public function actionEdicionN1(cuestionarioRequest $request, $id){
+    public function actionGuardarEvaluacionN1(cuestionarioRequest $request, $id){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
         if($nombre == NULL AND $pass == NULL){
@@ -547,5 +547,34 @@ class cuestionarioController extends Controller
         $rango = session()->get('rango');
         $dependencia = session()->get('nombre_dependencia');
         $id_dependencia = session()->get('dependencia');
+
+        $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->where('CVE_NGCI',1)->orderBy('NUM_ECI','ASC')->get();
+        $total = $cuestionario->count();
+
+        $mes_aux = date('m');
+        $hoy = date('Y/m/d');
+
+        $evaluaciones = [$request->evaluacion1,$request->evaluacion2,$request->evaluacion3,$request->evaluacion4,
+            $request->evaluacion5,$request->evaluacion6,$request->evaluacion7,$request->evaluacion8];
+        $responsables = [$request->responsable1,$request->responsable2,$request->responsable3,$request->responsable4,
+            $request->responsable5,$request->responsable6,$request->responsable7,$request->responsable8];
+        $evidencias = [$request->evidencia1,$request->evidencia2,$request->evidencia3,$request->evidencia4,
+            $request->evidencia5,$request->evidencia6,$request->evidencia7,$request->evidencia8];
+        for($i = 0; $i<$total; $i++){
+            $cuestionario_aux = ced_evaluacionModel::where('NUM_EVAL',$id)
+                ->where('NUM_ECI',$i)
+                ->update([
+                    'MES'=>$mes_aux,
+                    'NUM_MEEC'=>$evaluaciones[($i-1)],
+                    'ID_SP'=>$responsables[($i-1)],
+                    'RESPONSABLE'=>strtoupper($request->titular),
+                    'ENLACE'=>strtoupper($request->enlace),
+                    'USU_M'=>$nombre,
+                    'PW_M'=>$pass,
+                    'IP_M'=>$ip,
+                    'FECHA_M'=>$hoy,
+                    'EVIDENCIAS'=>$evidencias[($i-1)]
+                ]);
+        }
     }
 }

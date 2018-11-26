@@ -76,7 +76,7 @@
                             @endforeach
                                     </select>
                                 </div>-->
-                                <div class="col-xs-6">
+                                <!--<div class="col-xs-6">
                                     <label >* Proceso a evaluar</label>
                                     <select class="form-control m-bot15" name="proceso" id="proceso" required>
                                         <option disabled="disabled">Proceso</option>
@@ -92,7 +92,7 @@
                                             @endforeach
                                         @endif
                                     </select>
-                                </div>
+                                </div>-->
                             </div>
                             <br>
                             <div class="row">

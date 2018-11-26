@@ -53,7 +53,7 @@
                                             <td><a href="#" class="btn btn-success" title="Evaluado"><i class="fa fa-check"></i></a></td>
                                             <td><a href="#" class="btn btn-success" title="Activo"><i class="fa fa-check"></i></a></td>
                                             <!--<td><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></a></td>-->
-                                            <td><a href="{{route('SelecEvalEditar',$proceso->cve_proceso)}}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i> Norma 1</a>
+                                            <td><a href="{{ route('EditarN1',$proceso->cve_proceso) }}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i> Norma 1</a>
                                                 <a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i> Norma 2</a>
                                                 <a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i> Norma 3</a>
                                                 <a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i> Norma 4</a>

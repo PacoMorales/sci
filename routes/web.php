@@ -15,27 +15,26 @@ Route::get('/', function () {
     return view('sicinar.login.loginInicio');
 });
 
-Route::group(['prefix' => 'control-interno'], function(){
-	Route::post('menu','usuariosController@actionLogin')->name('login');
-	Route::get('status-sesion/expirada','usuariosController@actionExpirada')->name('expirada');
-	Route::get('status-sesion/terminada','usuariosController@actionCerrarSesion')->name('terminada');
-	
-	Route::get('cedula-evaluacion/inicio','cuestionarioController@actionCuestionario')->name('cuestionario');
-	Route::get('cedula-evaluacion/confirmacion','cuestionarioController@Val')->name('confirmacion');
-	Route::get('cedula-evaluacion/confirmado','cuestionarioController@actionConfirmado')->name('confirmado');
-	Route::get('cedula-evaluacion/verificar/{id}','cuestionarioController@actionVerificar')->name('verificar');
-	Route::put('cedula-evaluacion/verificar/{id}','cuestionarioController@actionVerificando')->name('verificando');
-	Route::get('listado/evidencias','cuestionarioController@actionListaEvidencias')->name('evidencias');
-    Route::get('/evidencias','cuestionarioController@actionListaEvidencias')->name('evidencias');
-	Route::post('cedula-evaluacion/nuevo','cuestionarioController@actionAltaCuestionario')->name('altaCuestionario');
-    Route::get('cedula-evaluacion/editar','cuestionarioController@actionEditar')->name('evalEditar');
-    Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
-    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
-    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
-    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
-    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+Route::group(['prefix' => 'control-interno'], function() {
+    Route::post('menu', 'usuariosController@actionLogin')->name('login');
+    Route::get('status-sesion/expirada', 'usuariosController@actionExpirada')->name('expirada');
+    Route::get('status-sesion/terminada', 'usuariosController@actionCerrarSesion')->name('terminada');
 
-    Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion','cuestionarioController@actionObtenerEvaluacion')->name('SelecEvalEditar');
+    Route::get('cedula-evaluacion/inicio', 'cuestionarioController@actionCuestionario')->name('cuestionario');
+    Route::get('cedula-evaluacion/confirmacion', 'cuestionarioController@Val')->name('confirmacion');
+    Route::get('cedula-evaluacion/confirmado', 'cuestionarioController@actionConfirmado')->name('confirmado');
+    Route::get('cedula-evaluacion/verificar/{id}', 'cuestionarioController@actionVerificar')->name('verificar');
+    Route::put('cedula-evaluacion/verificar/{id}', 'cuestionarioController@actionVerificando')->name('verificando');
+    Route::get('listado/evidencias', 'cuestionarioController@actionListaEvidencias')->name('evidencias');
+    Route::get('/evidencias', 'cuestionarioController@actionListaEvidencias')->name('evidencias');
+    Route::post('cedula-evaluacion/nuevo', 'cuestionarioController@actionAltaCuestionario')->name('altaCuestionario');
+    Route::get('cedula-evaluacion/editar', 'cuestionarioController@actionEditar')->name('evalEditar');
+    //EDICION NORMA 1
+    Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N1', 'cuestionarioController@actionObtenerEvaluacionN1')->name('EditarN1');
+    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N1', 'cuestionarioController@actionGuardarEvaluacionN1')->name('EdicionN1');
+    //EDICION NORMA 2
+    //Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N2', 'cuestionarioController@actionObtenerEvaluacionN2')->name('EdicionN2');
+    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
 
 	Route::get('procesos/nuevo','procesosController@actionVerAltaProcesos')->name('nuevoProceso');
 	Route::post('procesos/nuevo/alta','procesosController@actionAltaProcesos')->name('altaProceso');

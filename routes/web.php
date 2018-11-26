@@ -29,7 +29,12 @@ Route::group(['prefix' => 'control-interno'], function(){
     Route::get('/evidencias','cuestionarioController@actionListaEvidencias')->name('evidencias');
 	Route::post('cedula-evaluacion/nuevo','cuestionarioController@actionAltaCuestionario')->name('altaCuestionario');
     Route::get('cedula-evaluacion/editar','cuestionarioController@actionEditar')->name('evalEditar');
-    Route::get('cedula-evaluacion/edicion','cuestionarioController@actionEdicion')->name('evalEdicion');
+    Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+
     Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion','cuestionarioController@actionObtenerEvaluacion')->name('SelecEvalEditar');
 
 	Route::get('procesos/nuevo','procesosController@actionVerAltaProcesos')->name('nuevoProceso');

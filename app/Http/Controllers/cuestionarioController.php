@@ -324,7 +324,7 @@ class cuestionarioController extends Controller
         $rango = session()->get('rango');
         $dependencia = session()->get('nombre_dependencia');
         $id_dependencia = session()->get('dependencia');
-        $cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->orderBy('NUM_ECI','ASC')->get();
+        $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->orderBy('NUM_ECI','ASC')->get();
         $total = $cuestionario->count();
         $max = $id;
         $per_aux = date('Y');
@@ -514,7 +514,7 @@ class cuestionarioController extends Controller
         //dd($cuestionario);
         $proc=1;
         $estructuras = estructurasModel::Estructuras();
-        $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
+        $preguntas = eciModel::where('CVE_NGCI',1)->orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
         //$grados = grado_cumpModel::select('CVE_GRADO_CUMP','DESC_GRADO_CUMP')->orderBy('CVE_GRADO_CUMP','ASC')->get();
         $grados = grado_cumpModel::join('SCI_M_EVAELEMCONTROL','SCI_GRADO_CUMP.CVE_GRADO_CUMP','=','SCI_M_EVAELEMCONTROL.CVE_GRADO_CUMP')
@@ -530,10 +530,22 @@ class cuestionarioController extends Controller
         }
         $num_eval_aux = $id;
         $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')->orderBy('UNID_ADMON','ASC')->orderBy('NOMBRE_COMPLETO','ASC')->get();
-        return view('sicinar.cuestionario.editarEval',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia','servidores'));
-    }
+        return view('sicinar.cuestionario.edicion.editarN1',compact('usuario','nombre','estructura','rango','estructuras','preguntas','grados','apartados','cuestionario','num_eval_aux','unidades','procesos','proc','id_estructura','dependencia','servidores'));
+    } //EDICION NORMA 1
 
-    public function actionEdicion(cuestionarioRequest $request, $id){
-
+    public function actionEdicionN1(cuestionarioRequest $request, $id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $ip = session()->get('ip');
+        $rango = session()->get('rango');
+        $dependencia = session()->get('nombre_dependencia');
+        $id_dependencia = session()->get('dependencia');
     }
 }

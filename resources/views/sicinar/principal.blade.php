@@ -195,7 +195,7 @@
           <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
           </div>
-          <strong>Derechos reservados. Gobierno del Estado de México. <a href="#">Unidad de Desarrollo Institucional y Tecnologías de la Información (UDITI)</a>.</strong>
+          <strong>Derechos reservados. Gobierno del Estado de México.</strong>
         </footer>
       </div>
       <!-- jQuery 3 -->

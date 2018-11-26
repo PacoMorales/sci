@@ -38,6 +38,7 @@
               <div class="row">
                 <div class="col-xs-5">
                   <b style="color:red;">¡Importante!</b><br>
+                    Es importante terminar el cuestionario para almacenar la información.<br>
                     Los campos marcados con un asterisco(*) son obligatorios.<br>
                     No son válidos caracteres (,'"!#$%&/()=?¡{}[]).
                 </div>
@@ -125,7 +126,7 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable">
-                        <option selected="true" disabled="disabled">Responsable</option>
+                        <!--<option selected="true" disabled="disabled">Responsable</option>-->
                         @foreach($servidores as $servidor)
                           <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
@@ -133,14 +134,14 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
-                        <option selected="true" disabled="disabled">Evaluación</option>
+                        <!--<option selected="true" disabled="disabled">Evaluación</option>-->
                         @foreach($grados as $grado)
                           <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="Evidencia(s)">
                     </div>
                   </div>
                 </div>
@@ -166,7 +167,7 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable">
-                        <option selected="true" disabled="disabled">Responsable</option>
+                        <!--<option selected="true" disabled="disabled">Responsable</option>-->
                         @foreach($servidores as $servidor)
                           <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombre_completo}}{{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
@@ -174,14 +175,14 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
-                        <option selected="true" disabled="disabled">Evaluación</option>
+                        <!--<option selected="true" disabled="disabled">Evaluación</option>-->
                         @foreach($grados as $grado)
                           <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="Evidencia(s)">
                     </div>
                   </div>
                 </div>
@@ -207,7 +208,7 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable">
-                        <option selected="true" disabled="disabled">Responsable</option>
+                        <!--<option selected="true" disabled="disabled">Responsable</option>-->
                         @foreach($servidores as $servidor)
                           <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
@@ -215,14 +216,14 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
-                        <option selected="true" disabled="disabled">Evaluación</option>
+                        <!--<option selected="true" disabled="disabled">Evaluación</option>-->
                         @foreach($grados as $grado)
                           <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="Evidencia(s)">
                     </div>
                   </div>
                 </div>
@@ -248,7 +249,7 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable">
-                        <option selected="true" disabled="disabled">Responsable</option>
+                        <!--<option selected="true" disabled="disabled">Responsable</option>-->
                         @foreach($servidores as $servidor)
                           <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
@@ -256,14 +257,14 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
-                        <option selected="true" disabled="disabled">Evaluación</option>
+                        <!--<option selected="true" disabled="disabled">Evaluación</option>-->
                         @foreach($grados as $grado)
                           <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="Evidencia(s)">
                     </div>
                   </div>
                 </div>
@@ -289,7 +290,7 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$pregunta->num_eci}}" id="responsable">
-                        <option selected="true" disabled="disabled">Responsable</option>
+                        <!--<option selected="true" disabled="disabled">Responsable</option>-->
                         @foreach($servidores as $servidor)
                           <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
                         @endforeach
@@ -297,14 +298,14 @@
                     </div>
                     <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$pregunta->num_eci}}" id="evaluacion" required>
-                        <option selected="true" disabled="disabled">Evaluación</option>
+                        <!--<option selected="true" disabled="disabled">Evaluación</option>-->
                         @foreach($grados as $grado)
                           <option value="{{$grado->cve_grado_cump}}">{{$grado->desc_grado_cump}}</option>
                         @endforeach
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="* Evidencia(s)" onkeypress="return general(event)">
+                      <input type="text" class="form-control" name="evidencia{{$pregunta->num_eci}}" placeholder="Evidencia(s)">
                     </div>
                   </div>
                 </div>

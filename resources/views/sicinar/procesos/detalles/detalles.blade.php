@@ -208,7 +208,31 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="text-align:right;">TOTAL</td>
-                                    <td colspan="2" style="text-align:left;">33</td>
+                                    <td colspan="1" style="text-align:left;">33</td>
+                                    @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                        <th><a href="#" class="btn btn-danger"><b>{{$procesos[0]->total}}%</b></a></th>
+                                    @else
+                                        @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                            <th><a href="#" class="btn btn-warning"><b>{{$procesos[0]->total}}%</b></a></th>
+                                        @else
+                                            @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                <th><a href="#" class="btn btn-success"><b>{{$procesos[0]->total}}%</b></a></th>
+                                            @else
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <th><a href="#" class="btn btn-primary"><b>{{$procesos[0]->total}}%</b></a></th>
+                                                @else
+                                                    @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                        <th><a href="#" class="btn btn-info"><b>{{$procesos[0]->total}}%</b></a></th>
+                                                    @else
+                                                        @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                            <th><a href="#" class="btn btn-default"><b>{{$procesos[0]->total}}%</b></a></th>
+                                                        @else
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        @endif
+                                    @endif
                                 </tr>
                                 </tbody>
                             </table>
@@ -398,7 +422,273 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Grados de Cumplimiento de los elementos de control con base en la evidencia documental</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                                <br>Ponderación obtenida: {{$procesos[0]->total}}%
+                                <br>Si la ponderación esta entre 0% y 50.09%, la matriz se iluminará de color <b style="color:red">rojo</b>
+                                <br>Si la ponderación esta entre 50.1% y 83.39%, la matriz se iluminará de color <b style="color:yellowgreen">amarillo</b>
+                                <br>Si la ponderación esta entre 84.4% y 100%, la matriz se iluminará de color <b style="color:green">verde</b>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <table class="table table-bordered table-sm">
+                                            <thead style="color: white;" class="justify">
+                                            <tr>
+                                                <th></th>
+                                                <th colspan="6" style="background-color:#C4BC96;text-align:center;vertical-align: middle;">EVALUACIÓN DE LOS ELEMENTOS DE CONTROL CON BASE EN LA EVIDENCIA</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="background-color:#C4BC96;text-align:center;vertical-align: middle;"><b style="color:white">{{$matriz[2]->etapa_grado}}</b></td>
+                                                <td style="background-color:red;text-align:center;vertical-align: middle;" colspan="3"><b style="color:white">{{$matriz[2]->c_1}}</b></td>
+                                                <td style="background-color:yellow;text-align:center;vertical-align: middle;" colspan="2"><b style="color:black">{{$matriz[2]->c_4}}</b></td>
+                                                <td style="background-color:green;text-align:center;vertical-align: middle;"><b style="color:white">{{$matriz[2]->c_6}}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="background-color:#E5DFEC;text-align:center;vertical-align: middle;">{{$matriz[3]->etapa_grado}}</td>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[3]->c_1}}</td>
+                                                @else
+                                                    <td style="background-color:#D7E7F0;text-align:center;vertical-align: middle;">{{$matriz[3]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[3]->c_2}}</td>
+                                                @else
+                                                    <td style="background-color:#D7E7F0;text-align:center;vertical-align: middle;">{{$matriz[3]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[3]->c_3}}</td>
+                                                @else
+                                                    <td style="background-color:#D7E7F0;text-align:center;vertical-align: middle;">{{$matriz[3]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[3]->c_4}}</td>
+                                                @else
+                                                    <td style="background-color:#D7E7F0;text-align:center;vertical-align: middle;">{{$matriz[3]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[3]->c_5}}</td>
+                                                @else
+                                                    <td style="background-color:#D7E7F0;text-align:center;vertical-align: middle;">{{$matriz[3]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:blue;text-align:center;vertical-align: middle;">{{$matriz[3]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#D7E7F0;text-align:center;vertical-align: middle;">{{$matriz[3]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                <td style="background-color:#C6E6A2;text-align:center;vertical-align: middle;">{{$matriz[4]->etapa_grado}}</td>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[4]->c_1}}</td>
+                                                @else
+                                                    <td style="background-color:#F7F6DA;text-align:center;vertical-align: middle;">{{$matriz[4]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[4]->c_2}}</td>
+                                                @else
+                                                    <td style="background-color:#F7F6DA;text-align:center;vertical-align: middle;">{{$matriz[4]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[4]->c_3}}</td>
+                                                @else
+                                                    <td style="background-color:#F7F6DA;text-align:center;vertical-align: middle;">{{$matriz[4]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[4]->c_4}}</td>
+                                                @else
+                                                    <td style="background-color:#F8DCD3;text-align:center;vertical-align: middle;">{{$matriz[4]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[4]->c_5}}</td>
+                                                @else
+                                                    <td style="background-color:#F8DCD3;text-align:center;vertical-align: middle;">{{$matriz[4]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:green;text-align:center;vertical-align: middle;">{{$matriz[4]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#61D6FF;text-align:center;vertical-align: middle;">{{$matriz[4]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+                                            <tr>
+                                                <td style="background-color:#F0F5CF;text-align:center;vertical-align: middle;" rowspan="5">{{$matriz[5]->etapa_grado}}</td>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[5]->c_1}}</td>
+                                                @else
+                                                    <td style="background-color:#F2F2F2;text-align:center;vertical-align: middle;">{{$matriz[5]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[5]->c_2}}</td>
+                                                @else
+                                                    <td style="background-color:#F2F2F2;text-align:center;vertical-align: middle;">{{$matriz[5]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[5]->c_3}}</td>
+                                                @else
+                                                    <td style="background-color:#F2F2F2;text-align:center;vertical-align: middle;">{{$matriz[5]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[5]->c_4}}</td>
+                                                @else
+                                                    <td style="background-color:#F2F2F2;text-align:center;vertical-align: middle;">{{$matriz[5]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[5]->c_5}}</td>
+                                                @else
+                                                    <td style="background-color:#F2F2F2;text-align:center;vertical-align: middle;">{{$matriz[5]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:green;text-align:center;vertical-align: middle;">{{$matriz[5]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#F2F2F2;text-align:center;vertical-align: middle;">{{$matriz[5]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[6]->c_1}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[6]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[6]->c_2}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[6]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[6]->c_3}}</td>
+                                                @else
+                                                    <td style="background-color:#D9D9D9;text-align:center;vertical-align: middle;">{{$matriz[6]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[6]->c_4}}</td>
+                                                @else
+                                                    <td style="background-color:#D9D9D9;text-align:center;vertical-align: middle;">{{$matriz[6]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[6]->c_5}}</td>
+                                                @else
+                                                    <td style="background-color:#D9D9D9;text-align:center;vertical-align: middle;">{{$matriz[6]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:green;text-align:center;vertical-align: middle;">{{$matriz[6]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#D9D9D9;text-align:center;vertical-align: middle;">{{$matriz[6]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[7]->c_1}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[7]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[7]->c_2}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[7]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[7]->c_3}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[7]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[7]->c_4}}</td>
+                                                @else
+                                                    <td style="background-color:#BFBFBF;text-align:center;vertical-align: middle;">{{$matriz[7]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[7]->c_5}}</td>
+                                                @else
+                                                    <td style="background-color:#BFBFBF;text-align:center;vertical-align: middle;">{{$matriz[7]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:gree;text-align:center;vertical-align: middle;">{{$matriz[7]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#BFBFBF;text-align:center;vertical-align: middle;">{{$matriz[7]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[8]->c_1}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[8]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[8]->c_2}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[8]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[8]->c_3}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[8]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[8]->c_4}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[8]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[8]->c_5}}</td>
+                                                @else
+                                                    <td style="background-color:#ADADAD;text-align:center;vertical-align: middle;">{{$matriz[8]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:green;text-align:center;vertical-align: middle;">{{$matriz[8]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#ADADAD;text-align:center;vertical-align: middle;">{{$matriz[8]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                @if($procesos[0]->total >= 0 AND $procesos[0]->total <= 16.79)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[9]->c_1}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[9]->c_1}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 16.80 AND $procesos[0]->total <= 33.39)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[9]->c_2}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[9]->c_2}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 33.40 AND $procesos[0]->total <= 50.09)
+                                                    <td style="background-color:red;text-align:center;vertical-align: middle;">{{$matriz[9]->c_3}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[9]->c_3}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 50.1 AND $procesos[0]->total <= 66.79)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[9]->c_4}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[9]->c_4}}</td>
+                                                @endif
+                                                @if($procesos[0]->total >= 66.8 AND $procesos[0]->total <= 83.39)
+                                                    <td style="background-color:yellow;text-align:center;vertical-align: middle;">{{$matriz[9]->c_5}}</td>
+                                                @else
+                                                    <td style="text-align:center;vertical-align: middle;">{{$matriz[9]->c_5}}</td>
+                                                @endiF
+                                                @if($procesos[0]->total >= 83.4 AND $procesos[0]->total <= 100)
+                                                    <td style="background-color:green;text-align:center;vertical-align: middle;">{{$matriz[9]->c_6}}</td>
+                                                @else
+                                                    <td style="background-color:#9D9D9D;text-align:center;vertical-align: middle;">{{$matriz[9]->c_6}}</td>
+                                                @endif
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
     </div>
 @endsection

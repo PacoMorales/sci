@@ -129,7 +129,7 @@
                     <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
@@ -141,7 +141,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
@@ -153,6 +153,9 @@
                         @endforeach
                       </select>
                     </div>
+                      <div class="col-xs-3">
+                          <input type="text" class="form-control" name="evidencia{{$cuest->num_eci}}" value="{{$cuest->evidencias}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      </div>
                   </div>
                 </div>
               @endif
@@ -175,7 +178,7 @@
                     <div class="col-xs-5">
                         <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
@@ -187,7 +190,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
@@ -199,6 +202,9 @@
                         @endforeach
                       </select>
                     </div>
+                      <div class="col-xs-3">
+                          <input type="text" class="form-control" name="evidencia{{$cuest->num_eci}}" value="{{$cuest->evidencias}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      </div>
                   </div>
                 </div>
               @endif
@@ -221,7 +227,7 @@
                     <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
@@ -233,7 +239,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
@@ -245,6 +251,9 @@
                         @endforeach
                       </select>
                     </div>
+                      <div class="col-xs-3">
+                          <input type="text" class="form-control" name="evidencia{{$cuest->num_eci}}" value="{{$cuest->evidencias}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      </div>
                   </div>
                 </div>
               @endif
@@ -267,7 +276,7 @@
                     <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
@@ -279,7 +288,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
@@ -291,6 +300,9 @@
                         @endforeach
                       </select>
                     </div>
+                      <div class="col-xs-3">
+                          <input type="text" class="form-control" name="evidencia{{$cuest->num_eci}}" value="{{$cuest->evidencias}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      </div>
                   </div>
                 </div>
               @endif
@@ -313,7 +325,7 @@
                     <div class="col-xs-5">
                       <label style="color:gray;">{{$preguntas[($cuest->num_eci)-1]->preg_eci}}</label>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="responsable{{$cuest->num_eci}}" id="responsable" required>
                         <option selected="true" disabled="disabled">Responsable</option>
                         @foreach($servidores as $servidor)
@@ -325,7 +337,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                       <select class="form-control m-bot15" name="evaluacion{{$cuest->num_eci}}" id="evaluacion" required>
                         <option selected="false" disabled="disabled">Evaluación</option>
                         @foreach($grados as $grado)
@@ -337,6 +349,9 @@
                         @endforeach
                       </select>
                     </div>
+                      <div class="col-xs-3">
+                          <input type="text" class="form-control" name="evidencia{{$cuest->num_eci}}" value="{{$cuest->evidencias}}" placeholder="* Evidencia(s)" onkeypress="return soloAlfa(event)">
+                      </div>
                   </div>
                 </div>
               @endif

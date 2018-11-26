@@ -43,6 +43,8 @@ Route::group(['prefix' => 'control-interno'], function(){
     Route::get('procesos/gestion/institucional','procesosController@actionGestionProcesosInst')->name('procesosGestionInst');
     Route::get('procesos/gestion/sustantivo','procesosController@actionGestionProcesosSust')->name('procesosGestionSust');
     Route::get('procesos/gestion/ver/{id}/informacion-general','procesosController@actionVerInfo')->name('procesoVerInfo');
+    Route::get('procesos/gestion/unidades/administrativas','procesosController@actionGestionUnidad')->name('Gestunidades');
+    Route::get('procesos/gestion/unidad/administrativa','procesosController@actionInfoUnidad')->name('unidadesInfo');
 
     Route::get('procesos/gestion/todos/{id}/activar','procesosController@actionActivarProcesos')->name('procesosGestionAct');
     Route::get('procesos/gestion/todos/{id}/desactivar','procesosController@actionDesactivarProcesos')->name('procesosGestionDes');

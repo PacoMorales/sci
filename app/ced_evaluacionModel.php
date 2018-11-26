@@ -31,6 +31,7 @@ class ced_evaluacionModel extends Model
 	    'FECHA_M',
 	    'CVE_PROCESO',
 	    'OBJ_EVAL',
-        'ENLACE'
+        'ENLACE',
+        'EVIDENCIAS'
     ];
 }

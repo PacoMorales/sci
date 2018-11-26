@@ -122,7 +122,19 @@ class cuestionarioController extends Controller
                 if($i == 25){$nuevo->ID_SP=$request->responsable25;}else if($i == 26){$nuevo->ID_SP=$request->responsable26;}else if($i == 27){$nuevo->ID_SP=$request->responsable27;} else
                 if($i == 28){$nuevo->ID_SP=$request->responsable28;}else if($i == 29){$nuevo->ID_SP=$request->responsable29;}else if($i == 30){$nuevo->ID_SP=$request->responsable30;} else
                 if($i == 31){$nuevo->ID_SP=$request->responsable31;}else if($i == 32){$nuevo->ID_SP=$request->responsable32;}else if($i == 33){$nuevo->ID_SP=$request->responsable33;}
-	        	$nuevo->USU = $nombre;
+	        	//EVIDENCIAS
+                if($i == 1){$nuevo->EVIDENCIAS=$request->evidencia1;}else if($i == 2){$nuevo->EVIDENCIAS=$request->evidencia2;}else if($i == 3){$nuevo->EVIDENCIAS=$request->evidencia3;} else
+                if($i == 4){$nuevo->EVIDENCIAS=$request->evidencia4;}else if($i == 5){$nuevo->EVIDENCIAS=$request->evidencia5;}else if($i == 6){$nuevo->EVIDENCIAS=$request->evidencia6;} else
+                if($i == 7){$nuevo->EVIDENCIAS=$request->evidencia7;}else if($i == 8){$nuevo->EVIDENCIAS=$request->evidencia8;}else if($i == 9){$nuevo->EVIDENCIAS=$request->evidencia9;} else
+                if($i == 10){$nuevo->EVIDENCIAS=$request->evidencia10;}else if($i == 11){$nuevo->EVIDENCIAS=$request->evidencia11;}else if($i == 12){$nuevo->EVIDENCIAS=$request->evidencia12;} else
+                if($i == 13){$nuevo->EVIDENCIAS=$request->evidencia13;}else if($i == 14){$nuevo->EVIDENCIAS=$request->evidencia14;}else if($i == 15){$nuevo->EVIDENCIAS=$request->evidencia15;} else
+                if($i == 16){$nuevo->EVIDENCIAS=$request->evidencia16;}else if($i == 17){$nuevo->EVIDENCIAS=$request->evidencia17;}else if($i == 18){$nuevo->EVIDENCIAS=$request->evidencia18;} else
+                if($i == 19){$nuevo->EVIDENCIAS=$request->evidencia19;}else if($i == 20){$nuevo->EVIDENCIAS=$request->evidencia20;}else if($i == 21){$nuevo->EVIDENCIAS=$request->evidencia21;} else
+                if($i == 22){$nuevo->EVIDENCIAS=$request->evidencia22;}else if($i == 23){$nuevo->EVIDENCIAS=$request->evidencia23;}else if($i == 24){$nuevo->EVIDENCIAS=$request->evidencia24;} else
+                if($i == 25){$nuevo->EVIDENCIAS=$request->evidencia25;}else if($i == 26){$nuevo->EVIDENCIAS=$request->evidencia26;}else if($i == 27){$nuevo->EVIDENCIAS=$request->evidencia27;} else
+                if($i == 28){$nuevo->EVIDENCIAS=$request->evidencia28;}else if($i == 29){$nuevo->EVIDENCIAS=$request->evidencia29;}else if($i == 30){$nuevo->EVIDENCIAS=$request->evidencia30;} else
+                if($i == 31){$nuevo->EVIDENCIAS=$request->evidencia31;}else if($i == 32){$nuevo->EVIDENCIAS=$request->evidencia32;}else if($i == 33){$nuevo->EVIDENCIAS=$request->evidencia33;}
+                $nuevo->USU = $nombre;
 	        	$nuevo->PW = $pass;
 	        	$nuevo->IP = $ip;
 	        	$nuevo->FECHA_REG = $hoy;
@@ -250,7 +262,6 @@ class cuestionarioController extends Controller
                                 ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
                                 ->get();
         $unidades = dependenciasModel::Unidades($id_estructura);
-/*AAAAAAAAAAAAAAAAAAQQQQQUUUUUUUUUUUUUUUUUUIIIIIIIIIIIIIIII*/
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','N%')->get();
         if($procesos->count() == 0){
         	$proc = 0;
@@ -287,7 +298,7 @@ class cuestionarioController extends Controller
                                 ->orderBy('SCI_GRADO_CUMP.CVE_GRADO_CUMP','ASC')
                                 ->get();
     	$cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)->get();
-        //dd($cuestionario[0]);
+        //dd($cuestionario);
     	$unidades = dependenciasModel::Unidades($id_estructura);
     	$procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','%V%')->get();
         if($procesos->count() == 0){
@@ -335,6 +346,14 @@ class cuestionarioController extends Controller
                             $request->responsable21,$request->responsable22,$request->responsable23,$request->responsable24,
                             $request->responsable25,$request->responsable26,$request->responsable27,$request->responsable28,
                             $request->responsable29,$request->responsable30,$request->responsable31,$request->responsable32,$request->responsable33];
+        $evidencias = [$request->evidencia1,$request->evidencia2,$request->evidencia3,$request->evidencia4,
+            $request->evidencia5,$request->evidencia6,$request->evidencia7,$request->evidencia8,
+            $request->evidencia9,$request->evidencia10,$request->evidencia11,$request->evidencia12,
+            $request->evidencia13,$request->evidencia14,$request->evidencia15,$request->evidencia16,
+            $request->evidencia17,$request->evidencia18,$request->evidencia19,$request->evidencia20,
+            $request->evidencia21,$request->evidencia22,$request->evidencia23,$request->evidencia24,
+            $request->evidencia25,$request->evidencia26,$request->evidencia27,$request->evidencia28,
+            $request->evidencia29,$request->evidencia30,$request->evidencia31,$request->evidencia32,$request->evidencia33];
         for($i=1;$i<=$total;$i++){
 	        $cuestionario = ced_evaluacionModel::where('NUM_EVAL',$id)
 	        									->where('NUM_ECI',$i)
@@ -348,6 +367,7 @@ class cuestionarioController extends Controller
 	        										'PW_M'=>$pass,
 	        										'IP_M'=>$ip,
 	        										'FECHA_M'=>$hoy,
+                                                    'EVIDENCIAS'=>$evidencias[($i-1)]
 	        										]);
         }
         //return view('sicinar.cuestionario.confirmacion',compact('usuario','nombre','estructura','max','rango'));

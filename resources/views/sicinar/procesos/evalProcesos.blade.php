@@ -170,7 +170,7 @@
                     <th rowspan="2">CLAVE</th>
                     <th rowspan="2">PROCESO</th>
                     <th rowspan="2">TIPO</th>
-                    <th rowspan="2">DEPEN. / ORG. AUX. RESPONSABLE</th>
+                    <!--<th rowspan="2">DEPEN. / ORG. AUX. RESPONSABLE</th>-->
                     <th rowspan="2">U. ADMON. RESPONSABLE</th>
                     <th rowspan="2">RESPONSABLE</th>
                     <th colspan="6" style="text-align:center;">NORMAS GENERALES DE CONTROL INTERNO (NGCI)</th>
@@ -195,12 +195,12 @@
                         @endif
                       @endforeach
 
-                      @foreach($estructuras as $est)
+                      <!--@foreach($estructuras as $est)
                         @if(strpos((string)$est->estrucgob_id,(string)$proceso->estrucgob_id)!==false)
                           <td>{{$est->estrucgob_desc}}</td>
                           @break
                         @endif
-                      @endforeach                      
+                      @endforeach  -->
 
                       @foreach($dependencias as $dependencia)
                         @if(rtrim($dependencia->depen_id," ") == $proceso->cve_dependencia)

@@ -148,7 +148,7 @@
                           <li><a href="{{route('procesosGestionInst')}}"><i class="fa fa-square-o"></i> Procesos institucionales</a></li>
                         </ul>
                       </li>
-                      <li><a href="#"><i class="fa fa-circle-o"></i> Unidad</a></li>
+                      <li><a href="{{route('Gestunidades')}}"><i class="fa fa-circle-o"></i> Unidad</a></li>
                   </ul>
                 </li>
               @endif

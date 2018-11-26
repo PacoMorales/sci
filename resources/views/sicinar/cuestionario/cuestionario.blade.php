@@ -37,8 +37,7 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-xs-5">
-                  <b style="color:red;">¡Importante!</b><br>
-                    Es importante terminar el cuestionario para almacenar la información.<br>
+                  <b style="color:red;">¡Importante! Es importante terminar el cuestionario para almacenar la evaluación.</b><br>
                     Los campos marcados con un asterisco(*) son obligatorios.<br>
                     No son válidos caracteres (,'"!#$%&/()=?¡{}[]).
                 </div>

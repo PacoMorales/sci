@@ -161,7 +161,9 @@
                 </a>
                 <ul class="treeview-menu">
                   <li><a href="{{ route('cuestionario') }}"><i class="fa fa-circle-o"></i> Evaluar Proceso</a></li>
-                  <li><a href="{{ route('evalEditar') }}"><i class="fa fa-circle-o"></i> Editar Evaluación</a></li>
+                  @if($rango >=4)
+                    <li><a href="{{ route('evalEditar') }}"><i class="fa fa-circle-o"></i> Editar Evaluación</a></li>
+                  @endif
                 </ul>
               </li>
             @endif

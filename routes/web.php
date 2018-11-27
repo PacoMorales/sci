@@ -31,10 +31,19 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('cedula-evaluacion/editar', 'cuestionarioController@actionEditar')->name('evalEditar');
     //EDICION NORMA 1
     Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N1', 'cuestionarioController@actionObtenerEvaluacionN1')->name('EditarN1');
-    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N1', 'cuestionarioController@actionGuardarEvaluacionN1')->name('EdicionN1');
+    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N1', 'cuestionarioController@actionGuardarEvaluacionN1')->name('ActualizarN1');
     //EDICION NORMA 2
-    //Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N2', 'cuestionarioController@actionObtenerEvaluacionN2')->name('EdicionN2');
-    //Route::put('cedula-evaluacion/edicion/n1','cuestionarioController@actionEdicion')->name('EdicionN1');
+    Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N2', 'cuestionarioController@actionObtenerEvaluacionN2')->name('EditarN2');
+    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N2', 'cuestionarioController@actionGuardarEvaluacionN2')->name('ActualizarN2');
+    //EDICION NORMA 3
+    Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N3', 'cuestionarioController@actionObtenerEvaluacionN3')->name('EditarN3');
+    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N3', 'cuestionarioController@actionGuardarEvaluacionN3')->name('ActualizarN3');
+    //EDICION NORMA 3
+    Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N4', 'cuestionarioController@actionObtenerEvaluacionN4')->name('EditarN4');
+    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N4', 'cuestionarioController@actionGuardarEvaluacionN4')->name('ActualizarN4');
+    //EDICION NORMA 3
+    Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N5', 'cuestionarioController@actionObtenerEvaluacionN5')->name('EditarN5');
+    Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N5', 'cuestionarioController@actionGuardarEvaluacionN5')->name('ActualizarN5');
 
 	Route::get('procesos/nuevo','procesosController@actionVerAltaProcesos')->name('nuevoProceso');
 	Route::post('procesos/nuevo/alta','procesosController@actionAltaProcesos')->name('altaProceso');

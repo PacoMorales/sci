@@ -167,7 +167,7 @@
                 </ul>
               </li>
             @endif
-              @if($rango = 4)
+              @if($rango >= 4)
                 <li  class="treeview">
                   <a href="#"><i class="fa fa-book"></i> <span>Plan de Trabajo</span>
                     <span class="pull-right-container">

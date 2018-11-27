@@ -44,7 +44,7 @@ Route::group(['prefix' => 'control-interno'], function() {
     //EDICION NORMA 3
     Route::get('cedula-evaluacion/{id}/editar/cedula-evaluacion/N5', 'cuestionarioController@actionObtenerEvaluacionN5')->name('EditarN5');
     Route::put('cedula-evaluacion/{id}/guardar/cedula-evaluacion/N5', 'cuestionarioController@actionGuardarEvaluacionN5')->name('ActualizarN5');
-
+    //PROCESOS
 	Route::get('procesos/nuevo','procesosController@actionVerAltaProcesos')->name('nuevoProceso');
 	Route::post('procesos/nuevo/alta','procesosController@actionAltaProcesos')->name('altaProceso');
 	Route::get('procesos/unidades/{id}','procesosController@actionUnidades')->name('unidades');
@@ -62,7 +62,6 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('procesos/gestion/ver/{id}/informacion-general','procesosController@actionVerInfo')->name('procesoVerInfo');
     Route::get('procesos/gestion/unidades/administrativas','procesosController@actionGestionUnidad')->name('Gestunidades');
     Route::get('procesos/gestion/unidad/administrativa','procesosController@actionInfoUnidad')->name('unidadesInfo');
-
     Route::get('procesos/gestion/todos/{id}/activar','procesosController@actionActivarProcesos')->name('procesosGestionAct');
     Route::get('procesos/gestion/todos/{id}/desactivar','procesosController@actionDesactivarProcesos')->name('procesosGestionDes');
     Route::get('procesos/gestion/adm/{id}/activar','procesosController@actionActivarProcesosAdm')->name('procesosGestionActAdm');
@@ -74,5 +73,8 @@ Route::group(['prefix' => 'control-interno'], function() {
 
 	Route::get('downloadExcel','procesosController@export')->name('download');
     Route::get('ver/pdf/{id}','procesosController@verPDF')->name('Verpdf');
+    //PLAN DE TRABAJO
+    Route::get('plan-de-trabajo/nuevo','estrategiasController@actionNuevoPlan')->name('nuevoPlan');
+    Route::post('plan-de-trabajo/nuevo/alta','estrategiasController@actionAltaNuevoPlan')->name('AltaNuevoPlan');
 });
 

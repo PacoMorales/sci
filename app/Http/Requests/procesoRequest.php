@@ -13,7 +13,7 @@ class procesoRequest extends FormRequest
             //'nombre_proceso.max'         => 'El nombre del proceso debe ser de máximo 100 caracteres.',
             //'nombre_proceso.required'    => 'El nombre del proceso es necesario para registrarlo al sistema.',
             'descripcion.min'            => 'La descripción debe ser de mínimo 1 caracteres.',
-            'descripcion.max'            => 'La descripción debe ser de máximo 100 caracteres.',
+            'descripcion.max'            => 'La descripción debe ser de máximo 200 caracteres.',
             'descripcion.required'       => 'El nombre / descripción del proceso es necesario para identificar al proceso.',
             'secretaria.required'        => 'La secretaria es necesaria para identificar al proceso.',
             //'unidad.required'            => 'La unidad es necesaria para identificar al proceso.',
@@ -39,7 +39,7 @@ class procesoRequest extends FormRequest
     {
         return [
             //'nombre_proceso' =>  'min:1|max:100|required',
-            'descripcion' =>  'min:1|max:100|required',
+            'descripcion' =>  'min:1|max:200|required',
             'secretaria' => 'required',
             //'unidad' => 'required',
             'tipo' => 'required'

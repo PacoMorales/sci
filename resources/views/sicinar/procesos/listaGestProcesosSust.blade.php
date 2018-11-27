@@ -49,7 +49,7 @@
                                     <th>Responsable</th>
                                     <th>Proceso Evaluado</th>
                                     <th>Status</th>
-                                    <th>Acciones</th>
+                                    <th style="width: 100px;">Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -86,7 +86,8 @@
                                         @else
                                             <td><a href="{{route('procesosGestionActSust',$proceso->cve_proceso)}}" class="btn btn-danger" title="Inactivo"><i class="fa fa-square-o"></i></a></td>
                                         @endif
-                                        <td><a href="{{route('procesoVerInfo',$proceso->cve_proceso)}}" class="btn btn-default" title="Ver Información"><i class="fa fa-search"></i></a></td>
+                                        <td><a href="{{route('procesoVerInfo',$proceso->cve_proceso)}}" class="btn btn-primary" title="Ver Información"><i class="fa fa-search"></i></a>
+                                            <a href="{{route('Verpdf',$proceso->cve_proceso)}}" class="btn btn-warning" title="Ver Cédula de Evaluación"><i class="fa fa-file-text-o"></i></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

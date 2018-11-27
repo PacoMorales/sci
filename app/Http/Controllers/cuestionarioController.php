@@ -524,7 +524,8 @@ class cuestionarioController extends Controller
         $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->get();
         //dd($cuestionario);
         $unidades = dependenciasModel::Unidades($id_estructura);
-        $procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','%V%')->get();
+        $procesos = procesosModel::select('CVE_PROCESO','CVE_DEPENDENCIA','DESC_PROCESO','CVE_TIPO_PROC')->where('ESTRUCGOB_ID','like',$id_estructura.'%')->where('CVE_DEPENDENCIA','like',$id_dependencia.'%')->where('STATUS_1','like','E%')->get();
+        //dd($procesos);
         if($procesos->count() == 0){
             $proc = 0;
         }
@@ -549,6 +550,10 @@ class cuestionarioController extends Controller
         $rango = session()->get('rango');
         $dependencia = session()->get('nombre_dependencia');
         $id_dependencia = session()->get('dependencia');
+
+        $proceso_desc = procesosModel::where('CVE_PROCESO',$id)->update([
+            'DESC_PROCESO' => strtoupper($request->descripcion)
+        ]);
 
         $cuestionario = ced_evaluacionModel::where('CVE_PROCESO',$id)->where('CVE_NGCI',1)->orderBy('NUM_ECI','ASC')->get();
         $total = $cuestionario->count();

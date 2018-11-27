@@ -167,6 +167,19 @@
                 </ul>
               </li>
             @endif
+              @if($rango = 4)
+                <li  class="treeview">
+                  <a href="#"><i class="fa fa-book"></i> <span>Plan de Trabajo</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="{{route('nuevoPlan')}}"><i class="fa fa-circle-o"></i> Nuevo Plan de Trabajo</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Ver Plan de Trabajo</a></li>
+                  </ul>
+                </li>
+              @endif
               @if($rango>1 AND $rango<=4)
                 <li>
                   <a href="{{ route('verGraficas') }}">

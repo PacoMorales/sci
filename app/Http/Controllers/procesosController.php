@@ -291,8 +291,14 @@ class procesosController extends Controller
         $proceso = ponderacionModel::join('SCI_PROCESOS','SCI_PONDERACION.CVE_PROCESO','=','SCI_PROCESOS.CVE_PROCESO')
                                     ->select('SCI_PROCESOS.ESTRUCGOB_ID','SCI_PROCESOS.CVE_DEPENDENCIA','SCI_PROCESOS.CVE_PROCESO','SCI_PROCESOS.CVE_TIPO_PROC','SCI_PROCESOS.DESC_PROCESO','SCI_PROCESOS.RESPONSABLE','SCI_PONDERACION.POND_NGCI1','SCI_PONDERACION.POND_NGCI2','SCI_PONDERACION.POND_NGCI3','SCI_PONDERACION.POND_NGCI4','SCI_PONDERACION.POND_NGCI5','SCI_PONDERACION.TOTAL')
                                     ->where('SCI_PROCESOS.CVE_PROCESO',$id)
+                                    ->where('SCI_PROCESOS.STATUS_1','like','E%')
+                                    ->where('SCI_PROCESOS.STATUS_2','like','A%')
                                     ->orderBy('SCI_PROCESOS.CVE_PROCESO','ASC')
                                     ->get();
+        if($proceso->count() <= 0){
+            toastr()->error('No ha sido evaluado este proceso.','Que mal!',['positionClass' => 'toast-bottom-right']);
+            return back();
+        }
         $unidades = dependenciasModel::select('DEPEN_DESC')->where('DEPEN_ID','LIKE',$proceso[0]->cve_dependencia.'%')->first();
         $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON','DEPEN_ID')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();

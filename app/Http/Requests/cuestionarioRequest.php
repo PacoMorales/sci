@@ -106,7 +106,7 @@ class cuestionarioRequest extends FormRequest
             'evaluacion30' => 'required',
             'evaluacion31' => 'required',
             'evaluacion32' => 'required',
-            'evaluacion33'=> 'required'
+            'evaluacion33' => 'required'
         ];
     }
 }

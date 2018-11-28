@@ -41,7 +41,13 @@
                         {!! Form::open(['route' => 'AltaNuevoPlan', 'method' => 'POST']) !!}
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-3">
+                                    <label>* Secretaría </label>
+                                    <select class="form-control m-bot15" name="estructura" required>
+                                        <option value="21500" name="estructura">Secretaría de Desarrollo Social</option>
+                                    </select><br>
+                                </div>
+                                <div class="col-xs-4">
                                     <label>* Dependencia / Organismo Auxiliar </label>
                                     <select class="form-control m-bot15" name="unidad" required>
                                         @foreach($unidades as $unidad)
@@ -49,57 +55,53 @@
                                         @endforeach
                                     </select><br>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-5">
                                     <div class="col-xs-12">
                                         <label >* Nombre del Titular de la Dependencia / Organismo Auxiliar</label>
                                         <input type="text" class="form-control" name="titular" placeholder="Nombre del Titular de la Dependencia / Organismo Auxiliar" onkeypress="return soloAlfa(event)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12 offset-md-5">
-                                    {!! Form::submit('Ver Información',['class' => 'btn btn-primary btn-flat pull-right']) !!}
+                                    {!! Form::submit('Continuar',['class' => 'btn btn-primary btn-flat pull-right']) !!}
                                 </div>
                             </div>
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    <div class="box box-danger">
+                    <!--<div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><b></b></h3>
+                            <h3 class="box-title"><b>NGCI {{$apartados[0]->cve_ngci}}.- {{$apartados[0]->desc_ngci}}</b></h3>
                         </div>
                         <div class="box-body">
-                            <div class="row">
-                                <div class="col-xs-5">
-                                    <b style="color: orange;">Elemento de Control {{$pregunta->num_eci}}</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <label style="color:gray;">{{$pregunta->preg_eci}}</label>
-                                </div>
-                            </div>
+                            <table id="tabla1" class="table table-striped table-bordered table-sm">
+                                <thead style="color: brown;" class="justify">
+                                <tr>
+                                    <th style="background-color:black;text-align:center;vertical-align: middle;" colspan="4"><b style="color:white;">{{$apartados[0]->desc_ngci}}</b></th>
+                                </tr>
+                                <tr>
+                                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">No.</b></th>
+                                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Elemento de Control</b></th>
+                                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Registrar / Editar Acc. de Mejora</b></th>
+                                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Status Acc. de Mejora</b></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($preguntas as $pregunta)
+                                    @if($pregunta->num_eci >= 1 AND $pregunta->num_eci <= 8)
+                                        <tr>
+                                            <td style="background-color:green;text-align:center;vertical-align: middle;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
+                                            <td style="text-align:left;vertical-align: middle;">{{$pregunta->preg_eci}}</td>
+                                            <td style="text-align:center;vertical-align: middle;"><a href="#" class="btn btn-primary" title="Registrar / Editar Acción de Mejora"><i class="fa fa-plus-square"></i></a></td>
+                                            <td style="text-align:center;vertical-align: middle;"><a href="#" class="btn btn-success" title="Con Acción de Mejora"><i class="fa fa-check"></i></a>
+                                                <a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-times"></i></a></td>
+                                        </tr>
+                                    @endif
+
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div class="box box-danger">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><b>Apartado {{$apartados[0]->cve_ngci}}.- {{$apartados[0]->desc_ngci}}</b></h3>
-                        </div>
-                        @foreach($preguntas as $pregunta)
-                            @if($pregunta->num_eci >= 1 AND $pregunta->num_eci <= 8)
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div class="col-xs-5">
-                                            <b style="color: orange;">Elemento de Control {{$pregunta->num_eci}}</b>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <label style="color:gray;">{{$pregunta->preg_eci}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>

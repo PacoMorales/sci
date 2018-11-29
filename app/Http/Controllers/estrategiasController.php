@@ -18,6 +18,8 @@ use App\m_evaelemcontrolModel;
 use App\servidorespubModel;
 use App\grado_cumpModel;
 use App\matrizModel;
+use App\progtrabModel;
+use App\accionesmejoraModel;
 
 class estrategiasController extends Controller
 {
@@ -33,7 +35,11 @@ class estrategiasController extends Controller
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
 
-        $unidades = dependenciasModel::Unidades('21500');
+        $unidades = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')
+            ->where('ESTRUCGOB_ID','like','21500%')
+            ->where('CLASIFICGOB_ID','=',1)
+            ->orderBy('DEPEN_DESC','asc')
+            ->get();
         //dd($unidades);
         $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
@@ -53,23 +59,33 @@ class estrategiasController extends Controller
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
         $ip = session()->get('ip');
-        $plan = estrategiasModel::select('STATUS_1')
-            ->where('N_PERIODO','=',(int)date('Y'))
+        $plan = progtrabModel::select('STATUS_1')
+            ->where('N_PERIODO',date('Y'))
             ->where('ESTRUCGOB_ID','like',$request->estructura.'%')
             ->where('CVE_DEPENDENCIA','like',$request->unidad.'%')
             ->get();
-        //dd($plan);
+        //dd($plan->count());
         if($plan->count() > 0){
             toastr()->error('El Plan de Trabajo para esta Unidad Administrativa ya ha sido creado.','Plan de Trabajo Duplicado!',['positionClass' => 'toast-bottom-right']);
             return back();
         }
-        $unidades = dependenciasModel::Unidades('21500');
+        $unidades = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')
+            ->where('ESTRUCGOB_ID','like','21500%')
+            ->where('CLASIFICGOB_ID','=',1)
+            ->orderBy('DEPEN_DESC','asc')
+            ->get();
         $preguntas = eciModel::orderBy('NUM_ECI','asc')->get();
         $apartados = ngciModel::select('CVE_NGCI','DESC_NGCI')->orderBy('CVE_NGCI','ASC')->get();
-        $nuevoPlan = new estrategiasModel();
+        $id_plan = progtrabModel::max('NUM_EVAL');
+        $id_plan = $id_plan+1;
+        $nuevoPlan = new progtrabModel();
         $nuevoPlan->N_PERIODO = date('Y');
         $nuevoPlan->ESTRUCGOB_ID = $request->estructura;
         $nuevoPlan->CVE_DEPENDENCIA = $request->unidad;
+        $nuevoPlan->TITULAR = strtoupper($request->titular);
+        $nuevoPlan->NUM_EVAL = $id_plan;
+        $nuevoPlan->MES = date('m');
+        $nuevoPlan->STATUS_1 = 'A';
         $nuevoPlan->FECHA_REG = date('Y/m/d');
         $nuevoPlan->USU = $usuario;
         $nuevoPlan->IP = $ip;
@@ -78,7 +94,8 @@ class estrategiasController extends Controller
         $nuevoPlan->IP_M = $ip;
         if($nuevoPlan->save() == true){
             toastr()->success('El Plan de Trabajo ha sido dado de alta correctamente.','Plan de Trabajo dado de alta!',['positionClass' => 'toast-bottom-right']);
-            return view('sicinar.plandetrabajo.nuevoPlan',compact('unidades','nombre','usuario','estructura','id_estructura','rango','preguntas','apartados'));
+            return redirect()->route('nuevoPlan');
+            //return view('sicinar.plandetrabajo.nuevoPlan',compact('unidades','nombre','usuario','estructura','id_estructura','rango','preguntas','apartados'));
         }else{
             toastr()->error('Ha ocurrido algo inesperado al dar de alta el Plan de Trabajo. Vuelve a interlo.','Ups!',['positionClass' => 'toast-bottom-right']);
             return back();

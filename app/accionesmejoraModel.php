@@ -27,9 +27,9 @@ class accionesmejoraModel extends Model
         'FECHA_TER',
         'ID_SP',
         'MEDIOS_VERIFICACION',
-        'STATUS_1',
-        'STATUS_2',
-        'STATUS_3',
+        'STATUS_1', //S ACTIVO B INACTIVO
+        'STATUS_2', //0 PENDIENTE 1 CONCLUIDO
+        'STATUS_3', //0 SIN ACCION 1 CON ACCION
         'FECHA_REG',
         'USU',
         'IP',

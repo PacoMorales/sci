@@ -76,5 +76,13 @@ Route::group(['prefix' => 'control-interno'], function() {
     //PLAN DE TRABAJO
     Route::get('plan-de-trabajo/nuevo','estrategiasController@actionNuevoPlan')->name('nuevoPlan');
     Route::post('plan-de-trabajo/nuevo/alta','estrategiasController@actionAltaNuevoPlan')->name('AltaNuevoPlan');
+    Route::get('plan-de-trabajo/ver/todos','estrategiasController@actionVerPlan')->name('verPlan');
+    Route::get('plan-de-trabajo/{id}/marcar/activo','estrategiasController@actionActivarPlan')->name('activarPlan');
+    Route::get('plan-de-trabajo/{id}/marcar/inhactivo','estrategiasController@actionDesactivarPlan')->name('desactivarPlan');
+    Route::get('plan-de-trabajo/{id}/marcar/pendiente','estrategiasController@actionPlanPendiente')->name('planPendiente');
+    Route::get('plan-de-trabajo/{id}/marcar/concluido','estrategiasController@actionPlanConcluido')->name('planConcluido');
+    Route::get('plan-de-trabajo/{id}/editar/plan-de-trabajo','estrategiasController@actionEditarPlan')->name('editarPlan');
+    Route::get('plan-de-trabajo/{id}/editar/plan-de-trabajo/accion-de-mejora','estrategiasController@actionEditarAccion')->name('editarAccion');
+    Route::put('plan-de-trabajo/{id}/editar/plan-de-trabajo/nueva/accion-de-mejora','estrategiasController@actionAltaAccion')->name('altaAccion');
 });
 

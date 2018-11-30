@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 offset-md-5">
-                                    {!! Form::submit('Continuar',['class' => 'btn btn-primary btn-flat pull-right']) !!}
+                                    {!! Form::submit('Dar de alta',['class' => 'btn btn-primary btn-flat pull-right']) !!}
                                 </div>
                             </div>
                         </div>

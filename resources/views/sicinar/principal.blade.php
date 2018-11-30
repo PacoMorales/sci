@@ -176,7 +176,7 @@
                   </a>
                   <ul class="treeview-menu">
                     <li><a href="{{route('nuevoPlan')}}"><i class="fa fa-circle-o"></i> Nuevo Plan de Trabajo</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Ver Plan de Trabajo</a></li>
+                    <li><a href="{{route('verPlan')}}"><i class="fa fa-circle-o"></i> Ver Plan de Trabajo</a></li>
                   </ul>
                 </li>
               @endif

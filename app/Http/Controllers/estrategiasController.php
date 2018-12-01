@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\estrategiasModel;
 use Illuminate\Http\Request;
+use App\Http\Requests\accionRequest;
+use App\Rules\Letras;
 
+use App\estrategiasModel;
 use App\estructurasModel;
 use App\critseccModel;
 use App\tipoprocesoModel;
@@ -268,7 +270,7 @@ class estrategiasController extends Controller
             ->get();
         $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')
             ->orderBy('UNID_ADMON','ASC')
-            ->orderBy('NOMBRE_COMPLETO','ASC')
+            ->orderBy('NOMBRES','ASC')
             ->get();
         //dd($grados);
         //dd($procesos->all());
@@ -276,7 +278,7 @@ class estrategiasController extends Controller
 
     }
 
-    public function actionAltaAccion(Request $request, $id){
+    public function actionAltaAccion(accionRequest $request, $id){
         //dd($request->all());
         $num_eval = session()->get('plan_id');
         //EL id ES EL NUMERO DE PREGUNTA (1-33)
@@ -291,6 +293,11 @@ class estrategiasController extends Controller
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
         $ip = session()->get('ip');
+
+        $request->validate([
+            'accion' =>new Letras()
+        ]);
+
         $fecha_esp  = str_replace("/", "", $request->fecha_ini);
         $dia        = substr($fecha_esp, 0, 2);
         $mes        = substr($fecha_esp, 2, 2);

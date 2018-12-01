@@ -114,44 +114,57 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <label>% Cumplimiento Si / No </label>
-                                    <select class="form-control m-bot15" name="cumplimiento1" required>
-                                        @foreach($grados as $grado)
-                                            @if($grado->cve_grado_cump == $accion->num_meec)
-                                                <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
-                                            @else
-                                                <option value="{{$grado->cve_grado_cump}}">{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    <div class="form-group">
+                                        <label>% Cumplimiento Si / No </label>
+                                        <select class="form-control m-bot15" name="cumplimiento1" required>
+                                            @foreach($grados as $grado)
+                                                @if($grado->cve_grado_cump == $accion->num_meec)
+                                                    <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
+                                                @else
+                                                    <option value="{{$grado->cve_grado_cump}}">{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <label>% Cumplimiento con base en la Evidencia</label>
-                                    <select class="form-control m-bot15" name="cumplimiento2" required>
-                                        @foreach($grados as $grado)
-                                            @if($grado->cve_grado_cump == $accion->num_meec_2)
-                                                <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
-                                            @else
-                                                <option value="{{$grado->cve_grado_cump}}">{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    <div class="form-group">
+                                        <label>% Cumplimiento con base en la Evidencia</label>
+                                        <select class="form-control m-bot15" name="cumplimiento2" required>
+                                            @foreach($grados as $grado)
+                                                @if($grado->cve_grado_cump == $accion->num_meec_2)
+                                                    <option value="{{$grado->cve_grado_cump}}" selected>{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
+                                                @else
+                                                    <option value="{{$grado->cve_grado_cump}}">{{$grado->porc_meec}}% - {{$grado->desc_grado_cump}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="col-xs-12">
-                                        <label >Proceso</label>
-                                        <input type="text" class="form-control" name="procesos" placeholder="Proceso" value="{{$accion->procesos}}" required>
+                                        <div class="form-group">
+                                            <label >Proceso</label>
+                                            <input type="text" class="form-control" name="procesos" placeholder="Proceso" value="{{$accion->procesos}}" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div><br>
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <label>Número de Acción de Mejora</label>
-                                    <input type="text" class="form-control" name="no" placeholder="Número de Acción de Mejora" value="{{$accion->no_acc_mejora}}" required>
+                                    <div class="form-group">
+                                        <label>Número de Acción de Mejora</label>
+                                        <input type="text" class="form-control" name="no" placeholder="Número de Acción de Mejora" value="{{$accion->no_acc_mejora}}" required>
+                                    </div>
                                 </div>
                                 <div class="col-xs-8">
-                                    <label>Acción de Mejora</label>
-                                    <input type="text" class="form-control" name="accion" placeholder="Acción de Mejora" value="{{$accion->desc_acc_mejora}}" required>
+                                    <div class="form-group">
+                                        <label>Acción de Mejora</label>
+                                        <input type="text" class="form-control" name="accion" placeholder="Acción de Mejora" value="{{$accion->desc_acc_mejora}}" required>
+                                        @if ($errors->has('accion'))
+                                            <span class="text-danger">{{ $errors->first('accion') }}</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div><br>
                             <div class="row">
@@ -180,20 +193,24 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <label>Responsable</label>
-                                    <select class="form-control m-bot15" name="responsable" required>
-                                        @foreach($servidores as $servidor)
-                                            @if($servidor->id_sp == $accion->id_sp)
-                                                <option value="{{$servidor->id_sp}}" selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
-                                            @else
-                                                <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    <div class="form-group">
+                                        <label>Responsable</label>
+                                        <select class="form-control m-bot15" name="responsable" required>
+                                            @foreach($servidores as $servidor)
+                                                @if($servidor->id_sp == $accion->id_sp)
+                                                    <option value="{{$servidor->id_sp}}" selected>{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
+                                                @else
+                                                    <option value="{{$servidor->id_sp}}">{{$servidor->unid_admon}} - {{$servidor->nombres}} {{$servidor->paterno}} {{$servidor->materno}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <label>Medios de Verificación</label>
-                                    <input type="text" class="form-control" name="medios" placeholder="Medios de Verificación" value="{{$accion->medios_verificacion}}" required>
+                                    <div class="form-group">
+                                        <label>Medios de Verificación</label>
+                                        <input type="text" class="form-control" name="medios" placeholder="Medios de Verificación" value="{{$accion->medios_verificacion}}" required>
+                                    </div>
                                 </div>
                             </div><br>
                             <div class="row">
@@ -211,7 +228,11 @@
 @endsection
 
 @section('request')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\accionRequest','#altaAccion') !!}
 @endsection
 
 @section('javascrpt')
@@ -219,8 +240,8 @@
         $(function () {
             //Date picker
             $('#datepicker1').datepicker({
-                format: "yyyy/mm/dd",
-                startDate: "yesterday",
+                format: "dd/mm/yyyy",
+                startDate: "today",
                 startView: 2,
                 maxViewMode: 2,
                 clearBtn: true,
@@ -229,8 +250,8 @@
             })
 
             $('#datepicker2').datepicker({
-                format: "yyyy/mm/dd",
-                startDate: "today",
+                format: "dd/mm/yyyy",
+                startDate: "tomorrow",
                 startView: 2,
                 maxViewMode: 2,
                 clearBtn: true,

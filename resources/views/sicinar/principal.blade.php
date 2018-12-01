@@ -31,6 +31,8 @@
       <!-- Google Font -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+
+
       <section>@yield('links')</section>
 
       @toastr_css
@@ -176,7 +178,7 @@
                   </a>
                   <ul class="treeview-menu">
                     <li><a href="{{route('nuevoPlan')}}"><i class="fa fa-circle-o"></i> Nuevo Plan de Trabajo</a></li>
-                    <li><a href="{{route('verPlan')}}"><i class="fa fa-circle-o"></i> Ver Plan de Trabajo</a></li>
+                    <li><a href="{{route('verPlan')}}"><i class="fa fa-circle-o"></i> Editar Plan de Trabajo</a></li>
                   </ul>
                 </li>
               @endif
@@ -223,7 +225,9 @@
       <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="{{ asset('dist/js/demo.js') }}"></script>
+
       <section>@yield('request')</section>
       <section>@yield('javascrpt')</section>
+
     </body>
 </html>

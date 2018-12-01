@@ -113,7 +113,7 @@
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
                                             @endif
-                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;"><a href="{{route('editarAccion',$pregunta->num_eci)}}" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -148,7 +148,7 @@
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
                                             @endif
-                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;"><a href="{{route('editarAccion',$pregunta->num_eci)}}" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -183,7 +183,7 @@
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
                                             @endif
-                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;"><a href="{{route('editarAccion',$pregunta->num_eci)}}" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -218,7 +218,7 @@
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
                                             @endif
-                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;"><a href="{{route('editarAccion',$pregunta->num_eci)}}" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach

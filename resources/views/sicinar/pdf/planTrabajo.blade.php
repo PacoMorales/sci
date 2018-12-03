@@ -49,7 +49,12 @@
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
                     <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                     <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                    <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    @foreach($evaluaciones as $evaluacion)
+                        @if($valuacion->num_meec == $accion->num_meec_2)
+                            <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                            @break
+                        @endif
+                    @endforeach
                     <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                     <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
                     <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
@@ -63,7 +68,7 @@
         </tbody>
     </table>
 <!--:::::::::::::::::::::::::::::::::::::  APARTADO 2  ::::::::::::::::::::::::::::::::::::::::::::::-->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
             <tr>
                 <th colspan="12" style="background-color:black;text-align:center;vertical-align: middle;"><h5 style="color:white;">{{$acciones2[0]->cve_ngci}}.- {{$acciones2[0]->desc_ngci}}</h5></th>
@@ -89,7 +94,12 @@
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                @foreach($evaluaciones as $evaluacion)
+                    @if($valuacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                        @break
+                    @endif
+                @endforeach
                 <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
@@ -129,7 +139,12 @@
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                @foreach($evaluaciones as $evaluacion)
+                    @if($valuacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                        @break
+                    @endif
+                @endforeach
                 <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
@@ -169,7 +184,12 @@
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                @foreach($evaluaciones as $evaluacion)
+                    @if($valuacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                        @break
+                    @endif
+                @endforeach
                 <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
@@ -183,7 +203,7 @@
         </tbody>
     </table>
 <!--:::::::::::::::::::::::::::::::::::::  APARTADO 5  ::::::::::::::::::::::::::::::::::::::::::::::-->
-    <table class="table table-sm" align="center">
+    <table style="page-break-inside: avoid;" class="table table-sm" align="center">
         <thead>
         <tr>
             <th colspan="12" style="background-color:black;text-align:center;vertical-align: middle;"><h5 style="color:white;">{{$acciones5[0]->cve_ngci}}.- {{$acciones5[0]->desc_ngci}}</h5></th>
@@ -209,7 +229,12 @@
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                @foreach($evaluaciones as $evaluacion)
+                    @if($valuacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                        @break
+                    @endif
+                @endforeach
                 <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
                 <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>

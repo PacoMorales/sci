@@ -463,8 +463,11 @@ class estrategiasController extends Controller
             ->where('SCI_ACCIONES_MEJORA.NUM_EVAL',$id)
             ->orderBy('SCI_ECI.NUM_ECI','ASC')
             ->get();
+        $evaluaciones = m_evaelemcontrolModel::select('NUM_MEEC','PORC_MEEC')
+            ->orderBy('NUM_MEEC','ASC')
+            ->get();
         //dd($acciones1);
-        $pdf = PDF::loadView('sicinar.pdf.planTrabajo',compact('usuario','nombre','estructura','rango','acciones1','acciones2','acciones3','acciones4','acciones5','plan','dependencia_aux'));
+        $pdf = PDF::loadView('sicinar.pdf.planTrabajo',compact('usuario','nombre','estructura','rango','acciones1','acciones2','acciones3','acciones4','acciones5','plan','dependencia_aux','evaluaciones'));
         $pdf->setPaper('A4', 'landscape');
         //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
         return $pdf->stream('PlanDeTrabajo-'.$id);

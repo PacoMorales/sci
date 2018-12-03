@@ -22,6 +22,7 @@ use App\grado_cumpModel;
 use App\matrizModel;
 use App\progtrabModel;
 use App\accionesmejoraModel;
+use PDF;
 
 class estrategiasController extends Controller
 {
@@ -81,9 +82,37 @@ class estrategiasController extends Controller
             $nuevaAccion->NUM_EVAL = $id_plan;
             $nuevaAccion->MES = date('m');
             $nuevaAccion->NUM_ECI = $i;
+            if($i >= 1 AND $i <= 8){
+                $nuevaAccion->CVE_NGCI = 1;
+            }else{
+                if($i >= 9 AND $i <= 12){
+                    $nuevaAccion->CVE_NGCI = 2;
+                }else{
+                    if($i >= 13 AND $i <= 24){
+                        $nuevaAccion->CVE_NGCI = 3;
+                    }else{
+                        if($i >= 25 AND $i <= 30){
+                            $nuevaAccion->CVE_NGCI = 4;
+                        }else{
+                            $nuevaAccion->CVE_NGCI = 5;
+                        }
+                    }
+                }
+            }
+            $nuevaAccion->NUM_MEEC = 1;
+            $nuevaAccion->NUM_MEEC_2 = 1;
+            $nuevaAccion->PROCESOS = 'SIN PROCESO';
+            $nuevaAccion->NO_ACC_MEJORA = 0;
+            $nuevaAccion->DESC_ACC_MEJORA = 'SIN ACCION DE MEJORA';
+            $nuevaAccion->FECHA_INI = date('Y/m/d');
+            $nuevaAccion->FECHA_TER = date('Y/m/d');
+            $nuevaAccion->NO_ACC_MEJORA = 0;
+            $nuevaAccion->NO_ACC_MEJORA = 0;
             $nuevaAccion->STATUS_1 = 'S'; //S ACTIVO B INACTIVO
             $nuevaAccion->STATUS_2 = '0'; //0 PENDIENTE 1 CONCLUIDO
             $nuevaAccion->STATUS_3 = '0'; //0 SIN ACCION 1 CON ACCION
+            $nuevaAccion->ID_SP = 999999999;
+            $nuevaAccion->MEDIOS_VERIFICACION = 'SIN ESPECIFICAR';
             $nuevaAccion->FECHA_REG = date('Y/m/d');
             $nuevaAccion->USU = $usuario;
             $nuevaAccion->IP = $ip;
@@ -294,9 +323,9 @@ class estrategiasController extends Controller
         $rango = session()->get('rango');
         $ip = session()->get('ip');
 
-        $request->validate([
+        /*$request->validate([
             'accion' =>new Letras()
-        ]);
+        ]);*/
 
         $fecha_esp  = str_replace("/", "", $request->fecha_ini);
         $dia        = substr($fecha_esp, 0, 2);
@@ -345,5 +374,100 @@ class estrategiasController extends Controller
         return redirect()->route('editarPlan',$num_eval);
             //->get();
         //dd($actAccion->all());
+    }
+
+    public function actionVerPDF($id){
+        //dd($id);
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $plan = $plan = progtrabModel::select('CVE_DEPENDENCIA','TITULAR')
+            ->where('N_PERIODO',date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('NUM_EVAL',$id)
+            ->orderBy('NUM_EVAL','ASC')
+            ->first();
+        $dependencia_aux = dependenciasModel::select('DEPEN_DESC')
+            ->where('DEPEN_ID','LIKE',$plan->cve_dependencia.'%')
+            ->first();
+        //dd($dependencia_aux);
+        $acciones1 = accionesmejoraModel::join('SCI_ECI','SCI_ECI.NUM_ECI','=','SCI_ACCIONES_MEJORA.NUM_ECI')
+            ->join('SCI_NGCI','SCI_NGCI.CVE_NGCI','=','SCI_ACCIONES_MEJORA.CVE_NGCI')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            //->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.VALOR_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC_2')
+            ->join('SCI_SERVIDORESPUB','SCI_SERVIDORESPUB.ID_SP','=','SCI_ACCIONES_MEJORA.ID_SP')
+            ->select('SCI_NGCI.CVE_NGCI','SCI_NGCI.DESC_NGCI','SCI_ACCIONES_MEJORA.NUM_ECI','SCI_ECI.PREG_ECI','SCI_M_EVAELEMCONTROL.PORC_MEEC','SCI_ACCIONES_MEJORA.NUM_MEEC_2','SCI_ACCIONES_MEJORA.PROCESOS','SCI_ACCIONES_MEJORA.NO_ACC_MEJORA','SCI_ACCIONES_MEJORA.DESC_ACC_MEJORA','SCI_ACCIONES_MEJORA.FECHA_INI','SCI_ACCIONES_MEJORA.FECHA_TER','SCI_SERVIDORESPUB.UNID_ADMON','SCI_SERVIDORESPUB.NOMBRES','SCI_SERVIDORESPUB.PATERNO','SCI_SERVIDORESPUB.MATERNO','SCI_ACCIONES_MEJORA.MEDIOS_VERIFICACION')
+            ->where('SCI_ACCIONES_MEJORA.N_PERIODO',date('Y'))
+            ->where('SCI_ACCIONES_MEJORA.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_ACCIONES_MEJORA.CVE_NGCI','=',1)
+            ->where('SCI_ACCIONES_MEJORA.NUM_EVAL',$id)
+            ->orderBy('SCI_ECI.NUM_ECI','ASC')
+            ->get();
+        $acciones2 = accionesmejoraModel::join('SCI_ECI','SCI_ECI.NUM_ECI','=','SCI_ACCIONES_MEJORA.NUM_ECI')
+            ->join('SCI_NGCI','SCI_NGCI.CVE_NGCI','=','SCI_ACCIONES_MEJORA.CVE_NGCI')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            //->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.VALOR_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC_2')
+            ->join('SCI_SERVIDORESPUB','SCI_SERVIDORESPUB.ID_SP','=','SCI_ACCIONES_MEJORA.ID_SP')
+            ->select('SCI_NGCI.CVE_NGCI','SCI_NGCI.DESC_NGCI','SCI_ACCIONES_MEJORA.NUM_ECI','SCI_ECI.PREG_ECI','SCI_M_EVAELEMCONTROL.PORC_MEEC','SCI_ACCIONES_MEJORA.NUM_MEEC_2','SCI_ACCIONES_MEJORA.PROCESOS','SCI_ACCIONES_MEJORA.NO_ACC_MEJORA','SCI_ACCIONES_MEJORA.DESC_ACC_MEJORA','SCI_ACCIONES_MEJORA.FECHA_INI','SCI_ACCIONES_MEJORA.FECHA_TER','SCI_SERVIDORESPUB.UNID_ADMON','SCI_SERVIDORESPUB.NOMBRES','SCI_SERVIDORESPUB.PATERNO','SCI_SERVIDORESPUB.MATERNO','SCI_ACCIONES_MEJORA.MEDIOS_VERIFICACION')
+            ->where('SCI_ACCIONES_MEJORA.N_PERIODO',date('Y'))
+            ->where('SCI_ACCIONES_MEJORA.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_ACCIONES_MEJORA.CVE_NGCI','=',2)
+            ->where('SCI_ACCIONES_MEJORA.NUM_EVAL',$id)
+            ->orderBy('SCI_ECI.NUM_ECI','ASC')
+            ->get();
+        $acciones3 = accionesmejoraModel::join('SCI_ECI','SCI_ECI.NUM_ECI','=','SCI_ACCIONES_MEJORA.NUM_ECI')
+            ->join('SCI_NGCI','SCI_NGCI.CVE_NGCI','=','SCI_ACCIONES_MEJORA.CVE_NGCI')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            //->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.VALOR_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC_2')
+            ->join('SCI_SERVIDORESPUB','SCI_SERVIDORESPUB.ID_SP','=','SCI_ACCIONES_MEJORA.ID_SP')
+            ->select('SCI_NGCI.CVE_NGCI','SCI_NGCI.DESC_NGCI','SCI_ACCIONES_MEJORA.NUM_ECI','SCI_ECI.PREG_ECI','SCI_M_EVAELEMCONTROL.PORC_MEEC','SCI_ACCIONES_MEJORA.NUM_MEEC_2','SCI_ACCIONES_MEJORA.PROCESOS','SCI_ACCIONES_MEJORA.NO_ACC_MEJORA','SCI_ACCIONES_MEJORA.DESC_ACC_MEJORA','SCI_ACCIONES_MEJORA.FECHA_INI','SCI_ACCIONES_MEJORA.FECHA_TER','SCI_SERVIDORESPUB.UNID_ADMON','SCI_SERVIDORESPUB.NOMBRES','SCI_SERVIDORESPUB.PATERNO','SCI_SERVIDORESPUB.MATERNO','SCI_ACCIONES_MEJORA.MEDIOS_VERIFICACION')
+            ->where('SCI_ACCIONES_MEJORA.N_PERIODO',date('Y'))
+            ->where('SCI_ACCIONES_MEJORA.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_ACCIONES_MEJORA.CVE_NGCI','=',3)
+            ->where('SCI_ACCIONES_MEJORA.NUM_EVAL',$id)
+            ->orderBy('SCI_ECI.NUM_ECI','ASC')
+            ->get();
+        $acciones4 = accionesmejoraModel::join('SCI_ECI','SCI_ECI.NUM_ECI','=','SCI_ACCIONES_MEJORA.NUM_ECI')
+            ->join('SCI_NGCI','SCI_NGCI.CVE_NGCI','=','SCI_ACCIONES_MEJORA.CVE_NGCI')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            //->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.VALOR_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC_2')
+            ->join('SCI_SERVIDORESPUB','SCI_SERVIDORESPUB.ID_SP','=','SCI_ACCIONES_MEJORA.ID_SP')
+            ->select('SCI_NGCI.CVE_NGCI','SCI_NGCI.DESC_NGCI','SCI_ACCIONES_MEJORA.NUM_ECI','SCI_ECI.PREG_ECI','SCI_M_EVAELEMCONTROL.PORC_MEEC','SCI_ACCIONES_MEJORA.NUM_MEEC_2','SCI_ACCIONES_MEJORA.PROCESOS','SCI_ACCIONES_MEJORA.NO_ACC_MEJORA','SCI_ACCIONES_MEJORA.DESC_ACC_MEJORA','SCI_ACCIONES_MEJORA.FECHA_INI','SCI_ACCIONES_MEJORA.FECHA_TER','SCI_SERVIDORESPUB.UNID_ADMON','SCI_SERVIDORESPUB.NOMBRES','SCI_SERVIDORESPUB.PATERNO','SCI_SERVIDORESPUB.MATERNO','SCI_ACCIONES_MEJORA.MEDIOS_VERIFICACION')
+            ->where('SCI_ACCIONES_MEJORA.N_PERIODO',date('Y'))
+            ->where('SCI_ACCIONES_MEJORA.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_ACCIONES_MEJORA.CVE_NGCI','=',4)
+            ->where('SCI_ACCIONES_MEJORA.NUM_EVAL',$id)
+            ->orderBy('SCI_ECI.NUM_ECI','ASC')
+            ->get();
+        $acciones5 = accionesmejoraModel::join('SCI_ECI','SCI_ECI.NUM_ECI','=','SCI_ACCIONES_MEJORA.NUM_ECI')
+            ->join('SCI_NGCI','SCI_NGCI.CVE_NGCI','=','SCI_ACCIONES_MEJORA.CVE_NGCI')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            ->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.NUM_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC')
+            //->join('SCI_M_EVAELEMCONTROL','SCI_M_EVAELEMCONTROL.VALOR_MEEC','=','SCI_ACCIONES_MEJORA.NUM_MEEC_2')
+            ->join('SCI_SERVIDORESPUB','SCI_SERVIDORESPUB.ID_SP','=','SCI_ACCIONES_MEJORA.ID_SP')
+            ->select('SCI_NGCI.CVE_NGCI','SCI_NGCI.DESC_NGCI','SCI_ACCIONES_MEJORA.NUM_ECI','SCI_ECI.PREG_ECI','SCI_M_EVAELEMCONTROL.PORC_MEEC','SCI_ACCIONES_MEJORA.NUM_MEEC_2','SCI_ACCIONES_MEJORA.PROCESOS','SCI_ACCIONES_MEJORA.NO_ACC_MEJORA','SCI_ACCIONES_MEJORA.DESC_ACC_MEJORA','SCI_ACCIONES_MEJORA.FECHA_INI','SCI_ACCIONES_MEJORA.FECHA_TER','SCI_SERVIDORESPUB.UNID_ADMON','SCI_SERVIDORESPUB.NOMBRES','SCI_SERVIDORESPUB.PATERNO','SCI_SERVIDORESPUB.MATERNO','SCI_ACCIONES_MEJORA.MEDIOS_VERIFICACION')
+            ->where('SCI_ACCIONES_MEJORA.N_PERIODO',date('Y'))
+            ->where('SCI_ACCIONES_MEJORA.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_ACCIONES_MEJORA.CVE_NGCI','=',5)
+            ->where('SCI_ACCIONES_MEJORA.NUM_EVAL',$id)
+            ->orderBy('SCI_ECI.NUM_ECI','ASC')
+            ->get();
+        //dd($acciones1);
+        $pdf = PDF::loadView('sicinar.pdf.planTrabajo',compact('usuario','nombre','estructura','rango','acciones1','acciones2','acciones3','acciones4','acciones5','plan','dependencia_aux'));
+        $pdf->setPaper('A4', 'landscape');
+        //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');
+        return $pdf->stream('PlanDeTrabajo-'.$id);
+        //return view('sicinar.pdf.planTrabajo',compact('usuario','nombre','estructura','rango','acciones1','acciones2','acciones3','acciones4','acciones5','plan','dependencia_aux'));
     }
 }

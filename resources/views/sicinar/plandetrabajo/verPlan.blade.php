@@ -71,7 +71,7 @@
                                                 <td style="text-align:right; vertical-align: middle;"><a href="{{route('planConcluido',$plan->num_eval)}}" class="btn btn-warning" title="Concluido?"><i class="fa fa-minus-square-o"></i></a></td>
                                             @endif
                                             <td style="text-align:center;"><a href="{{route('editarPlan',$plan->num_eval)}}" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                                                <!--<a href="#" class="btn btn-default" title="Ver"><i class="fa fa-search"></i></a>--></td>
+                                                <a href="{{route('planPDF',$plan->num_eval)}}" class="btn btn-danger" title="Ver Plan de Trabajo"><i class="fa fa-search"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

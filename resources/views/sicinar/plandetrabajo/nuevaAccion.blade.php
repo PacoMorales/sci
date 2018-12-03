@@ -161,9 +161,9 @@
                                     <div class="form-group">
                                         <label>Acción de Mejora</label>
                                         <input type="text" class="form-control" name="accion" placeholder="Acción de Mejora" value="{{$accion->desc_acc_mejora}}" required>
-                                        @if ($errors->has('accion'))
+                                        <!--@if ($errors->has('accion'))
                                             <span class="text-danger">{{ $errors->first('accion') }}</span>
-                                        @endif
+                                        @endif-->
                                     </div>
                                 </div>
                             </div><br>

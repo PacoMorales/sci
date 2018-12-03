@@ -30,34 +30,34 @@
             </tr>
                 <tr>
                     <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 450px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Proceso</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Proceso</b></th>
                     <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 15px;"><b style="color:white;font-size: x-small;">No.</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
-                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 200px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
+                    <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
                 </tr>
         </thead>
         <tbody>
             @foreach($acciones1 as $accion)
                 <tr>
                     <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 450px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
-                    <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                    <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 150px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
+                    <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                     <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
-                    <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
-                    <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
-                    <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
+                    <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
+                    <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
+                    <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
                 </tr>
                 @endforeach
         </tbody>
@@ -70,34 +70,34 @@
             </tr>
             <tr>
                 <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 450px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Proceso</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Proceso</b></th>
                 <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 15px;"><b style="color:white;font-size: x-small;">No.</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
-                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 200px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
+                <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
             </tr>
         </thead>
         <tbody>
         @foreach($acciones2 as $accion)
             <tr>
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 450px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 150px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
-                <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
-                <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
             </tr>
         @endforeach
         </tbody>
@@ -110,34 +110,34 @@
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 450px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Proceso</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Proceso</b></th>
             <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 15px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 200px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
         </tr>
         </thead>
         <tbody>
         @foreach($acciones3 as $accion)
             <tr>
-            <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
-            <td style="text-align:justify;vertical-align: middle;width: 450px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
-            <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-            <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-            <td style="text-align:justify;vertical-align: middle;width: 150px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
-            <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
-            <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
-            <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
-            <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
-            <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
-            <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
-            <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
+                <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
         </tr>
         @endforeach
         </tbody>
@@ -150,34 +150,34 @@
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 450px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Proceso</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Proceso</b></th>
             <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 15px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 200px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
         </tr>
         </thead>
         <tbody>
         @foreach($acciones4 as $accion)
             <tr>
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 450px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 150px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
-                <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
-                <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
             </tr>
         @endforeach
         </tbody>
@@ -190,34 +190,34 @@
         </tr>
         <tr>
             <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 450px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 25px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Proceso</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Elemento de Control</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento Si / No</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 20px;"><b style="color:white;font-size: x-small;">% Cumplimiento con base en la evidencia</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Proceso</b></th>
             <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 15px;"><b style="color:white;font-size: x-small;">No.</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
-            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 250px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 200px;"><b style="color:white;font-size: x-small;">Acción de Mejora</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Inicio</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 50px;"><b style="color:white;font-size: x-small;">Fecha de Término</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Unidad Administrativa</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Responsable</b></th>
+            <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 100px;"><b style="color:white;font-size: x-small;">Medios de verificación</b></th>
         </tr>
         </thead>
         <tbody>
         @foreach($acciones5 as $accion)
             <tr>
                 <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;font-size: x-small;">{{$accion->num_eci}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 450px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 25px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 150px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 20px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{{$accion->procesos}}</b></td>
                 <td style="text-align:center;vertical-align: middle;width: 15px;"><b style="color:black;font-size: xx-small;">{{$accion->no_acc_mejora}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
-                <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
-                <td style="text-align:center;vertical-align: middle;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
-                <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 200px;"><b style="color:black;font-size: xx-small;">{{$accion->desc_acc_mejora}}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ini)) !!}</b></td>
+                <td style="text-align:center;vertical-align: middle;width: 50px;"><b style="color:black;font-size: xx-small;">{!! date('d/m/Y',strtotime($accion->fecha_ter)) !!}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->unid_admon}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->nombres}} {{$accion->paterno}} {{$accion->materno}}</b></td>
+                <td style="text-align:justify;vertical-align: middle;width: 100px;"><b style="color:black;font-size: xx-small;">{{$accion->medios_verificacion}}</b></td>
             </tr>
         @endforeach
         </tbody>

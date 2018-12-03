@@ -50,8 +50,8 @@
                     <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                     <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
                     @foreach($evaluaciones as $evaluacion)
-                        @if($valuacion->num_meec == $accion->num_meec_2)
-                            <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                        @if($evaluacion->num_meec == $accion->num_meec_2)
+                            <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$evaluacion->porc_meec}}%</b></td>
                             @break
                         @endif
                     @endforeach
@@ -95,8 +95,8 @@
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
                 @foreach($evaluaciones as $evaluacion)
-                    @if($valuacion->num_meec == $accion->num_meec_2)
-                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    @if($evaluacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$evaluacion->porc_meec}}%</b></td>
                         @break
                     @endif
                 @endforeach
@@ -140,8 +140,8 @@
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
                 @foreach($evaluaciones as $evaluacion)
-                    @if($valuacion->num_meec == $accion->num_meec_2)
-                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    @if($evaluacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$evaluacion->porc_meec}}%</b></td>
                         @break
                     @endif
                 @endforeach
@@ -185,8 +185,8 @@
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
                 @foreach($evaluaciones as $evaluacion)
-                    @if($valuacion->num_meec == $accion->num_meec_2)
-                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    @if($evaluacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$evaluacion->porc_meec}}%</b></td>
                         @break
                     @endif
                 @endforeach
@@ -230,8 +230,8 @@
                 <td style="text-align:justify;vertical-align: middle;width: 250px;"><b style="color:black;font-size: xx-small;">{{$accion->preg_eci}}</b></td>
                 <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
                 @foreach($evaluaciones as $evaluacion)
-                    @if($valuacion->num_meec == $accion->num_meec_2)
-                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$accion->porc_meec}}%</b></td>
+                    @if($evaluacion->num_meec == $accion->num_meec_2)
+                        <td style="background-color:#FFC000;text-align:center;vertical-align: middle;width: 10px;"><b style="color:black;font-size: xx-small;">{{$evaluacion->porc_meec}}%</b></td>
                         @break
                     @endif
                 @endforeach

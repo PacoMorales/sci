@@ -466,7 +466,7 @@ class estrategiasController extends Controller
         $evaluaciones = m_evaelemcontrolModel::select('NUM_MEEC','PORC_MEEC')
             ->orderBy('NUM_MEEC','ASC')
             ->get();
-        //dd($acciones1);
+        //dd($evaluaciones);
         $pdf = PDF::loadView('sicinar.pdf.planTrabajo',compact('usuario','nombre','estructura','rango','acciones1','acciones2','acciones3','acciones4','acciones5','plan','dependencia_aux','evaluaciones'));
         $pdf->setPaper('A4', 'landscape');
         //return $pdf->download('procesos_'.date('d-m-Y').'.pdf');

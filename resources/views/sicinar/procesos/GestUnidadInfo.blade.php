@@ -418,7 +418,7 @@
                 <div class="col-md-12">
                     <div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Gráfica de Ponderación</h3>
+                            <h3 class="box-title">Gráfica de Ponderación de las Normas Generales de  Control Iinterno (NGCI)</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
@@ -589,7 +589,7 @@
                                             <thead style="color: white;" class="justify">
                                                 <tr>
                                                     <th></th>
-                                                    <th colspan="6" style="background-color:#C4BC96;text-align:center;vertical-align: middle;">EVALUACIÓN DE LOS ELEMENTOS DE CONTROL CON BASE EN LA EVIDENCIA</th>
+                                                    <th colspan="6" style="background-color:#C4BC96;text-align:center;vertical-align: middle;">MATRIZ DE EVALUACIÓN DE LOS ELEMENTOS DE CONTROL CON BASE EN LA EVIDENCIA</th>
                                                 </tr>
                                             </thead>
                                         <tbody>

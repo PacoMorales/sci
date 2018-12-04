@@ -85,5 +85,9 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('plan-de-trabajo/{id}/editar/plan-de-trabajo/accion-de-mejora','estrategiasController@actionEditarAccion')->name('editarAccion');
     Route::put('plan-de-trabajo/{id}/editar/plan-de-trabajo/nueva/accion-de-mejora','estrategiasController@actionAltaAccion')->name('altaAccion');
     Route::get('plan-de-trabajo/{id}/ver/pdf','estrategiasController@actionVerPDF')->name('planPDF');
+    //ADMINISTRACIÓN DE RIEGOS
+    Route::get('admin-de-riesgos/inicio','adm_riesgosController@actionVerRiesgo')->name('verRiesgos');
+    Route::get('admin-de-riesgos/nuevo','adm_riesgosController@actionNuevoRiesgo')->name('nuevoRiesgo');
+    Route::post('admin-de-riesgos/nuevo/alta','adm_riesgosController@actionAltaRiesgo')->name('altaRiesgo');
 });
 

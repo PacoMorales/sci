@@ -138,7 +138,7 @@
                   </a>
                   <ul class="treeview-menu">
                       <li class="treeview">
-                        <a href="#"><i class="fa fa-circle-o"></i> Procesos
+                        <a href="#"><i class="fa fa-circle-o"></i> Por Procesos
                           <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -150,7 +150,7 @@
                           <li><a href="{{route('procesosGestionInst')}}"><i class="fa fa-square-o"></i> Procesos institucionales</a></li>
                         </ul>
                       </li>
-                      <li><a href="{{route('Gestunidades')}}"><i class="fa fa-circle-o"></i> Unidad</a></li>
+                      <li><a href="{{route('Gestunidades')}}"><i class="fa fa-circle-o"></i> Por Unidad Administrativa</a></li>
                   </ul>
                 </li>
               @endif
@@ -179,6 +179,18 @@
                   <ul class="treeview-menu">
                     <li><a href="{{route('nuevoPlan')}}"><i class="fa fa-circle-o"></i> Nuevo Plan de Trabajo</a></li>
                     <li><a href="{{route('verPlan')}}"><i class="fa fa-circle-o"></i> Editar Plan de Trabajo</a></li>
+                  </ul>
+                </li>
+              @endif
+              @if($rango >= 4)
+                <li  class="treeview">
+                  <a href="#"><i class="fa fa-th-large"></i> <span>Administración de Riesgos</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
                   </ul>
                 </li>
               @endif
@@ -212,7 +224,7 @@
           <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
           </div>
-          <strong>Derechos reservados. Gobierno del Estado de México.</strong>
+          <strong>Derechos reservados: Gobierno del Estado de México. Unidad de Desarrollo Institucional y Tecnologías de Información (UDITI).</strong>
         </footer>
       </div>
       <!-- jQuery 3 -->

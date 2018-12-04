@@ -24,6 +24,8 @@ use PDF;
 use App\clase_riesgoModel;
 use App\nivel_riesgoModel;
 use App\clasificacion_riesgoModel;
+use App\prob_ocurModel;
+use App\gradoimpactoModel;
 
 class adm_riesgosController extends Controller
 {
@@ -70,7 +72,7 @@ class adm_riesgosController extends Controller
         $clases = clase_riesgoModel::orderBy('CVE_CLASE_RIESGO','ASC')->get();
         $niveles = nivel_riesgoModel::orderBy('CVE_NIVEL_DECRIESGO','ASC')->get();
         $clasificaciones = clasificacion_riesgoModel::orderBy('CVE_CLASIF_RIESGO','ASC')->get();
-        return view('sicinar.administracionderiesgos.nuevo',compact('nombre','usuario','estructura','rango','id_estructura','planes','unidades'));
+        return view('sicinar.administracionderiesgos.nuevo',compact('nombre','usuario','estructura','rango','id_estructura','planes','unidades','clases','niveles','clasificaciones'));
     }
 
     public function actionAltaRiesgo(Request $request){

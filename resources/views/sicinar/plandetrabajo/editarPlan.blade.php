@@ -133,7 +133,7 @@
                                 <tr>
                                     <th style="background-color:darkred;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">No.</b></th>
                                     <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Elemento de Control</b></th>
-                                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Con Acción de Mejora</b></th>
+                                    <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Con / Sin Acción de Mejora</b></th>
                                     <th style="background-color:darkred;text-align:center;vertical-align: middle;"><b style="color:white;">Editar Acción de Mejora</b></th>
                                 </tr>
                                 </thead>

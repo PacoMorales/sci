@@ -68,10 +68,10 @@
                                             @if($plan->status_2 == '1')
                                                 <td style="text-align:left; vertical-align: middle;"><a href="{{route('planPendiente',$plan->num_eval)}}" class="btn btn-success" title="Pendiente?"><i class="fa fa-check-square-o"></i></a></td>
                                             @else
-                                                <td style="text-align:right; vertical-align: middle;"><a href="{{route('planConcluido',$plan->num_eval)}}" class="btn btn-warning" title="Concluido?"><i class="fa fa-minus-square-o"></i></a></td>
+                                                <td style="text-align:right; vertical-align: middle;"><a href="{{route('planConcluido',$plan->num_eval)}}" class="btn btn-danger" title="Concluir?"><i class="fa fa-minus-square-o"></i></a></td>
                                             @endif
                                             <td style="text-align:center;"><a href="{{route('editarPlan',$plan->num_eval)}}" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                                                <a href="{{route('planPDF',$plan->num_eval)}}" class="btn btn-danger" title="Ver Plan de Trabajo"><i class="fa fa-search"></i></a></td>
+                                                <a href="{{route('planPDF',$plan->num_eval)}}" class="btn btn-danger" title="Ver Plan de Trabajo (formato PDF)"><i class="fa fa-file-pdf-o"></i> PDF</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

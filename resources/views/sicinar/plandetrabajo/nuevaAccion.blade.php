@@ -84,7 +84,7 @@
                                     <table class="table table-striped table-bordered table-sm">
                                         <thead style="color: brown;" class="justify">
                                         <tr>
-                                            <th colspan="2" style="background-color:dodgerblue;text-align:center;"><h5 style="color:white;">Procesos dados de alta</h5></th>
+                                            <th colspan="2" style="background-color:green;text-align:center;"><h5 style="color:white;">Procesos dados de alta</h5></th>
                                         </tr>
                                         <tr>
                                             <th style="background-color:gray;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">Proceso</b></th>
@@ -94,7 +94,7 @@
                                         <tbody>
                                         @foreach($procesos as $proceso)
                                             <tr>
-                                                <td style="background-color:cornflowerblue;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">{{$proceso->cve_proceso}}</b></td>
+                                                <td style="background-color:green;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">{{$proceso->cve_proceso}}</b></td>
                                                 <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size:small;">{{$proceso->desc_proceso}}</b></td>
                                             </tr>
                                         @endforeach
@@ -215,7 +215,7 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-md-12 offset-md-5">
-                                    <button type="submit" class="btn btn-primary btn-block">Agregar Acción de Mejora</button>
+                                    <button type="submit" class="btn btn-success btn-block">Registrar Acción de Mejora</button>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 @extends('sicinar.principal')
 
-@section('title','Administración de Riezgos')
+@section('title','Administración de Riesgos')
 
 @section('links')
     <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -41,42 +41,56 @@
                         <div class="box-body">
                             <table id="tabla1" class="table table-striped table-bordered table-sm">
                                 <thead style="color: brown;" class="justify">
-                                <tr>
-                                    <th style="text-align:center; vertical-align: middle;">Clave</th>
-                                    <th style="text-align:center; vertical-align: middle;">Unidad Administrativa</th>
-                                    <th style="text-align:center; vertical-align: middle;">Titular</th>
-                                    <th style="text-align:center; vertical-align: middle;">Activo / Inactivo</th>
-                                    <th style="text-align:center; vertical-align: middle;">Concluido / Pendiente</th>
-                                    <th style="text-align:center; vertical-align: middle;">Acciones</th>
-                                </tr>
+                                    <tr>
+                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Clave</th>
+                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Riesgo</th>
+                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Unidad Administrativa</th>
+                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Activo / Inactivo</th>
+                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Riesgo controlado suficientemente? <br> Si / No</th>
+                                        <th colspan="5" style="text-align:center; vertical-align: middle;">Acciones</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align:center; vertical-align: middle;">I. Evaluación Riesgos</th>
+                                        <th style="text-align:center; vertical-align: middle;">II. Evaluación de Controles</th>
+                                        <th style="text-align:center; vertical-align: middle;">III. Valoración de Riesgos vs Controles</th>
+                                        <th style="text-align:center; vertical-align: middle;">IV. Mapa de Riesgos</th>
+                                        <th style="text-align:center; vertical-align: middle;">V. Estrategias y Acciones</th>
+                                        <th style="text-align:center; vertical-align: middle;">Ver Evaluación Completa</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($planes as $plan)
+                                @foreach($riesgos as $riesgo)
                                     <tr>
-                                        <td style="text-align:center; vertical-align: middle;">{{$plan->num_eval}}</td>
+                                        <td style="text-align:center; vertical-align: middle;">{{$riesgo->cve_riesgo}}</td>
+                                        <td style="text-align:center; vertical-align: middle;">{{$riesgo->desc_riesgo}}</td>
                                         @foreach($unidades as $unidad)
-                                            @if(strpos($unidad->depen_id,$plan->cve_dependencia)!==false)
+                                            @if(strpos($unidad->depen_id,$riesgo->cve_dependencia) !== false)
                                                 <td style="text-align:center; vertical-align: middle;">{{$unidad->depen_desc}}</td>
+                                                @break
                                             @endif
                                         @endforeach
-                                        <td style="text-align:center; vertical-align: middle;">{{$plan->titular}}</td>
-                                        @if($plan->status_1 == 'S')
-                                            <td style="text-align:left; vertical-align: middle;"><a href="{{route('desactivarPlan',$plan->num_eval)}}" class="btn btn-success" title="Desactivar?"><i class="fa fa-check"></i></a></td>
+                                        @if($riesgo->status_1 == 'S')
+                                            <td style="text-align:left; vertical-align: middle;"><a href="{{route('desactivarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-success" title="Desactivar?"><i class="fa fa-check"></i></a></td>
                                         @else
-                                            <td style="text-align:right; vertical-align: middle;"><a href="{{route('activarPlan',$plan->num_eval)}}" class="btn btn-danger" title="Activar?"><i class="fa fa-times"></i></a></td>
+                                            <td style="text-align:right; vertical-align: middle;"><a href="{{route('activarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="Activar?"><i class="fa fa-times"></i></a></td>
                                         @endif
-                                        @if($plan->status_2 == '1')
-                                            <td style="text-align:left; vertical-align: middle;"><a href="{{route('planPendiente',$plan->num_eval)}}" class="btn btn-success" title="Pendiente?"><i class="fa fa-check-square-o"></i></a></td>
+                                        @if($riesgo->status_2 == 'S')
+                                            <td style="text-align:left; vertical-align: middle;"><a href="{{route('descontrolarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-success" title="Si"><i class="fa fa-check-square-o"></i></a></td>
                                         @else
-                                            <td style="text-align:right; vertical-align: middle;"><a href="{{route('planConcluido',$plan->num_eval)}}" class="btn btn-warning" title="Concluido?"><i class="fa fa-minus-square-o"></i></a></td>
+                                            <td style="text-align:right; vertical-align: middle;"><a href="{{route('controlarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="No"><i class="fa fa-minus-square-o"></i></a></td>
                                         @endif
-                                        <td style="text-align:center;"><a href="{{route('editarPlan',$plan->num_eval)}}" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                                            <a href="{{route('planPDF',$plan->num_eval)}}" class="btn btn-danger" title="Ver Plan de Trabajo"><i class="fa fa-search"></i></a></td>
+                                        <td style="text-align:center;"><a href="{{route('editarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;"><a href="#" class="btn btn-danger" title="Ver (formato PDF)"><i class="fa fa-file-pdf-o"></i> PDF</a></td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            {!! $planes->appends(request()->input())->links() !!}
+                            {!! $riesgos->appends(request()->input())->links() !!}
                         </div>
                     </div>
                 </div>

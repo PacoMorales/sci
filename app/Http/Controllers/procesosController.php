@@ -124,7 +124,7 @@ class procesosController extends Controller
             ->where('ESTRUCGOB_ID','like','21500%')
             ->where('STATUS_2','LIKE','A%')
             ->orderBy('CVE_PROCESO','ASC')
-            ->paginate(25);
+            ->paginate(5);
         //dd($procesos);
         if($id_estructura == '0'){
             $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')->where('CLASIFICGOB_ID',1)->whereRaw("(ESTRUCGOB_ID like '22400%') OR (ESTRUCGOB_ID like '21500%') OR (ESTRUCGOB_ID like '21200%') OR (ESTRUCGOB_ID like '20400%') OR (ESTRUCGOB_ID like '21700%') OR (ESTRUCGOB_ID like '20700%') OR (ESTRUCGOB_ID like '22500%')")->get();

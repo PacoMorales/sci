@@ -12,7 +12,6 @@ class gradoimpactoModel extends Model
     public $incrementing = false;
     protected $fillable = [
         'GRADO_IMPACTO',
-        'IMPACTO',
-        'GRADO_IMPACTO'
+        'IMPACTO'
     ];
 }

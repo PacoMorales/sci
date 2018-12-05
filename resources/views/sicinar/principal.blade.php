@@ -190,7 +190,8 @@
                   </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    <li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo Riesgo</a></li>
+                    <li><a href="{{route('verRiesgos')}}"><i class="fa fa-circle-o"></i> Ver Riesgos</a></li>
                   </ul>
                 </li>
               @endif

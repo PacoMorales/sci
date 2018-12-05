@@ -169,7 +169,7 @@
                 </ul>
               </li>
             @endif
-              @if($rango >= 4)
+              @if($rango >= 3)
                 <li  class="treeview">
                   <a href="#"><i class="fa fa-book"></i> <span>Plan de Trabajo</span>
                     <span class="pull-right-container">
@@ -189,9 +189,41 @@
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                   </a>
-                  <ul class="treeview-menu">
+                  <!--<ul class="treeview-menu">
                     <li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo Riesgo</a></li>
                     <li><a href="{{route('verRiesgos')}}"><i class="fa fa-circle-o"></i> Ver Riesgos</a></li>
+                  </ul>-->
+                  <ul class="treeview-menu">
+                    <!--<li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo Riesgo</a></li>
+                    <li><a href="{{route('verRiesgos')}}"><i class="fa fa-circle-o"></i> Ver Riesgos</a></li>-->
+                    <li class="treeview">
+                      <a href="#"><i class="fa fa-circle-o"></i> Nuevo
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li><a href="{{route('nuevoRiesgo')}}">I. Evaluación de Riesgos</a></li>
+                        <li><a href="#">II. Evaluación de Controles</a></li>
+                        <li><a href="#">III. Valoración de Riesgos vs Controles</a></li>
+                        <li><a href="#">IV. Mapa de Riesgos</a></li>
+                        <li><a href="#">V. Estrategias y Acciones</a></li>
+                      </ul>
+                    </li>
+                    <li class="treeview">
+                      <a href="#"><i class="fa fa-circle-o"></i>Editar
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li><a href="{{route('verRiesgos')}}">I. Evaluación de Riesgos</a></li>
+                        <li><a href="#">II. Evaluación de Controles</a></li>
+                        <li><a href="#">III. Valoración de Riesgos vs Controles</a></li>
+                        <li><a href="#">IV. Mapa de Riesgos</a></li>
+                        <li><a href="#">V. Estrategias y Acciones</a></li>
+                      </ul>
+                    </li>
                   </ul>
                 </li>
               @endif

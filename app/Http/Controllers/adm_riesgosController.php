@@ -313,6 +313,91 @@ class adm_riesgosController extends Controller
     }
 
     public function actualizarRiesgoI(riesgosRequest $request, $id){
-        dd($request->all());
+        //dd($request->all());
+        //dd($id);
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+
+        /*$titular='';$id_sp_1='';
+        $coordinador='';$id_sp_2='';
+        $enlace='';$id_sp_3='';*/
+
+        if(strcmp($request->titular,"999999999") == 0){
+            $titular = strtoupper($request->titular_aux);
+            $id_sp_1 = $request->id_sp_aux;
+        }else{
+            $sp = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO')->where('ID_SP','like',$request->titular.'%')->first();
+            if($sp->count() == 0){
+                $titular = 'SIN ESPECIFICAR';
+                $id_sp_1 = '999999999';
+            }else{
+                $titular_aux = ($sp->nombres.' '.$sp->paterno.' '.$sp->materno);
+                $titular = $titular_aux;
+                $id_sp_1 = $sp->id_sp;
+            }
+        }
+
+        if(strcmp($request->coordinador,"999999999") == 0){
+            $coordinador = strtoupper($request->coor_aux);
+            $id_sp_2 = $request->id_sp_coor;
+        }else{
+            $sp = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO')->where('ID_SP','like',$request->coordinador.'%')->first();
+            if($sp->count() == 0){
+                $coordinador = 'SIN ESPECIFICAR';
+                $id_sp_2 = '999999999';
+            }else{
+                $coor_aux = ($sp->nombres.' '.$sp->paterno.' '.$sp->materno);
+                $coordinador = $coor_aux;
+                $id_sp_2 = $sp->id_sp;
+            }
+        }
+
+        if(strcmp($request->enlace,"999999999") == 0){
+            $enlace = strtoupper($request->enlace_aux);
+            $id_sp_3 = $request->id_sp_enlace;
+        }else{
+            $sp = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO')->where('ID_SP','like',$request->enlace.'%')->first();
+            if($sp->count() == 0){
+                $enlace = 'SIN ESPECIFICAR';
+                $id_sp_3 = '999999999';
+            }else{
+                $enlace_aux = ($sp->nombres.' '.$sp->paterno.' '.$sp->materno);
+                $enlace = $enlace_aux;
+                $id_sp_3 = $sp->id_sp;
+            }
+        }
+
+        $actualizarRiesgo = riesgosModel::where('CVE_RIESGO',$id)
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->update([
+                'ESTRUCGOB_ID' => $request->estructura,
+                'CVE_DEPENDENCIA' => $request->unidad,
+                'TITULAR' => $titular,
+                'ID_SP_1' => $id_sp_1,
+                'COORDINADOR' => $coordinador,
+                'ID_SP_2' => $id_sp_2,
+                'ENLACE' => $enlace,
+                'ID_SP_3' => $id_sp_3,
+                'DESC_RIESGO' => strtoupper($request->riesgo),
+                'ALINEACION_RIESGO' => strtoupper($request->descripcion),
+                'CVE_CLASE_RIESGO' => $request->seleccion,
+                'CVE_NIVEL_DECRIESGO' => $request->decision,
+                'CVE_CLASIF_RIESGO' => $request->clasificacion,
+                'OTRO_CLASIF_RIESGO' => $request->otro,
+                'EFECTOS_RIESGO' => $request->efectos,
+                'GRADO_IMPACTO' => $request->impacto,
+                'ESCALA_VALOR' => $request->ocurrencia,
+                'FECHA_M' => date('Y/m/d'),
+                'USU_M' => $usuario,
+                'IP_M' => $ip
+            ]);
+        toastr()->success('El Riesgo ha sido actualizado correctamente.','Riesgo actualizado!',['positionClass' => 'toast-bottom-right']);
+        return redirect()->route('verRiesgos');
     }
 }

@@ -33,8 +33,8 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="box">
+                <div class="col-md-8">
+                    <div class="box box-success">
                         <div class="box-header">
                             <h3 class="box-title">Matriz de Administración de Riesgos Institucional</h3>
                         </div>
@@ -42,21 +42,22 @@
                             <table id="tabla1" class="table table-striped table-bordered table-sm">
                                 <thead style="color: brown;" class="justify">
                                     <tr>
-                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Clave</th>
-                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Riesgo</th>
-                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Unidad Administrativa</th>
-                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Activo / Inactivo</th>
-                                        <th rowspan="2" style="text-align:center; vertical-align: middle;">Riesgo controlado suficientemente? <br> Si / No</th>
-                                        <th colspan="5" style="text-align:center; vertical-align: middle;">Acciones</th>
+                                        <th rowspan="1" style="text-align:center; vertical-align: middle;">Clave</th>
+                                        <th rowspan="1" style="text-align:center; vertical-align: middle;">Riesgo</th>
+                                        <th rowspan="1" style="text-align:center; vertical-align: middle;">Unidad Administrativa</th>
+                                        <th rowspan="1" style="text-align:center; vertical-align: middle;">Activo / Inactivo</th>
+                                        <th rowspan="1" style="text-align:center; vertical-align: middle;">Riesgo controlado suficientemente? <br> Si / No</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Editar</th>
+                                        <!--<th colspan="1" style="text-align:center; vertical-align: middle;">Acciones</th>-->
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <th style="text-align:center; vertical-align: middle;">I. Evaluación Riesgos</th>
                                         <th style="text-align:center; vertical-align: middle;">II. Evaluación de Controles</th>
                                         <th style="text-align:center; vertical-align: middle;">III. Valoración de Riesgos vs Controles</th>
                                         <th style="text-align:center; vertical-align: middle;">IV. Mapa de Riesgos</th>
                                         <th style="text-align:center; vertical-align: middle;">V. Estrategias y Acciones</th>
                                         <th style="text-align:center; vertical-align: middle;">Ver Evaluación Completa</th>
-                                    </tr>
+                                    </tr>-->
                                 </thead>
                                 <tbody>
                                 @foreach($riesgos as $riesgo)
@@ -80,11 +81,11 @@
                                             <td style="text-align:right; vertical-align: middle;"><a href="{{route('controlarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="No"><i class="fa fa-minus-square-o"></i></a></td>
                                         @endif
                                         <td style="text-align:center;"><a href="{{route('editarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <!--<td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
-                                        <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
-                                        <td style="text-align:center;"><a href="#" class="btn btn-danger" title="Ver (formato PDF)"><i class="fa fa-file-pdf-o"></i> PDF</a></td>
+                                        <td style="text-align:center;"><a href="#" class="btn btn-danger" title="Ver (formato PDF)"><i class="fa fa-file-pdf-o"></i> PDF</a></td>-->
 
                                     </tr>
                                 @endforeach

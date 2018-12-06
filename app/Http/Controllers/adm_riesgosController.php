@@ -16,6 +16,7 @@ use App\riesgosModel;
 
 class adm_riesgosController extends Controller
 {
+    //VER APARTADO I
     public function actionVerRiesgo(){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
@@ -165,6 +166,7 @@ class adm_riesgosController extends Controller
         return view('sicinar.administracionderiesgos.verTodos',compact('nombre','usuario','estructura','rango','id_estructura','riesgos','unidades'));
     }
 
+    //NUEVO APARTADO I
     public function actionNuevoRiesgo(){
         //dd('Nuevo riesgo...');
         $nombre = session()->get('userlog');
@@ -191,6 +193,7 @@ class adm_riesgosController extends Controller
         return view('sicinar.administracionderiesgos.nuevo',compact('nombre','usuario','estructura','rango','id_estructura','planes','unidades','clases','niveles','clasificaciones','grados','probabilidades','servidores'));
     }
 
+    //ALTA APARTADO I
     public function actionAltaRiesgo(riesgosRequest $request){
         //dd($request->all());
         $nombre = session()->get('userlog');
@@ -277,6 +280,7 @@ class adm_riesgosController extends Controller
         }
     }
 
+    //EDITAR APARTADO I
     public function editarRiesgo($id){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
@@ -312,6 +316,7 @@ class adm_riesgosController extends Controller
         return view('sicinar.administracionderiesgos.I',compact('nombre','usuario','estructura','rango','id_estructura','riesgo','unidades','clases','niveles','clasificaciones','grados','probabilidades','servidores'));
     }
 
+    //ACTUALIZAR APARTADO I
     public function actualizarRiesgoI(riesgosRequest $request, $id){
         //dd($request->all());
         //dd($id);

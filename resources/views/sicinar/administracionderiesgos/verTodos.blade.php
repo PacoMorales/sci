@@ -23,20 +23,20 @@
         <section class="content-header">
             <h1>
                 Matriz de Administración de Riesgos Institucional
-                <small> Selecciona alguno para registrar o editar</small>
+                <small> I. Evaluación de Riesgos</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Menú</a></li>
-                <li><a href="#">Matriz de Riesgos</a></li>
-                <li class="active">Todos</li>
+                <li><a href="#">I. Evaluación de Riesgos</a></li>
+                <li class="active">Ver Todos</li>
             </ol>
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-10">
                     <div class="box box-success">
                         <div class="box-header">
-                            <h3 class="box-title">Matriz de Administración de Riesgos Institucional</h3>
+                            <h3 class="box-title">I. Evaluación de Riesgos</h3>
                         </div>
                         <div class="box-body">
                             <table id="tabla1" class="table table-striped table-bordered table-sm">
@@ -47,7 +47,9 @@
                                         <th rowspan="1" style="text-align:center; vertical-align: middle;">Unidad Administrativa</th>
                                         <th rowspan="1" style="text-align:center; vertical-align: middle;">Activo / Inactivo</th>
                                         <th rowspan="1" style="text-align:center; vertical-align: middle;">Riesgo controlado suficientemente? <br> Si / No</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Editar</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Editar Evaluación</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle; color:green;">Agregar Factor</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle; color:green;">Ver Factor</th>
                                         <!--<th colspan="1" style="text-align:center; vertical-align: middle;">Acciones</th>-->
                                     </tr>
                                     <!--<tr>
@@ -76,11 +78,13 @@
                                             <td style="text-align:right; vertical-align: middle;"><a href="{{route('activarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="Activar?"><i class="fa fa-times"></i></a></td>
                                         @endif
                                         @if($riesgo->status_2 == 'S')
-                                            <td style="text-align:left; vertical-align: middle;"><a href="{{route('descontrolarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-success" title="Si"><i class="fa fa-check-square-o"></i></a></td>
+                                            <td style="text-align:center;vertical-align: middle;"><a href="{{route('descontrolarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-success" title="Si"><i class="fa fa-check-square-o"></i></a></td>
                                         @else
-                                            <td style="text-align:right; vertical-align: middle;"><a href="{{route('controlarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="No"><i class="fa fa-minus-square-o"></i></a></td>
+                                            <td style="text-align:center;vertical-align: middle;"><a href="{{route('controlarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="No"><i class="fa fa-minus-square-o"></i></a></td>
                                         @endif
-                                        <td style="text-align:center;"><a href="{{route('editarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;vertical-align: middle;"><a href="{{route('editarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-primary" title="Editar Evaluación de Riesgos"><i class="fa fa-edit"></i></a></td>
+                                        <td style="text-align:center;vertical-align: middle;"><a href="#" class="btn btn-success" title="Agregar un Factor"><i class="fa fa-plus"></i></a></td>
+                                        <td style="text-align:center;vertical-align: middle;"><a href="#" class="btn btn-info" title="Ver Factor"><i class="fa fa-search"></i></a></td>
                                         <!--<td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>

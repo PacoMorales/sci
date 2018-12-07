@@ -87,14 +87,18 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('plan-de-trabajo/{id}/ver/pdf','estrategiasController@actionVerPDF')->name('planPDF');
     //ADMINISTRACIÓN DE RIEGOS
     Route::get('admin-de-riesgos/inicio','adm_riesgosController@actionVerRiesgo')->name('verRiesgos');
-    Route::get('admin-de-riesgos/nuevo','adm_riesgosController@actionNuevoRiesgo')->name('nuevoRiesgo');
-    Route::post('admin-de-riesgos/nuevo/alta','adm_riesgosController@actionAltaRiesgo')->name('altaRiesgo');
     Route::get('admin-de-riesgos/{id}/activar/riesgo','adm_riesgosController@activarRiesgo')->name('activarRiesgo');
     Route::get('admin-de-riesgos/{id}/desactivar/riesgo','adm_riesgosController@desactivarRiesgo')->name('desactivarRiesgo');
     Route::get('admin-de-riesgos/{id}/controlar/riesgo','adm_riesgosController@controlarRiesgo')->name('controlarRiesgo');
     Route::get('admin-de-riesgos/{id}/descontrolar/riesgo','adm_riesgosController@descontrolarRiesgo')->name('descontrolarRiesgo');
     // I. EVALUACIÓN DE RIESGOS
+    Route::get('admin-de-riesgos/nuevo','adm_riesgosController@actionNuevoRiesgo')->name('nuevoRiesgo');
+    Route::post('admin-de-riesgos/nuevo/alta','adm_riesgosController@actionAltaRiesgo')->name('altaRiesgo');
     Route::get('admin-de-riesgos/{id}/editar-I/riesgo','adm_riesgosController@editarRiesgo')->name('editarRiesgo');
     Route::put('admin-de-riesgos/{id}/actualizar-I/riesgo','adm_riesgosController@actualizarRiesgoI')->name('actualizarRiesgoI');
+    // FACTORES DE EVALUACION DE RIESGOS
+    Route::get('admin-de-riesgos/{id}/nuevo/factor-de-riesgo','adm_riesgosController@actionNuevoFactor')->name('nuevoFactor');
+    Route::post('admin-de-riesgos/alta/nuevo/factor-de-riesgo','adm_riesgosController@actionAltaFactor')->name('altaFactor');
+    Route::get('admin-de-riesgos/{id}/ver/factor-de-riesgo','adm_riesgosController@actionVerFactor')->name('verFactor');
 });
 

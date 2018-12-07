@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\riesgosRequest;
+use App\Http\Requests\factorRequest;
 use App\dependenciasModel;
 use App\servidorespubModel;
 use App\progtrabModel;
@@ -13,6 +14,9 @@ use App\clasificacion_riesgoModel;
 use App\prob_ocurModel;
 use App\gradoimpactoModel;
 use App\riesgosModel;
+use App\clasif_factorriesgoModel;
+use App\tipo_factorModel;
+use App\factores_riesgoModel;
 
 class adm_riesgosController extends Controller
 {
@@ -166,7 +170,7 @@ class adm_riesgosController extends Controller
         return view('sicinar.administracionderiesgos.verTodos',compact('nombre','usuario','estructura','rango','id_estructura','riesgos','unidades'));
     }
 
-    //NUEVO APARTADO I
+    //NUEVO APARTADO I. EVALUACION DE RIESGOS
     public function actionNuevoRiesgo(){
         //dd('Nuevo riesgo...');
         $nombre = session()->get('userlog');
@@ -193,7 +197,7 @@ class adm_riesgosController extends Controller
         return view('sicinar.administracionderiesgos.nuevo',compact('nombre','usuario','estructura','rango','id_estructura','planes','unidades','clases','niveles','clasificaciones','grados','probabilidades','servidores'));
     }
 
-    //ALTA APARTADO I
+    //ALTA APARTADO I. EVALUACION DE RIESGOS
     public function actionAltaRiesgo(riesgosRequest $request){
         //dd($request->all());
         $nombre = session()->get('userlog');
@@ -280,7 +284,7 @@ class adm_riesgosController extends Controller
         }
     }
 
-    //EDITAR APARTADO I
+    //EDITAR APARTADO I. EVALUACION DE RIESGOS
     public function editarRiesgo($id){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
@@ -316,7 +320,7 @@ class adm_riesgosController extends Controller
         return view('sicinar.administracionderiesgos.I',compact('nombre','usuario','estructura','rango','id_estructura','riesgo','unidades','clases','niveles','clasificaciones','grados','probabilidades','servidores'));
     }
 
-    //ACTUALIZAR APARTADO I
+    //ACTUALIZAR APARTADO I. EVALUACION DE RIESGOS
     public function actualizarRiesgoI(riesgosRequest $request, $id){
         //dd($request->all());
         //dd($id);
@@ -404,5 +408,108 @@ class adm_riesgosController extends Controller
             ]);
         toastr()->success('El Riesgo ha sido actualizado correctamente.','Riesgo actualizado!',['positionClass' => 'toast-bottom-right']);
         return redirect()->route('verRiesgos');
+    }
+
+    //NUEVO FACTOR DEL APARTADO I
+    public function actionNuevoFactor($id){
+        //dd('Nuevo riesgo...');
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgo = riesgosModel::select('CVE_RIESGO','DESC_RIESGO')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO',$id)
+            ->orderBy('CVE_RIESGO','ASC')
+            ->first();
+        $clasificaciones = clasif_factorriesgoModel::select('CVE_CLASIF_FACTORRIESGO','DESC_CLASIF_FACTORRIESGO')
+            ->orderBy('CVE_CLASIF_FACTORRIESGO','ASC')
+            ->get();
+        $tipos = tipo_factorModel::select('CVE_TIPO_FACTOR','DESC_TIPO_FACTOR')
+            ->orderBy('CVE_TIPO_FACTOR','ASC')
+            ->get();
+        session()->forget('riesgo_id');
+        session(['riesgo_id' => $id]);
+        return view('sicinar.administracionderiesgos.factores.nuevoFactor',compact('nombre','usuario','estructura','rango','id_estructura','riesgo','clasificaciones','tipos'));
+    }
+
+    //ALTA FACTOR DEL APARTADO I
+    public function actionAltaFactor(factorRequest $request){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+        $riesgo = session()->get('riesgo_id');
+        //
+        $riesgo_aux = riesgosModel::select('N_PERIODO','ESTRUCGOB_ID','CVE_DEPENDENCIA')
+            ->where('N_PERIODO',2018)
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO',$riesgo)
+            ->orderBy('CVE_RIESGO','ASC')
+            ->first();
+        $idFactor = factores_riesgoModel::max('NUM_FACTOR_RIESGO');
+        $nuevoFactor = new factores_riesgoModel();
+        $nuevoFactor->N_PERIODO = $riesgo_aux->n_periodo;
+        $nuevoFactor->ESTRUCGOB_ID = $riesgo_aux->estrucgob_id;
+        $nuevoFactor->CVE_DEPENDENCIA = $riesgo_aux->cve_dependencia;
+        $nuevoFactor->CVE_RIESGO = $riesgo;
+        $nuevoFactor->NUM_FACTOR_RIESGO  = $idFactor+1;
+        $nuevoFactor->DESC_FACTOR_RIESGO = strtoupper($request->descripcion);
+        $nuevoFactor->CVE_CLASIF_FACTORRIESGO = $request->clasificacion;
+        $nuevoFactor->CVE_TIPO_FACTOR = $request->tipo;
+        $nuevoFactor->STATUS_1 = 'S';
+        $nuevoFactor->STATUS_2 = 'N';
+        $nuevoFactor->SE_PUBLICA = 'S';
+        $nuevoFactor->FECHA_REG = date('Y/m/d');
+        if($nuevoFactor->save() == true){
+            toastr()->success('El Factor ha sido dado de alta correctamente.','Nuevo Factor dado de alta!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevoFactor',$riesgo);
+        }else{
+            toastr()->error('Ha ocurrido algo inesperado al dar de alta el Factor. Vuelve a interlo.','Ups!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevoFactor',$riesgo);
+        }
+    }
+
+    //VER FACTORES DEL APARTADO I
+    public function actionVerFactor($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+
+        $riesgo = riesgosModel::select('CVE_RIESGO','DESC_RIESGO')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO',$id)
+            ->first();
+
+        $factores = factores_riesgoModel::join('SCI_CLASIF_FACTORRIESGO','SCI_FACTORES_RIESGO.CVE_CLASIF_FACTORRIESGO','=','SCI_CLASIF_FACTORRIESGO.CVE_CLASIF_FACTORRIESGO')
+            ->join('SCI_TIPO_FACTOR','SCI_FACTORES_RIESGO.CVE_TIPO_FACTOR','=','SCI_TIPO_FACTOR.CVE_TIPO_FACTOR')
+            ->select('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_CLASIF_FACTORRIESGO.DESC_CLASIF_FACTORRIESGO','SCI_TIPO_FACTOR.DESC_TIPO_FACTOR','SCI_FACTORES_RIESGO.STATUS_1','SCI_FACTORES_RIESGO.STATUS_2')
+            ->where('SCI_FACTORES_RIESGO.N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO',$id)
+            ->orderBy('NUM_FACTOR_RIESGO','ASC')
+            ->paginate(5);
+        //dd($riesgo);
+        return view('sicinar.administracionderiesgos.factores.verFactor',compact('nombre','usuario','estructura','id_estructura','rango','riesgo','factores'));
+
     }
 }

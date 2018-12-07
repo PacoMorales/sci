@@ -83,8 +83,8 @@
                                             <td style="text-align:center;vertical-align: middle;"><a href="{{route('controlarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-danger" title="No"><i class="fa fa-minus-square-o"></i></a></td>
                                         @endif
                                         <td style="text-align:center;vertical-align: middle;"><a href="{{route('editarRiesgo',$riesgo->cve_riesgo)}}" class="btn btn-primary" title="Editar Evaluación de Riesgos"><i class="fa fa-edit"></i></a></td>
-                                        <td style="text-align:center;vertical-align: middle;"><a href="#" class="btn btn-success" title="Agregar un Factor"><i class="fa fa-plus"></i></a></td>
-                                        <td style="text-align:center;vertical-align: middle;"><a href="#" class="btn btn-info" title="Ver Factor"><i class="fa fa-search"></i></a></td>
+                                        <td style="text-align:center;vertical-align: middle;"><a href="{{route('nuevoFactor',$riesgo->cve_riesgo)}}" class="btn btn-success" title="Agregar un Factor"><i class="fa fa-plus"></i></a></td>
+                                        <td style="text-align:center;vertical-align: middle;"><a href="{{route('verFactor',$riesgo->cve_riesgo)}}" class="btn btn-info" title="Ver Factor"><i class="fa fa-search"></i></a></td>
                                         <!--<td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>
                                         <td style="text-align:center;"><a href="#" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a></td>

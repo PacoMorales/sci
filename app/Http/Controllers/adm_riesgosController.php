@@ -504,12 +504,31 @@ class adm_riesgosController extends Controller
             ->join('SCI_TIPO_FACTOR','SCI_FACTORES_RIESGO.CVE_TIPO_FACTOR','=','SCI_TIPO_FACTOR.CVE_TIPO_FACTOR')
             ->select('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_CLASIF_FACTORRIESGO.DESC_CLASIF_FACTORRIESGO','SCI_TIPO_FACTOR.DESC_TIPO_FACTOR','SCI_FACTORES_RIESGO.STATUS_1','SCI_FACTORES_RIESGO.STATUS_2')
             ->where('SCI_FACTORES_RIESGO.N_PERIODO',(int)date('Y'))
-            ->where('ESTRUCGOB_ID','LIKE','21500%')
-            ->where('CVE_RIESGO',$id)
-            ->orderBy('NUM_FACTOR_RIESGO','ASC')
+            ->where('SCI_FACTORES_RIESGO.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_FACTORES_RIESGO.CVE_RIESGO',$id)
+            ->orderBy('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','ASC')
+            //->orderBy('SCI_FACTORES_RIESGO.CVE_RIESGO','ASC')
             ->paginate(5);
         //dd($riesgo);
         return view('sicinar.administracionderiesgos.factores.verFactor',compact('nombre','usuario','estructura','id_estructura','rango','riesgo','factores'));
 
     }
+
+    //EDITAR FACTOR DEL APARTADO I
+    public function actionEditarFactor($id){
+        //dd($id);
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+    }
+
+    //EDITAR FACTOR DEL APARTADO I
+    //public function actionEditarFactor(){}
 }

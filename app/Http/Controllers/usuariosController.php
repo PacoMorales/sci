@@ -12,8 +12,21 @@ class usuariosController extends Controller
 {
     public function actionLogin(usuarioRequest $request){
     	//dd($request->all());
-        $existe = usuarioModel::select('TIPO_USUARIO','ESTRUCGOB_ID','CVE_DEPENDENCIA','STATUS_1')->where('LOGIN','like','%'.$request->usuario.'%')->where('PASSWORD','like','%'.$request->password.'%')->get();
-    	if($existe->count()>=1){
+        $existe = usuarioModel::select('LOGIN','PASSWORD','TIPO_USUARIO','ESTRUCGOB_ID','CVE_DEPENDENCIA','STATUS_1')->where('LOGIN','like','%'.$request->usuario.'%')->where('PASSWORD','like','%'.$request->password.'%')->get();
+    	//dd($existe);
+        if($existe->count()>=1){
+            //dd('Entra if.');
+    	    if(strcmp($existe[0]->login,$request->usuario) == 0){
+    	        if(strcmp($existe[0]->password,$request->password) == 0){
+                    //dd('Entro.');
+                }else{
+                    return back()->withInput()->withErrors(['PASSWORD' => 'Contraseña incorrecta.']);
+                }
+            }else{
+                return back()->withInput()->withErrors(['LOGIN' => 'Usuario -'.$request->usuario.'- incorrecto.']);
+            }
+        }
+        if($existe->count()>=1){
     		$estruc = estructurasModel::ObtEstruc($existe[0]->estrucgob_id);
     		if($existe[0]->status_1 == '4'){  //DIOS
     			$usuario = "Administrador";
@@ -78,7 +91,10 @@ class usuariosController extends Controller
     }
 
     public function actionCerrarSesion(){
-        session()->forget('userlog','passlog','usuario','estructura','ip','rango','id_estructura','plan_id');
+        session()->forget('userlog');
+        session()->forget('passlog');
+        session()->forget('usuario','estructura','ip','rango','id_estructura','plan_id');
+        //session()->forget('userlog','passlog','usuario','estructura','ip','rango','id_estructura','plan_id');
         //REGRESA AL LOGIN PRINCIPAL
         //return view('sicinar.login.terminada');
         return view('sicinar.login.loginInicio');

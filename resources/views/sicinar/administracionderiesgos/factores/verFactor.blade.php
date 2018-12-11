@@ -56,7 +56,7 @@
                                             <td style="text-align:center; vertical-align: middle;">{{$factor->desc_factor_riesgo}}</td>
                                             <td style="text-align:center; vertical-align: middle;">{{$factor->desc_clasif_factorriesgo}}</td>
                                             <td style="text-align:center; vertical-align: middle;">{{$factor->desc_tipo_factor}}</td>
-                                            <td style="text-align:center; vertical-align: middle;"><a class="btn btn-primary" href="#" title="Editar Factor de Riesgos"><i class="fa fa-edit"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;"><a class="btn btn-primary" href="{{route('editarFactor',$factor->num_factor_riesgo)}}" title="Editar Factor de Riesgos"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

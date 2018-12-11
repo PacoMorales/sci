@@ -100,5 +100,10 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('admin-de-riesgos/{id}/nuevo/factor-de-riesgo','adm_riesgosController@actionNuevoFactor')->name('nuevoFactor');
     Route::post('admin-de-riesgos/alta/nuevo/factor-de-riesgo','adm_riesgosController@actionAltaFactor')->name('altaFactor');
     Route::get('admin-de-riesgos/{id}/ver/factor-de-riesgo','adm_riesgosController@actionVerFactor')->name('verFactor');
+    Route::get('admin-de-riesgos/{id}/editar/factor-de-riesgo','adm_riesgosController@actionEditarFactor')->name('editarFactor');
+    Route::put('admin-de-riesgos/{id}/actualizar/factor-de-riesgo','adm_riesgosController@actionActualizarFactor')->name('actualizarFactor');
+    // II. EVALUACIÓN DE CONTROLES
+    Route::get('admin-de-riesgos/nuevo/control','adm_riesgosController@actionNuevoControl')->name('nuevoControl');
+    Route::post('admin-de-riesgos/alta/nuevo/control','adm_riesgosController@actionAltaControl')->name('altaControl');
 });
 

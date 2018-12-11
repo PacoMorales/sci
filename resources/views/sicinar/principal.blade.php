@@ -189,13 +189,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                   </a>
-                  <!--<ul class="treeview-menu">
-                    <li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo Riesgo</a></li>
-                    <li><a href="{{route('verRiesgos')}}"><i class="fa fa-circle-o"></i> Ver Riesgos</a></li>
-                  </ul>-->
                   <ul class="treeview-menu">
-                    <!--<li><a href="{{route('nuevoRiesgo')}}"><i class="fa fa-circle-o"></i> Nuevo Riesgo</a></li>
-                    <li><a href="{{route('verRiesgos')}}"><i class="fa fa-circle-o"></i> Ver Riesgos</a></li>-->
                     <li class="treeview">
                       <a href="#"><i class="fa fa-circle-o"></i> Nuevo
                         <span class="pull-right-container">
@@ -204,7 +198,7 @@
                       </a>
                       <ul class="treeview-menu">
                         <li><a href="{{route('nuevoRiesgo')}}">I. Evaluación de Riesgos</a></li>
-                        <li><a href="#">II. Evaluación de Controles</a></li>
+                        <li><a href="{{route('nuevoControl')}}">II. Evaluación de Controles</a></li>
                         <li><a href="#">III. Valoración de Riesgos vs Controles</a></li>
                         <li><a href="#">IV. Mapa de Riesgos</a></li>
                         <li><a href="#">V. Estrategias y Acciones</a></li>

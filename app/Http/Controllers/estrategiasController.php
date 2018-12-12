@@ -249,6 +249,7 @@ class estrategiasController extends Controller
             ->where('ESTRUCGOB_ID','LIKE','21500%')
             ->where('CVE_DEPENDENCIA','LIKE',$plan->cve_dependencia.'%')
             ->where('NUM_EVAL',$id)
+            ->orderBy('NUM_ECI','ASC')
             ->get();
         //dd($acciones->all());
         session()->forget('plan_id');

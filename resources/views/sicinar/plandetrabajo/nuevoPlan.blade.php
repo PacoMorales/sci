@@ -38,16 +38,16 @@
                         <div class="box-header">
                             <h3 class="box-title">Generar un nuevo Plan de Trabajo</h3>
                         </div>
-                        {!! Form::open(['route' => 'AltaNuevoPlan', 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => 'AltaNuevoPlan', 'method' => 'POST','id' => 'nuevoPlan']) !!}
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-xs-3 form-group">
                                     <label>* Secretaría </label>
                                     <select class="form-control m-bot15" name="estructura" required>
                                         <option value="21500" name="estructura">Secretaría de Desarrollo Social</option>
                                     </select><br>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-4 form-group">
                                     <label>* Dependencia / Organismo Auxiliar </label>
                                     <select class="form-control m-bot15" name="unidad" required>
                                         @foreach($unidades as $unidad)
@@ -55,7 +55,7 @@
                                         @endforeach
                                     </select><br>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-xs-5 form-group">
                                     <div class="col-xs-12">
                                         <label >* Nombre del Titular de la Dependencia / Organismo Auxiliar</label>
                                         <input type="text" class="form-control" name="titular" placeholder="Nombre del Titular de la Dependencia / Organismo Auxiliar" onkeypress="return soloAlfa(event)" required>
@@ -109,6 +109,10 @@
 @endsection
 
 @section('request')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\plan_trabajoRequest','#nuevoPlan') !!}
 @endsection
 
 @section('javascrpt')

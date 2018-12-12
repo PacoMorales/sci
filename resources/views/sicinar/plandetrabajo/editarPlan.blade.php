@@ -108,7 +108,7 @@
                                         <tr>
                                             <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
                                             <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size:small;">{{$pregunta->preg_eci}}</b></td>
-                                            @if($acciones[($pregunta->num_eci)-1] == '0')
+                                            @if($acciones[($pregunta->num_eci)-1]->status_3 == '1')
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success" title="Con Acción de Mejora"><i class="fa fa-check-square-o"></i></a></td>
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
@@ -143,7 +143,7 @@
                                         <tr>
                                             <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
                                             <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size:small;">{{$pregunta->preg_eci}}</b></td>
-                                            @if($acciones[($pregunta->num_eci)-1] == '0')
+                                            @if($acciones[($pregunta->num_eci)-1]->status_3 == '1')
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success" title="Con Acción de Mejora"><i class="fa fa-check-square-o"></i></a></td>
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
@@ -178,7 +178,7 @@
                                         <tr>
                                             <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
                                             <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size:small;">{{$pregunta->preg_eci}}</b></td>
-                                            @if($acciones[($pregunta->num_eci)-1] == '0')
+                                            @if($acciones[($pregunta->num_eci)-1]->status_3 == '1')
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success" title="Con Acción de Mejora"><i class="fa fa-check-square-o"></i></a></td>
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>
@@ -213,7 +213,7 @@
                                         <tr>
                                             <td style="background-color:darkgreen;text-align:center;vertical-align: middle;width: 5px;"><b style="color:white;">{{$pregunta->num_eci}}</b></td>
                                             <td style="text-align:justify;vertical-align: middle;"><b style="color:black;font-size:small;">{{$pregunta->preg_eci}}</b></td>
-                                            @if($acciones[($pregunta->num_eci)-1] == '0')
+                                            @if($acciones[($pregunta->num_eci)-1]->status_3 == '1')
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success" title="Con Acción de Mejora"><i class="fa fa-check-square-o"></i></a></td>
                                             @else
                                                 <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-danger" title="Sin Acción de Mejora"><i class="fa fa-square-o"></i></a></td>

@@ -38,12 +38,13 @@
                         <div class="box-header">
                             <h3 class="box-title">Nueva Evaluación de Control</h3>
                         </div>
-                        {!! Form::open(['route' => 'altaControl', 'method' => 'POST', 'id' => 'altaRiesgo']) !!}
+                        {!! Form::open(['route' => 'altaControl', 'method' => 'POST', 'id' => 'altaControl']) !!}
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-xs-3 form-group">
                                     <label>* Riesgo</label>
-                                    <select class="form-control m-bot15" name="riesgo" required>
+                                    <select class="form-control m-bot15" name="riesgo" id="riesgo" required>
+                                            <option selected="true" disabled="disabled">Seleccione un Riesgo</option>
                                         @foreach($riesgos as $riesgo)
                                             <option value="{{$riesgo->cve_riesgo}}">{{$riesgo->cve_riesgo}} - {{$riesgo->desc_riesgo}}</option>
                                         @endforeach
@@ -51,10 +52,7 @@
                                 </div>
                                 <div class="col-xs-3 form-group">
                                     <label>* Factor</label>
-                                    <select class="form-control m-bot15" name="factor" required>
-                                        @foreach($riesgos as $riesgo)
-                                            <option value="{{$riesgo->cve_riesgo}}">{{$riesgo->cve_riesgo}} - {{$riesgo->desc_riesgo}}</option>
-                                        @endforeach
+                                    <select class="form-control m-bot15" name="factor" id="factor" required>
                                     </select><br>
                                 </div>
                                 <div class="col-xs-4 form-group">
@@ -77,49 +75,48 @@
                                 <div class="col-xs-3 form-group">
                                     <label>Está Documentado</label>
                                     <select class="form-control m-bot15" name="documentado" required>
-                                        @foreach($suficiencias as $suf)
-                                            <option value="{{$suf->cve_defsuf_control}}">{{$suf->desc_defsuf_control}}</option>
-                                        @endforeach
+                                        <option value="S">SI</option>
+                                        <option value="N">NO</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-3 form-group">
                                     <label>Está Formalizado</label>
                                     <select class="form-control m-bot15" name="formalizado" required>
-                                        @foreach($suficiencias as $suf)
-                                            <option value="{{$suf->cve_defsuf_control}}">{{$suf->desc_defsuf_control}}</option>
-                                        @endforeach
+                                        <option value="S">SI</option>
+                                        <option value="N">NO</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-3 form-group">
                                     <label>Se Aplica</label>
                                     <select class="form-control m-bot15" name="aplica" required>
-                                        @foreach($suficiencias as $suf)
-                                            <option value="{{$suf->cve_defsuf_control}}">{{$suf->desc_defsuf_control}}</option>
-                                        @endforeach
+                                        <option value="S">SI</option>
+                                        <option value="N">NO</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-3 form-group">
                                     <label>Es Efectivo</label>
                                     <select class="form-control m-bot15" name="efectivo" required>
-                                        @foreach($suficiencias as $suf)
-                                            <option value="{{$suf->cve_defsuf_control}}">{{$suf->desc_defsuf_control}}</option>
-                                        @endforeach
+                                        <option value="S">SI</option>
+                                        <option value="N">NO</option>
                                     </select>
-                                </div>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-xs-6 form-group">
-                                    <label>Resultado de la Determinación del Control </label>
-                                    <input type="text" class="form-control" name="descripcion" placeholder="Descripción" required>
-                                </div>
-                                <div class="col-xs-6 form-group">
-                                    <label>Riesgo controlado suficientemente </label>
-                                    <input type="text" class="form-control" name="descripcion" placeholder="Descripción" required>
                                 </div>
                                 <div class="col-md-12 offset-md-5">
                                     {!! Form::submit('Registrar',['class' => 'btn btn-success btn-block']) !!}
                                 </div>
-                            </div>
+                            </div><br>
+                            <!--<div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Resultado de la Determinación del Control </label>
+                                    <input type="text" class="form-control" name="resultado" placeholder="Descripción" required>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Riesgo controlado suficientemente </label>
+                                    <input type="text" class="form-control" name="controlado" placeholder="Descripción" required>
+                                </div>
+                                <div class="col-md-12 offset-md-5">
+                                    {!! Form::submit('Registrar',['class' => 'btn btn-success btn-block']) !!}
+                                </div>
+                            </div>-->
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -133,8 +130,31 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\riesgosRequest','#altaRiesgo') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\controlRequest','#altaControl') !!}
 @endsection
 
 @section('javascrpt')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#riesgo").on('change', function(){
+                var sec = $(this).val();
+                if(sec) {
+                    $.ajax({
+                        url: '/control-interno/factores/'+sec,
+                        type: "GET",
+                        dataType: "json",
+                        success:function(data){
+                            var html_select = '<option selected="true" disabled="disabled">Seleccione un Factor</option>';
+                            for (var i=0; i<data.length ;++i)
+                                html_select += '<option value="'+data[i].num_factor_riesgo+'">'+data[i].desc_factor_riesgo+'</option>';
+                            $('#factor').html(html_select);
+                        }
+                    });
+                }else{
+                    var html_select = '<option selected="true" disabled="disabled">Seleccione un Factor</option>';
+                    $("#factor").html(html_select);
+                }
+            });
+        });
+    </script>
 @endsection

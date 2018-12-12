@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\riesgosRequest;
 use App\Http\Requests\factorRequest;
+use App\Http\Requests\controlRequest;
 use App\dependenciasModel;
 use App\servidorespubModel;
 use App\progtrabModel;
@@ -20,6 +21,7 @@ use App\tipo_factorModel;
 use App\factores_riesgoModel;
 use App\tipo_controlModel;
 use App\defsuficienciaModel;
+use App\control_riesgoModel;
 
 class adm_riesgosController extends Controller
 {
@@ -578,7 +580,6 @@ class adm_riesgosController extends Controller
         $id_estruc = session()->get('id_estructura');
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
-
         $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO')
             ->where('N_PERIODO',(int)date('Y'))
             ->where('ESTRUCGOB_ID','LIKE','21500%')
@@ -587,11 +588,97 @@ class adm_riesgosController extends Controller
             ->orderBy('CVE_TIPO_CONTROL','ASC')
             ->get();
         $suficiencias = defsuficienciaModel::select('CVE_DEFSUF_CONTROL','DESC_DEFSUF_CONTROL')
-            ->orderBy('CVE_DEFSUF_CONTROL','DESC_DEFSUF_CONTROL')->get();
+            ->orderBy('CVE_DEFSUF_CONTROL','ASC')->get();
         return view('sicinar.administracionderiesgos.nuevoControl',compact('nombre','usuario','estructura','id_estructura','rango','riesgos','tipos','suficiencias'));
     }
 
-    public function actionAltaControl(Request $request){
-        dd($request->all());
+    //ALTA APARTADO II. EVALUACIÓN DE CONTROLES
+    public function actionAltaControl(controlRequest $request){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+        $riesgo = riesgosModel::select('ESTRUCGOB_ID','CVE_DEPENDENCIA')->where('CVE_RIESGO',$request->riesgo)->first();
+        $id_aux = control_riesgoModel::max('CVE_CONTROL_DERIESGO');
+        $nuevoControl = new control_riesgoModel();
+        $nuevoControl->N_PERIODO = (int)date('Y');
+        $nuevoControl->ESTRUCGOB_ID = $riesgo->estrucgob_id;
+        $nuevoControl->CVE_DEPENDENCIA = $riesgo->cve_dependencia;
+        $nuevoControl->CVE_RIESGO = $request->riesgo;
+        $nuevoControl->NUM_FACTOR_RIESGO = $request->factor;
+        $nuevoControl->CVE_CONTROL_DERIESGO = $id_aux+1;
+        $nuevoControl->DESC_CONTROL_DERIESGO = strtoupper($request->control);
+        $nuevoControl->CVE_TIPO_CONTROL = $request->tipo;
+        if($request->documentado=='2' AND $request->formalizado=='2' AND $request->aplica=='2' AND $request->efectivo=='2'){
+            $nuevoControl->CVE_DEFSUF_CONTROL = 2;
+        }else{
+            $nuevoControl->CVE_DEFSUF_CONTROL = 1;
+        }
+        if($request->documentado == '1'){}else{}
+        $nuevoControl->DOCUMENTADO = $request->documentado;
+        $nuevoControl->FORMALIZADO = $request->formalizado;
+        $nuevoControl->APLICA = $request->aplica;
+        $nuevoControl->EFECTIVO = $request->efectivo;
+        $nuevoControl->STATUS_1 = 'S';
+        $nuevoControl->FECHA_REG = date('Y/m/d');
+        $nuevoControl->USU = $usuario;
+        $nuevoControl->IP = $ip;
+        $nuevoControl->FECHA_M = date('Y/m/d');
+        $nuevoControl->USU_M = $usuario;
+        $nuevoControl->IP_M = $ip;
+        //dd($nuevoControl);
+        if($nuevoControl->save() == true){
+            toastr()->success('El Control ha sido dado de alta correctamente.','Nuevo Control!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevoControl');
+        }else{
+            toastr()->error('Ha ocurrido algo inesperado. Por favor vuelve a agregar el control.','Ups!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevoControl');
+        }
+    }
+
+    //VER APARTADO II. EVALUACIÓN DE CONTROLES
+    public function actionVerControl(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $controles = control_riesgoModel::join('SCI_RIESGOS','SCI_CONTROLES_DERIESGO.CVE_RIESGO','=','SCI_RIESGOS.CVE_RIESGO') //RIESGO
+            ->join('SCI_FACTORES_RIESGO','SCI_CONTROLES_DERIESGO.NUM_FACTOR_RIESGO','=','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO') //FACTOR
+            ->join('SCI_DEFSUFICIENCIA_CONTROL','SCI_CONTROLES_DERIESGO.CVE_DEFSUF_CONTROL','=','SCI_DEFSUFICIENCIA_CONTROL.CVE_DEFSUF_CONTROL') //DEFICIENCIA O SUFICIENCIA
+            ->join('SCI_TIPO_CONTROL','SCI_CONTROLES_DERIESGO.CVE_TIPO_CONTROL','=','SCI_TIPO_CONTROL.CVE_TIPO_CONTROL') //TIPO
+            ->select('SCI_RIESGOS.CVE_RIESGO','SCI_RIESGOS.DESC_RIESGO','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO','SCI_CONTROLES_DERIESGO.DESC_CONTROL_DERIESGO','SCI_DEFSUFICIENCIA_CONTROL.DESC_DEFSUF_CONTROL','SCI_TIPO_CONTROL.DESC_TIPO_CONTROL','SCI_CONTROLES_DERIESGO.STATUS_1')
+            ->where('SCI_CONTROLES_DERIESGO.N_PERIODO',(int)date('Y'))
+            ->where('SCI_CONTROLES_DERIESGO.ESTRUCGOB_ID','like','21500%')
+            ->orderBy('SCI_CONTROLES_DERIESGO.CVE_RIESGO','ASC')
+            ->orderBy('SCI_CONTROLES_DERIESGO.NUM_FACTOR_RIESGO','ASC')
+            ->orderBy('SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO','ASC')
+            ->paginate(5);
+        $total = $controles->count();
+        return view('sicinar.administracionderiesgos.verControl',compact('nombre','usuario','estructura','id_estructura','rango','controles','total'));
+        //dd($controles);
+    }
+
+    public function actionObtFactores($id){
+        return (response()->json(factores_riesgoModel::select('NUM_FACTOR_RIESGO','DESC_FACTOR_RIESGO')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO',$id)
+            ->orderBy('NUM_FACTOR_RIESGO','ASC')->get()));
+        /*return (response()->json(factores_riesgoModel::join('SCI_CONTROLES_DERIESGO','SCI_CONTROLES_DERIESGO.NUM_FACTOR_RIESGO','<>','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','right outer')
+            ->select('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO')
+            ->where('SCI_FACTORES_RIESGO.N_PERIODO',(int)date('Y'))
+            ->where('SCI_FACTORES_RIESGO.ESTRUCGOB_ID','LIKE','21500%')
+            ->where('SCI_FACTORES_RIESGO.CVE_RIESGO',$id)
+            ->orderBy('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','ASC')->get()));*/
     }
 }

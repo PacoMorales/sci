@@ -272,7 +272,7 @@ class procesosController extends Controller
 
     public function actionUnidades(Request $request, $id){
     	return (response()->json(dependenciasModel::Unidades($id)));
-    	$nuevo = new procesosModel();
+    	//$nuevo = new procesosModel();
     }
 
     public function export(){

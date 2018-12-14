@@ -42,16 +42,16 @@
                             <table id="tabla1" class="table table-striped table-bordered table-sm">
                                 <thead style="color: brown;" class="justify">
                                     <tr>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Clave del Riesgo</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Riesgo</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Clave del Factor</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Factor</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: green">Clave del Riesgo</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: green">Riesgo</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: dodgerblue">Clave del Factor</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: dodgerblue">Factor</b></th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;">Clave del Control</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;">Control</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle; color:green;">Tipo</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle; color:green;">Status</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle; color:green;">Resultado de la determinación del Control</th>
-                                        <th colspan="1" rowspan="{{$total}}" style="text-align:center; vertical-align: middle; color:green;">Riesgo Controlado Suficientemente</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Tipo</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Status</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Resultado de la determinación del Control</th>
+                                        <th colspan="1" rowspan="{{$total}}" style="text-align:center; vertical-align: middle;">Riesgo Controlado Suficientemente</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,7 +64,11 @@
                                         <td style="text-align:center; vertical-align: middle;">{{$control->cve_control_deriesgo}}</td>
                                         <td style="text-align:center; vertical-align: middle;">{{$control->desc_control_deriesgo}}</td>
                                         <td style="text-align:center; vertical-align: middle;">{{$control->desc_tipo_control}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->status_1}}</td>
+                                        @if($control->status_1 == 'S')
+                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success">Activo</a></td>
+                                        @else
+                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success">Inactivo</a></td>
+                                        @endif
                                         <td style="text-align:center; vertical-align: middle;">{{$control->desc_defsuf_control}}</td>
                                         <td style="text-align:center; vertical-align: middle;">{{$control->status_1}}</td>
                                     </tr>

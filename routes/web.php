@@ -107,5 +107,15 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::post('admin-de-riesgos/alta/nuevo/control','adm_riesgosController@actionAltaControl')->name('altaControl');
     Route::get('factores/{id}','adm_riesgosController@actionObtFactores')->name('factores');
     Route::get('admin-de-riesgos/ver/todos/controles','adm_riesgosController@actionVerControl')->name('verControl');
+    Route::get('admin-de-riesgos/activar/control/{id}','adm_riesgosController@activarControl')->name('activarControl');
+    Route::get('admin-de-riesgos/desactivar/control/{id}','adm_riesgosController@desactivarControl')->name('desactivarControl');
+    Route::get('admin-de-riesgos/activar/documentado/{id}','adm_riesgosController@activarDocumentado')->name('activarDocumentado');
+    Route::get('admin-de-riesgos/desactivar/documentado/{id}','adm_riesgosController@desactivarDocumentado')->name('desactivarDocumentado');
+    Route::get('admin-de-riesgos/activar/formalizado/{id}','adm_riesgosController@activarFormalizado')->name('activarFormalizado');
+    Route::get('admin-de-riesgos/desactivar/formalizado/{id}','adm_riesgosController@desactivarFormalizado')->name('desactivarFormalizado');
+    Route::get('admin-de-riesgos/activar/aplica/{id}','adm_riesgosController@activarAplica')->name('activarAplica');
+    Route::get('admin-de-riesgos/desactivar/aplica/{id}','adm_riesgosController@desactivarAplica')->name('desactivarAplica');
+    Route::get('admin-de-riesgos/activar/efectivo/{id}','adm_riesgosController@activarEfectivo')->name('activarEfectivo');
+    Route::get('admin-de-riesgos/desactivar/efectivo/{id}','adm_riesgosController@desactivarEfectivo')->name('desactivarEfectivo');
 });
 

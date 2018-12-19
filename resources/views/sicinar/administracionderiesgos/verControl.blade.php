@@ -39,43 +39,92 @@
                             <h3 class="box-title">II. Evaluación de Controles</h3>
                         </div>
                         <div class="box-body">
-                            <table id="tabla1" class="table table-striped table-bordered table-sm">
-                                <thead style="color: brown;" class="justify">
+                            <table id="tabla1" border="1" style="border: 2px solid slategray;" class="table table-bordered table-sm">
+                                <thead style="border-color:brown;color: brown;" class="justify">
                                     <tr>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: green">Clave del Riesgo</b></th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: green">Riesgo</b></th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: dodgerblue">Clave del Factor</b></th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;"><b style="color: dodgerblue">Factor</b></th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Clave del Control</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Control</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Tipo</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Status</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;">Resultado de la determinación del Control</th>
-                                        <th colspan="1" rowspan="{{$total}}" style="text-align:center; vertical-align: middle;">Riesgo Controlado Suficientemente</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><b style="color: green">Clave del Riesgo</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><b style="color: green">Riesgo</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><b style="color: dodgerblue">Clave del Factor</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><b style="color: dodgerblue">Factor</b></th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Clave del Control</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Control</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Status</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Tipo</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Está Documentado</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Está Formalizado</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Se Aplica</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Es Efectivo</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Resultado de la determinación del Control</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Riesgo Controlado Suficientemente</th>
                                     </tr>
                                 </thead>
+                                <?php $cont = 1;$fact = 1;$conta=1;?>
                                 <tbody>
                                 @foreach($controles as $control)
                                     <tr>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->cve_riesgo}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->desc_riesgo}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->num_factor_riesgo}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->desc_factor_riesgo}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->cve_control_deriesgo}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->desc_control_deriesgo}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->desc_tipo_control}}</td>
-                                        @if($control->status_1 == 'S')
-                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success">Activo</a></td>
-                                        @else
-                                            <td style="text-align:center; vertical-align: middle;"><a href="#" class="btn btn-success">Inactivo</a></td>
+                                        @if($conta == $control->cve_riesgo)
+                                            <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->cve_riesgo}}</td>
+                                            <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_riesgo}}</td>
+                                            <?php $conta = $conta+1;?>
                                         @endif
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->desc_defsuf_control}}</td>
-                                        <td style="text-align:center; vertical-align: middle;">{{$control->status_1}}</td>
+                                            @if($fact == $control->num_factor_riesgo)
+                                                @foreach($cant_factor as $factores)
+                                                    @if($factores->num_factor_riesgo == $control->num_factor_riesgo)
+                                                        <td rowspan="{!! $cant_factor[($control->num_factor_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->num_factor_riesgo}}</td>
+                                                        <td rowspan="{!! $cant_factor[($control->num_factor_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_factor_riesgo}}</td>
+                                                        <?php $fact = $fact+1;?>
+                                                        @break
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->cve_control_deriesgo}}</td>
+                                        <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_control_deriesgo}}</td>
+                                        @if($control->status_1 == 'S')
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('desactivarControl',$control->cve_control_deriesgo)}}" class="btn btn-success" title="Desactivar?"><i class="fa fa-check"></i></a></td>
+                                        @else
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('activarControl',$control->cve_control_deriesgo)}}" class="btn btn-danger" title="Activar?"><i class="fa fa-times"></i></a></td>
+                                        @endif
+                                        <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_tipo_control}}</td>
+                                        @if($control->documentado == 'S')
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('desactivarDocumentado',$control->cve_control_deriesgo)}}" class="btn btn-success" title="Si">Si</a></td>
+                                        @else
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('activarDocumentado',$control->cve_control_deriesgo)}}" class="btn btn-danger" title="No">No</a></td>
+                                        @endif
+                                        @if($control->formalizado == 'S')
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('desactivarFormalizado',$control->cve_control_deriesgo)}}" class="btn btn-success" title="Si">Si</a></td>
+                                        @else
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('activarFormalizado',$control->cve_control_deriesgo)}}" class="btn btn-danger" title="No">No</a></td>
+                                        @endif
+                                        @if($control->aplica == 'S')
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('desactivarAplica',$control->cve_control_deriesgo)}}" class="btn btn-success" title="Si">Si</a></td>
+                                        @else
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('activarAplica',$control->cve_control_deriesgo)}}" class="btn btn-danger" title="No">No</a></td>
+                                        @endif
+                                        @if($control->efectivo == 'S')
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('desactivarEfectivo',$control->cve_control_deriesgo)}}" class="btn btn-success" title="Si">Si</a></td>
+                                        @else
+                                            <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('activarEfectivo',$control->cve_control_deriesgo)}}" class="btn btn-danger" title="No">No</a></td>
+                                        @endif
+                                        <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_defsuf_control}}</td>
+                                        @if($cont == $control->cve_riesgo)
+                                            @if($controlads == 0)
+                                                    <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;background-color: #00FF00;text-align:center; vertical-align: middle;">Si</td>
+                                            @endif
+                                            @foreach($controlados as $contr)
+                                                @if($contr->cve_riesgo == $control->cve_riesgo)
+                                                    <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;background-color: #FFFF99;text-align:center; vertical-align: middle;">No</td>
+                                                    @break
+                                                @endif
+                                                @if($loop->last)
+                                                        <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;background-color: #00FF00;text-align:center; vertical-align: middle;">Si</td>
+                                                @endif
+                                            @endforeach
+                                            <?php $cont = $cont+1;?>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            {!! $controles->appends(request()->input())->links() !!}
                         </div>
                     </div>
                 </div>

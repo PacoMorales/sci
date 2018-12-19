@@ -613,10 +613,10 @@ class adm_riesgosController extends Controller
         $nuevoControl->CVE_CONTROL_DERIESGO = $id_aux+1;
         $nuevoControl->DESC_CONTROL_DERIESGO = strtoupper($request->control);
         $nuevoControl->CVE_TIPO_CONTROL = $request->tipo;
-        if($request->documentado=='2' AND $request->formalizado=='2' AND $request->aplica=='2' AND $request->efectivo=='2'){
-            $nuevoControl->CVE_DEFSUF_CONTROL = 2;
+        if($request->documentado=='S' AND $request->formalizado=='S' AND $request->aplica=='S' AND $request->efectivo=='S'){
+            $nuevoControl->CVE_DEFSUF_CONTROL = 2; //SUFICIENTE
         }else{
-            $nuevoControl->CVE_DEFSUF_CONTROL = 1;
+            $nuevoControl->CVE_DEFSUF_CONTROL = 1; //DEFICIENTE
         }
         if($request->documentado == '1'){}else{}
         $nuevoControl->DOCUMENTADO = $request->documentado;
@@ -656,16 +656,226 @@ class adm_riesgosController extends Controller
             ->join('SCI_FACTORES_RIESGO','SCI_CONTROLES_DERIESGO.NUM_FACTOR_RIESGO','=','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO') //FACTOR
             ->join('SCI_DEFSUFICIENCIA_CONTROL','SCI_CONTROLES_DERIESGO.CVE_DEFSUF_CONTROL','=','SCI_DEFSUFICIENCIA_CONTROL.CVE_DEFSUF_CONTROL') //DEFICIENCIA O SUFICIENCIA
             ->join('SCI_TIPO_CONTROL','SCI_CONTROLES_DERIESGO.CVE_TIPO_CONTROL','=','SCI_TIPO_CONTROL.CVE_TIPO_CONTROL') //TIPO
-            ->select('SCI_RIESGOS.CVE_RIESGO','SCI_RIESGOS.DESC_RIESGO','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO','SCI_CONTROLES_DERIESGO.DESC_CONTROL_DERIESGO','SCI_DEFSUFICIENCIA_CONTROL.DESC_DEFSUF_CONTROL','SCI_TIPO_CONTROL.DESC_TIPO_CONTROL','SCI_CONTROLES_DERIESGO.STATUS_1')
+            ->select('SCI_RIESGOS.CVE_RIESGO','SCI_RIESGOS.DESC_RIESGO','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO','SCI_CONTROLES_DERIESGO.DESC_CONTROL_DERIESGO','SCI_DEFSUFICIENCIA_CONTROL.DESC_DEFSUF_CONTROL','SCI_TIPO_CONTROL.DESC_TIPO_CONTROL','SCI_CONTROLES_DERIESGO.STATUS_1','SCI_CONTROLES_DERIESGO.DOCUMENTADO','SCI_CONTROLES_DERIESGO.FORMALIZADO','SCI_CONTROLES_DERIESGO.APLICA','SCI_CONTROLES_DERIESGO.EFECTIVO')
             ->where('SCI_CONTROLES_DERIESGO.N_PERIODO',(int)date('Y'))
             ->where('SCI_CONTROLES_DERIESGO.ESTRUCGOB_ID','like','21500%')
             ->orderBy('SCI_CONTROLES_DERIESGO.CVE_RIESGO','ASC')
             ->orderBy('SCI_CONTROLES_DERIESGO.NUM_FACTOR_RIESGO','ASC')
             ->orderBy('SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO','ASC')
-            ->paginate(5);
+            ->get();
+        if($controles->count() <= 0){
+            toastr()->error('No haz dado de alta ningún control.','Ups!',['positionClass' => 'toast-bottom-right']);
+            toastr()->info('Da de alta un nuevo control.','Hazlo ya!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevoControl');
+        }
+        $controlados = control_riesgoModel::selectRaw('CVE_RIESGO,DOCUMENTADO, COUNT(DOCUMENTADO) as TOTALDOCS, FORMALIZADO, COUNT(FORMALIZADO) as TOTALFORMAL,APLICA, COUNT(APLICA) as TOTALAPLICA, EFECTIVO, COUNT(EFECTIVO) AS TOTALEFEC')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','like','21500%')
+            ->whereRaw("((DOCUMENTADO like 'N%') OR (FORMALIZADO like 'N%') OR (APLICA like 'N%') OR (EFECTIVO like 'N%'))")
+            //->orwhere('DOCUMENTADO','like','N%')
+            //->orwhere('FORMALIZADO','like','N%')
+            //->orwhere('APLICA','like','N%')
+            //->orwhere('EFECTIVO','like','N%')
+            ->groupBy('CVE_RIESGO','DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->orderBy('CVE_RIESGO','ASC')
+            ->get();
+        //dd($controlados);
+        $controlads = $controlados->count();
+        //dd($controlads);
+        $cant_controles = control_riesgoModel::selectRaw('CVE_RIESGO, COUNT(CVE_RIESGO) AS RENGLONES')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','like','21500%')
+            ->groupBy('CVE_RIESGO')
+            ->orderBy('CVE_RIESGO','ASC')
+            ->get();
+        //dd($cant_controles);
+        $cant_factor = control_riesgoModel::selectRaw('NUM_FACTOR_RIESGO, COUNT(NUM_FACTOR_RIESGO) AS RENGLONES')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','like','21500%')
+            ->groupBy('NUM_FACTOR_RIESGO')
+            ->orderBy('NUM_FACTOR_RIESGO','ASC')
+            ->get();
+            //dd($cant_factor->all());
         $total = $controles->count();
-        return view('sicinar.administracionderiesgos.verControl',compact('nombre','usuario','estructura','id_estructura','rango','controles','total'));
+        return view('sicinar.administracionderiesgos.verControl',compact('nombre','usuario','estructura','id_estructura','rango','controles','total','controlados','cant_controles','cant_factor','controlads'));
         //dd($controles);
+    }
+
+    //ACTIVAR CONTROL II. EVALUACIÓN DE CONTROLES
+    public function activarControl($id){
+        //dd('Ha desactivar '.$id);
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['STATUS_1' => 'S']);
+        //dd($actualizarControl);
+        return redirect()->route('verControl');
+    }
+
+    //DESACTIVAR CONTROL II. EVALUACIÓN DE CONTROLES
+    public function desactivarControl($id){
+        //dd('Ha activar'.$id);
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['STATUS_1' => 'N']);
+        return redirect()->route('verControl');
+    }
+
+    //ACTIVAR DOCUMENTADO II. EVALUACIÓN DE CONTROLES
+    public function activarDocumentado($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['DOCUMENTADO' => 'S']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //DESACTIVAR DOCUMENTADO II. EVALUACIÓN DE CONTROLES
+    public function desactivarDocumentado($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['DOCUMENTADO' => 'N']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //ACTIVAR FORMALIZADO II. EVALUACIÓN DE CONTROLES
+    public function activarFormalizado($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['FORMALIZADO' => 'S']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //DESACTIVAR FORMALIZADO II. EVALUACIÓN DE CONTROLES
+    public function desactivarFormalizado($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['FORMALIZADO' => 'N']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //ACTIVAR APLICA II. EVALUACIÓN DE CONTROLES
+    public function activarAplica($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['APLICA' => 'S']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //DESACTIVAR APLICA II. EVALUACIÓN DE CONTROLES
+    public function desactivarAplica($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['APLICA' => 'N']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //ACTIVAR EFECTIVO II. EVALUACIÓN DE CONTROLES
+    public function activarEfectivo($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['EFECTIVO' => 'S']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
+    }
+
+    //DESACTIVAR EFECTIVO II. EVALUACIÓN DE CONTROLES
+    public function desactivarEfectivo($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['EFECTIVO' => 'N']);
+        $control = control_riesgoModel::select('DOCUMENTADO','FORMALIZADO','APLICA','EFECTIVO')
+            ->where('CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        if($control->documentado=='S' AND $control->formalizado == 'S' AND $control->aplica=='S' AND $control->efectivo == 'S'){
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 2]);
+        }else{
+            $actualizarCntrl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->update(['CVE_DEFSUF_CONTROL' => 1]);
+        }
+        return redirect()->route('verControl');
     }
 
     public function actionObtFactores($id){

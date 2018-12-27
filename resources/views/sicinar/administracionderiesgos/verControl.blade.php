@@ -49,6 +49,7 @@
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Clave del Control</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Control</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Status</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Editar</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Tipo</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Está Documentado</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Está Formalizado</th>
@@ -84,6 +85,7 @@
                                         @else
                                             <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('activarControl',$control->cve_control_deriesgo)}}" class="btn btn-danger" title="Activar?"><i class="fa fa-times"></i></a></td>
                                         @endif
+                                        <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('editarControl',$control->cve_control_deriesgo)}}" class="btn btn-primary" title="Editar"><i class="fa fa-pencil"></i></a></td>
                                         <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_tipo_control}}</td>
                                         @if($control->documentado == 'S')
                                             <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;"><a href="{{route('desactivarDocumentado',$control->cve_control_deriesgo)}}" class="btn btn-success" title="Si">Si</a></td>

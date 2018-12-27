@@ -618,7 +618,6 @@ class adm_riesgosController extends Controller
         }else{
             $nuevoControl->CVE_DEFSUF_CONTROL = 1; //DEFICIENTE
         }
-        if($request->documentado == '1'){}else{}
         $nuevoControl->DOCUMENTADO = $request->documentado;
         $nuevoControl->FORMALIZADO = $request->formalizado;
         $nuevoControl->APLICA = $request->aplica;
@@ -699,6 +698,65 @@ class adm_riesgosController extends Controller
         $total = $controles->count();
         return view('sicinar.administracionderiesgos.verControl',compact('nombre','usuario','estructura','id_estructura','rango','controles','total','controlados','cant_controles','cant_factor','controlads'));
         //dd($controles);
+    }
+
+    //EDITAR APARTADO II. EVALUACIÓN DE CONTROLES
+    public function actionEditarControl($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $control = control_riesgoModel::join('SCI_RIESGOS','SCI_CONTROLES_DERIESGO.CVE_RIESGO','=','SCI_RIESGOS.CVE_RIESGO')
+            ->join('SCI_FACTORES_RIESGO','SCI_CONTROLES_DERIESGO.NUM_FACTOR_RIESGO','=','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO')
+            ->select('SCI_RIESGOS.DESC_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO','SCI_CONTROLES_DERIESGO.DESC_CONTROL_DERIESGO','SCI_CONTROLES_DERIESGO.CVE_TIPO_CONTROL','SCI_CONTROLES_DERIESGO.DOCUMENTADO','SCI_CONTROLES_DERIESGO.FORMALIZADO','SCI_CONTROLES_DERIESGO.APLICA','SCI_CONTROLES_DERIESGO.EFECTIVO')
+            ->where('SCI_CONTROLES_DERIESGO.CVE_CONTROL_DERIESGO',$id)
+            ->first();
+        //dd($control);
+        /*$control = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)->first();*/
+        $tipos = tipo_controlModel::select('CVE_TIPO_CONTROL','DESC_TIPO_CONTROL')
+            ->orderBy('CVE_TIPO_CONTROL','ASC')
+            ->get();
+        $suficiencias = defsuficienciaModel::select('CVE_DEFSUF_CONTROL','DESC_DEFSUF_CONTROL')
+            ->orderBy('CVE_DEFSUF_CONTROL','ASC')->get();
+        return view('sicinar.administracionderiesgos.editarControl',compact('nombre','usuario','estructura','id_estructura','rango','control','tipos','suficiencias'));
+    }
+
+    //ACTUALIZAR CONTROL II. EVALUACIÓN DE CONTROLES
+    public function actionActualizarControl(controlRequest $request, $id){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+        if($request->documentado=='S' AND $request->formalizado=='S' AND $request->aplica=='S' AND $request->efectivo=='S'){
+            $aux = 2; //SUFICIENTE
+        }else{
+            $aux = 1; //DEFICIENTE
+        }
+        $actualizarControl = control_riesgoModel::where('CVE_CONTROL_DERIESGO',$id)
+            ->update([
+                'DESC_CONTROL_DERIESGO' => strtoupper($request->control),
+                'CVE_TIPO_CONTROL' => $request->tipo,
+                'CVE_DEFSUF_CONTROL' => $aux,
+                'DOCUMENTADO' => $request->documentado,
+                'FORMALIZADO' => $request->formalizado,
+                'APLICA' => $request->aplica,
+                'EFECTIVO' => $request->efectivo,
+                'FECHA_M' => date('Y/m/d'),
+                'USU_M' => $usuario,
+                'IP_M' => $ip
+            ]);
+        toastr()->success('El Control ha sido actualizado correctamente.','Actualización!',['positionClass' => 'toast-bottom-right']);
+        return redirect()->route('verControl');
     }
 
     //ACTIVAR CONTROL II. EVALUACIÓN DE CONTROLES

@@ -107,6 +107,8 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::post('admin-de-riesgos/alta/nuevo/control','adm_riesgosController@actionAltaControl')->name('altaControl');
     Route::get('factores/{id}','adm_riesgosController@actionObtFactores')->name('factores');
     Route::get('admin-de-riesgos/ver/todos/controles','adm_riesgosController@actionVerControl')->name('verControl');
+    Route::get('admin-de-riesgos/editar/control/{id}','adm_riesgosController@actionEditarControl')->name('editarControl');
+    Route::put('admin-de-riesgos/actualizar/control/{id}','adm_riesgosController@actionActualizarControl')->name('actualizarControl');
     Route::get('admin-de-riesgos/activar/control/{id}','adm_riesgosController@activarControl')->name('activarControl');
     Route::get('admin-de-riesgos/desactivar/control/{id}','adm_riesgosController@desactivarControl')->name('desactivarControl');
     Route::get('admin-de-riesgos/activar/documentado/{id}','adm_riesgosController@activarDocumentado')->name('activarDocumentado');

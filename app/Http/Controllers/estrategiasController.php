@@ -204,7 +204,7 @@ class estrategiasController extends Controller
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
         $planes = progtrabModel::select('CVE_DEPENDENCIA','NUM_EVAL','TITULAR','STATUS_1','STATUS_2')
-            ->where('N_PERIODO',2018)
+            ->where('N_PERIODO',(int)date('Y'))
             ->where('ESTRUCGOB_ID','LIKE','21500%')
             //->where('STATUS_1','LIKE','S%')
             ->orderBy('NUM_EVAL','ASC')

@@ -49,7 +49,7 @@
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Clave del Control</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Control</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Status</th>
-                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Editar</th>
+                                        <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><b style="color: dodgerblue">Editar</b></th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Tipo</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Está Documentado</th>
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Está Formalizado</th>
@@ -59,20 +59,20 @@
                                         <th colspan="1" style="text-align:center; vertical-align: middle;border: 2px solid slategray;">Riesgo Controlado Suficientemente</th>
                                     </tr>
                                 </thead>
-                                <?php $cont = 1;$fact = 1;$conta=1;?>
+                                <?php $cont = $controles[0]->cve_riesgo; $fact = $controles[0]->num_factor_riesgo; $conta = $controles[0]->cve_riesgo; $aux=0;?>
                                 <tbody>
                                 @foreach($controles as $control)
                                     <tr>
                                         @if($conta == $control->cve_riesgo)
-                                            <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->cve_riesgo}}</td>
-                                            <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_riesgo}}</td>
+                                            <td rowspan="{!! $cant_controles[($aux)]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->cve_riesgo}}</td>
+                                            <td rowspan="{!! $cant_controles[($aux)]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_riesgo}}</td>
                                             <?php $conta = $conta+1;?>
                                         @endif
                                             @if($fact == $control->num_factor_riesgo)
                                                 @foreach($cant_factor as $factores)
                                                     @if($factores->num_factor_riesgo == $control->num_factor_riesgo)
-                                                        <td rowspan="{!! $cant_factor[($control->num_factor_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->num_factor_riesgo}}</td>
-                                                        <td rowspan="{!! $cant_factor[($control->num_factor_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_factor_riesgo}}</td>
+                                                        <td rowspan="{!! $cant_factor[($aux)]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->num_factor_riesgo}}</td>
+                                                        <td rowspan="{!! $cant_factor[($aux)]->renglones !!}" style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_factor_riesgo}}</td>
                                                         <?php $fact = $fact+1;?>
                                                         @break
                                                     @endif
@@ -110,19 +110,20 @@
                                         <td style="border: 2px solid slategray;text-align:center; vertical-align: middle;">{{$control->desc_defsuf_control}}</td>
                                         @if($cont == $control->cve_riesgo)
                                             @if($controlads == 0)
-                                                    <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;background-color: #00FF00;text-align:center; vertical-align: middle;">Si</td>
+                                                    <td rowspan="{!! $cant_controles[($aux)]->renglones !!}" style="border: 2px solid slategray;background-color: #00FF00;text-align:center; vertical-align: middle;">Si</td>
                                             @endif
                                             @foreach($controlados as $contr)
                                                 @if($contr->cve_riesgo == $control->cve_riesgo)
-                                                    <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;background-color: #FFFF99;text-align:center; vertical-align: middle;">No</td>
+                                                    <td rowspan="{!! $cant_controles[($aux)]->renglones !!}" style="border: 2px solid slategray;background-color: #FFFF99;text-align:center; vertical-align: middle;">No</td>
                                                     @break
                                                 @endif
                                                 @if($loop->last)
-                                                        <td rowspan="{!! $cant_controles[($control->cve_riesgo)-1]->renglones !!}" style="border: 2px solid slategray;background-color: #00FF00;text-align:center; vertical-align: middle;">Si</td>
+                                                        <td rowspan="{!! $cant_controles[($aux)]->renglones !!}" style="border: 2px solid slategray;background-color: #00FF00;text-align:center; vertical-align: middle;">Si</td>
                                                 @endif
                                             @endforeach
                                             <?php $cont = $cont+1;?>
                                         @endif
+                                            <?php $aux = $aux+1;?>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -1085,7 +1085,7 @@ class adm_riesgosController extends Controller
     }
 
     public function actionVerMapa($id){
-        dd('OC mapa de riesgo');
+        //dd('OC mapa de riesgo');
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
         if($nombre == NULL AND $pass == NULL){
@@ -1096,13 +1096,14 @@ class adm_riesgosController extends Controller
         $id_estruc = session()->get('id_estructura');
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
-        $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO','GRADO_IMPACTO_2','ESCALA_VALOR_2')
+        $riesgo = riesgosModel::select('CVE_RIESGO','DESC_RIESGO','GRADO_IMPACTO_2','ESCALA_VALOR_2')
             ->where('N_PERIODO',(int)date('Y'))
             ->where('ESTRUCGOB_ID','LIKE','21500%')
             ->where('CVE_RIESGO','=',$id)
             ->where('GRADO_IMPACTO_2','>',0)
             ->where('ESCALA_VALOR_2','>',0)
-            ->orderBy('CVE_RIESGO','ASC')->paginate(5);
-        return view('sicinar.administracionderiesgos.mapa.verMapa',compact('usuario','nombre','estructura','id_estructura','rango','riesgos'));
+            ->orderBy('CVE_RIESGO','ASC')->first();
+        //dd($riesgo);
+        return view('sicinar.administracionderiesgos.mapa.verMapa',compact('usuario','nombre','estructura','id_estructura','rango','riesgo'));
     }
 }

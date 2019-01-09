@@ -119,5 +119,14 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('admin-de-riesgos/desactivar/aplica/{id}','adm_riesgosController@desactivarAplica')->name('desactivarAplica');
     Route::get('admin-de-riesgos/activar/efectivo/{id}','adm_riesgosController@activarEfectivo')->name('activarEfectivo');
     Route::get('admin-de-riesgos/desactivar/efectivo/{id}','adm_riesgosController@desactivarEfectivo')->name('desactivarEfectivo');
+    // III. VALORACIÓN DE RIESGOS VS CONTROLES
+    Route::get('admin-de-riesgos/nueva/valoracion','adm_riesgosController@actionNuevaValoracion')->name('nuevaValoracion');
+    Route::post('admin-de-riesgos/alta/valoracion','adm_riesgosController@actionAltaValoracion')->name('altaValoracion');
+    Route::get('admin-de-riesgos/valoracion/ver/todos','adm_riesgosController@actionVerValoracion')->name('verValoracion');
+    Route::get('admin-de-riesgos/editar/{id}/valoracion','adm_riesgosController@actionEditarValoracion')->name('editarValoracion');
+    Route::put('admin-de-riesgos/actualizar/{id}/valoracion','adm_riesgosController@actionActualizarValoracion')->name('actualizarValoracion');
+    // IV. MAPA DE RIESGOS
+    Route::get('admin-de-riesgos/mapas-de-riesgos/todos','adm_riesgosController@actionListaMapas')->name('enlistaMapas');
+    Route::get('admin-de-riesgos/mapas-de-riesgos/{id}/ver/mapa','adm_riesgosController@actionVerMapa')->name('verMapa');
 });
 

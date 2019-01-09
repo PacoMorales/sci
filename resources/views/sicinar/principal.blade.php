@@ -199,8 +199,8 @@
                       <ul class="treeview-menu">
                         <li><a href="{{route('nuevoRiesgo')}}">I. Evaluación de Riesgos</a></li>
                         <li><a href="{{route('nuevoControl')}}">II. Evaluación de Controles</a></li>
-                        <li><a href="#">III. Valoración de Riesgos vs Controles</a></li>
-                        <li><a href="#">IV. Mapa de Riesgos</a></li>
+                        <li><a href="{{route('nuevaValoracion')}}">III. Valoración de Riesgos vs Controles</a></li>
+                        <li><a href="{{route('enlistaMapas')}}">IV. Mapa de Riesgos</a></li>
                         <li><a href="#">V. Estrategias y Acciones</a></li>
                       </ul>
                     </li>
@@ -213,8 +213,8 @@
                       <ul class="treeview-menu">
                         <li><a href="{{route('verRiesgos')}}">I. Evaluación de Riesgos</a></li>
                         <li><a href="{{route('verControl')}}">II. Evaluación de Controles</a></li>
-                        <li><a href="#">III. Valoración de Riesgos vs Controles</a></li>
-                        <li><a href="#">IV. Mapa de Riesgos</a></li>
+                        <li><a href="{{route('verValoracion')}}">III. Valoración de Riesgos vs Controles</a></li>
+                        <li><a href="{{route('enlistaMapas')}}">IV. Mapa de Riesgos</a></li>
                         <li><a href="#">V. Estrategias y Acciones</a></li>
                       </ul>
                     </li>

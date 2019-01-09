@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\riesgosRequest;
 use App\Http\Requests\factorRequest;
 use App\Http\Requests\controlRequest;
+use App\Http\Requests\valoracionRequest;
 use App\dependenciasModel;
 use App\servidorespubModel;
 use App\progtrabModel;
@@ -950,5 +951,158 @@ class adm_riesgosController extends Controller
             ->where('SCI_FACTORES_RIESGO.ESTRUCGOB_ID','LIKE','21500%')
             ->where('SCI_FACTORES_RIESGO.CVE_RIESGO',$id)
             ->orderBy('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','ASC')->get()));*/
+    }
+
+    //NUEVO III. VALORACIÓN DE RIESGOS VS CONTROLES
+    public function actionNuevaValoracion(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('GRADO_IMPACTO_2','=',0)
+            ->where('ESCALA_VALOR_2','=',0)
+            ->orderBy('CVE_RIESGO','ASC')->get();
+        $grados = gradoimpactoModel::orderBy('GRADO_IMPACTO','ASC')->get();
+        $probabilidades = prob_ocurModel::orderBy('ESCALA_VALOR','ASC')->get();
+        return view('sicinar.administracionderiesgos.valoracion.nuevo',compact('usuario','nombre','estructura','id_estructura','rango','riesgos','grados','probabilidades'));
+    }
+
+    //ALTA III. VALORACIÓN DE RIESGOS VS CONTROLES
+    public function actionAltaValoracion(valoracionRequest $request){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+        $actualizarRiesgo = riesgosModel::where('CVE_RIESGO',$request->riesgo)
+            ->update([
+                'GRADO_IMPACTO_2' => $request->grado,
+                'ESCALA_VALOR_2' => $request->probabilidad,
+                'FECHA_M' => date('Y/m/d'),
+                'USU_M' => $usuario,
+                'IP_M' => $ip
+            ]);
+        toastr()->success('La Valoración ha sido dado de alta correctamente.','Nueva Valoración!',['positionClass' => 'toast-bottom-right']);
+        return redirect()->route('nuevaValoracion');
+    }
+
+    //VER III. VALORACIÓN DE RIESGOS VS CONTROLES
+    public function actionVerValoracion(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO','GRADO_IMPACTO_2','ESCALA_VALOR_2')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('GRADO_IMPACTO_2','>',0)
+            ->where('ESCALA_VALOR_2','>',0)
+            ->orderBy('CVE_RIESGO','ASC')->paginate(5);
+        return view('sicinar.administracionderiesgos.valoracion.ver',compact('usuario','nombre','estructura','id_estructura','rango','riesgos'));
+    }
+
+    //EDITAR III. VALORACIÓN DE RIESGOS VS CONTROLES
+    public function actionEditarValoracion($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgo = riesgosModel::select('CVE_RIESGO','DESC_RIESGO','GRADO_IMPACTO_2','ESCALA_VALOR_2')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO','=',$id)
+            ->first();
+        $grados = gradoimpactoModel::orderBy('GRADO_IMPACTO','ASC')->get();
+        $probabilidades = prob_ocurModel::orderBy('ESCALA_VALOR','ASC')->get();
+        return view('sicinar.administracionderiesgos.valoracion.editar',compact('usuario','nombre','estructura','id_estructura','rango','riesgo','grados','probabilidades'));
+    }
+
+    //MODIFICAR III. VALORACIÓN DE RIESGOS VS CONTROLES
+    public function actionActualizarValoracion(valoracionRequest $request, $id){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+        $actualizarRiesgo = riesgosModel::where('CVE_RIESGO',$id)
+            ->update([
+                'GRADO_IMPACTO_2' => $request->grado,
+                'ESCALA_VALOR_2' => $request->probabilidad,
+                'FECHA_M' => date('Y/m/d'),
+                'USU_M' => $usuario,
+                'IP_M' => $ip
+            ]);
+        toastr()->success('La Valoración ha sido dado de actualizada correctamente.','Valoración Actualizada!',['positionClass' => 'toast-bottom-right']);
+        return redirect()->route('verValoracion');
+    }
+
+    //ENLISTAR TODOS LOS RIESGOS CON MAPAS
+    public function actionListaMapas(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO','GRADO_IMPACTO_2','ESCALA_VALOR_2')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('GRADO_IMPACTO_2','>',0)
+            ->where('ESCALA_VALOR_2','>',0)
+            ->orderBy('CVE_RIESGO','ASC')->paginate(5);
+        return view('sicinar.administracionderiesgos.mapa.enlistarMapas',compact('usuario','nombre','estructura','id_estructura','rango','riesgos'));
+    }
+
+    public function actionVerMapa($id){
+        dd('OC mapa de riesgo');
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO','GRADO_IMPACTO_2','ESCALA_VALOR_2')
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->where('CVE_RIESGO','=',$id)
+            ->where('GRADO_IMPACTO_2','>',0)
+            ->where('ESCALA_VALOR_2','>',0)
+            ->orderBy('CVE_RIESGO','ASC')->paginate(5);
+        return view('sicinar.administracionderiesgos.mapa.verMapa',compact('usuario','nombre','estructura','id_estructura','rango','riesgos'));
     }
 }

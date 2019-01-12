@@ -23,6 +23,8 @@ use App\factores_riesgoModel;
 use App\tipo_controlModel;
 use App\defsuficienciaModel;
 use App\control_riesgoModel;
+use App\admon_riesgosModel;
+use App\estrategias_accionesModel;
 
 class adm_riesgosController extends Controller
 {
@@ -1063,7 +1065,7 @@ class adm_riesgosController extends Controller
         return redirect()->route('verValoracion');
     }
 
-    //ENLISTAR TODOS LOS RIESGOS CON MAPAS
+    //ENLISTAR TODOS LOS RIESGOS CON MAPAS IV. MAPA DE RIESGOS
     public function actionListaMapas(){
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
@@ -1105,5 +1107,35 @@ class adm_riesgosController extends Controller
             ->orderBy('CVE_RIESGO','ASC')->first();
         //dd($riesgo);
         return view('sicinar.administracionderiesgos.mapa.verMapa',compact('usuario','nombre','estructura','id_estructura','rango','riesgo'));
+    }
+
+    //OBTENER FACTORES V. ESTRATEGIAS PARA EVITAR EL RIESGO (QUE NO TIENEN ACCIONES DE MEJORA)
+    public function actionFactores($id){
+        return (response()->json(
+            estrategias_accionesModel::join('SCI_FACTORES_RIESGO','SCI_ESTRATEGIAS_YACCIONES.CVE_ACCION','<>','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','right outer')
+                ->select('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO')
+                ->where('SCI_FACTORES_RIESGO.N_PERIODO',(int)date('Y'))
+                ->where('SCI_FACTORES_RIESGO.ESTRUCGOB_ID','LIKE','21500%')
+                ->where('SCI_FACTORES_RIESGO.CVE_RIESGO','=',$id)
+                ->orderBy('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','ASC')
+                ->get()
+        ));
+    }
+
+    //NUEVO V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionNuevaEstrategia(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO')
+            ->where()
+            ->get();
     }
 }

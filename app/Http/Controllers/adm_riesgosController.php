@@ -6,6 +6,7 @@ use App\Http\Requests\riesgosRequest;
 use App\Http\Requests\factorRequest;
 use App\Http\Requests\controlRequest;
 use App\Http\Requests\valoracionRequest;
+use App\Http\Requests\estrategiasRequest;
 use App\dependenciasModel;
 use App\servidorespubModel;
 use App\progtrabModel;
@@ -1112,7 +1113,7 @@ class adm_riesgosController extends Controller
     //OBTENER FACTORES V. ESTRATEGIAS PARA EVITAR EL RIESGO (QUE NO TIENEN ACCIONES DE MEJORA)
     public function actionFactores($id){
         return (response()->json(
-            estrategias_accionesModel::join('SCI_FACTORES_RIESGO','SCI_ESTRATEGIAS_YACCIONES.CVE_ACCION','<>','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','right outer')
+            factores_riesgoModel::join('SCI_ESTRATEGIAS_YACCIONES','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','<>','SCI_ESTRATEGIAS_YACCIONES.NUM_FACTOR_RIESGO','right outer')
                 ->select('SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO')
                 ->where('SCI_FACTORES_RIESGO.N_PERIODO',(int)date('Y'))
                 ->where('SCI_FACTORES_RIESGO.ESTRUCGOB_ID','LIKE','21500%')
@@ -1135,7 +1136,101 @@ class adm_riesgosController extends Controller
         $id_estructura = rtrim($id_estruc," ");
         $rango = session()->get('rango');
         $riesgos = riesgosModel::select('CVE_RIESGO','DESC_RIESGO')
-            ->where()
+            ->where('N_PERIODO',(int)date('Y'))
+            ->where('ESTRUCGOB_ID','LIKE','21500%')
+            ->orderBy('CVE_RIESGO','ASC')->get();
+        $estrategias = admon_riesgosModel::select('CVE_ADMON_RIESGO','DESC_ADMON_RIESGO')
+            ->orderBy('CVE_ADMON_RIESGO','ASC')->get();
+        $servidores = servidorespubModel::select('ID_SP','NOMBRES','PATERNO','MATERNO','UNID_ADMON')
+            ->orderBy('UNID_ADMON','ASC')
+            ->orderBy('PATERNO','ASC')
             ->get();
+        return view('sicinar.administracionderiesgos.estrategias.nuevaEstrategia',compact('nombre','usuario','estructura','rango','id_estructura','riesgos','estrategias','servidores'));
     }
+
+    //ALTA V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionAltaEstrategia(estrategiasRequest $request){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $ip = session()->get('ip');
+        $riesgo= riesgosModel::where('CVE_RIESGO','=',$request->riesgo)->first();
+        $id_estrategia = estrategias_accionesModel::max('CVE_ACCION');
+        $nuevaEstrategia = new estrategias_accionesModel();
+        $nuevaEstrategia->N_PERIODO = date('Y');
+        $nuevaEstrategia->ESTRUCGOB_ID = $riesgo->estrucgob_id;
+        $nuevaEstrategia->CVE_DEPENDENCIA = $riesgo->cve_dependencia;
+        $nuevaEstrategia->CVE_RIESGO = $request->riesgo;
+        $nuevaEstrategia->NUM_FACTOR_RIESGO = $request->factor;
+        $nuevaEstrategia->CVE_ADMON_RIESGO = $request->estrategia;
+        $nuevaEstrategia->CVE_ACCION = $id_estrategia+1;
+        $nuevaEstrategia->DESC_ACCION = $request->descripcion;
+        $nuevaEstrategia->ID_SP = $request->sp;
+        $nuevaEstrategia->STATUS_1 = 'S';
+        $nuevaEstrategia->STATUS_2 = '0';
+        $nuevaEstrategia->FECHA_REG = date('Y/m/d');
+        $nuevaEstrategia->USU = $usuario;
+        $nuevaEstrategia->IP = $ip;
+        $nuevaEstrategia->FECHA_M = date('Y/m/d');
+        $nuevaEstrategia->USU_M = $usuario;
+        $nuevaEstrategia->IP_M = $ip;
+        if($nuevaEstrategia->save() == true){
+            toastr()->success('La Estrategia ha sido dado de alta correctamente.','Nueva Estrategia!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('verEstrategias');
+        }else{
+            toastr()->error('Ha ocurrido un error al dar de alta la Estrategia.','Ups!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevaEstrategia');
+        }
+
+    }
+
+    //VER V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionVerEstrategias(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        $id_estruc = session()->get('id_estructura');
+        $id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $estrategias = estrategias_accionesModel::join('SCI_RIESGOS','SCI_ESTRATEGIAS_YACCIONES.CVE_RIESGO','=','SCI_RIESGOS.CVE_RIESGO')
+            ->join('SCI_FACTORES_RIESGO','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','=','SCI_ESTRATEGIAS_YACCIONES.NUM_FACTOR_RIESGO')
+            ->join('SCI_ADMON_RIESGOS','SCI_ADMON_RIESGOS.CVE_ADMON_RIESGO','=','SCI_ESTRATEGIAS_YACCIONES.CVE_ACCION')
+            ->select('SCI_RIESGOS.CVE_RIESGO','SCI_RIESGOS.DESC_RIESGO','SCI_FACTORES_RIESGO.NUM_FACTOR_RIESGO','SCI_FACTORES_RIESGO.DESC_FACTOR_RIESGO','SCI_ADMON_RIESGOS.DESC_ADMON_RIESGO','SCI_ESTRATEGIAS_YACCIONES.DESC_ACCION','SCI_ESTRATEGIAS_YACCIONES.STATUS_1','SCI_ESTRATEGIAS_YACCIONES.STATUS_2')
+            ->where('SCI_ESTRATEGIAS_YACCIONES.N_PERIODO',(int)date('Y'))
+            ->orderBy('SCI_ESTRATEGIAS_YACCIONES.CVE_RIESGO','ASC')
+            ->orderBy('SCI_ESTRATEGIAS_YACCIONES.NUM_FACTOR_RIESGO','ASC')
+            ->paginate(5);
+        if($estrategias->count()<=0){
+            toastr()->error('No haz dado de alta ninguna estrategia.','Ups!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('nuevaEstrategia');
+        }
+        return view('sicinar.administracionderiesgos.estrategias.verEstrategia',compact('nombre','usuario','estructura','rango','id_estructura','estrategias'));
+    }
+
+    //ACTIVAR V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionActivarEstrategia($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $estrategia = estrategias_accionesModel::where('CVE_ACCION',$id)
+            ->update();
+    }
+
+    //DESACTIVAR V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionDesactivarEstrategia($id){}
+
+    //CONCLUIR V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionConcluirEstrategia($id){}
+
+    //PENDIENTE V. ESTRATEGIAS PARA EVITAR EL RIESGO
+    public function actionPendienteEstrategia($id){}
 }

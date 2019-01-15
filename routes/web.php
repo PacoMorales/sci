@@ -130,5 +130,8 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('admin-de-riesgos/mapas-de-riesgos/{id}/ver/mapa','adm_riesgosController@actionVerMapa')->name('verMapa');
     // V. ESTRATEGIAS PARA EVITAR EL RIESGO
     Route::get('estrategias/factores/{id}','adm_riesgosController@actionFactores')->name('factores');
+    Route::get('admin-de-riesgos/nueva/estrategia','adm_riesgosController@actionNuevaEstrategia')->name('nuevaEstrategia');
+    Route::post('admin-de-riesgos/alta/nueva/estrategia','adm_riesgosController@actionAltaEstrategia')->name('altaEstrategia');
+    Route::get('admin-de-riesgos/ver/estrategias','adm_riesgosController@actionVerEstrategias')->name('verEstrategias');
 });
 

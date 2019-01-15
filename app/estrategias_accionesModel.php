@@ -16,6 +16,7 @@ class estrategias_accionesModel extends Model
         'CVE_DEPENDENCIA',
         'CVE_RIESGO',
         'NUM_FACTOR_RIESGO',
+        'CVE_ADMON_RIESGO',
         'CVE_ACCION',
         'DESC_ACCION',
         'ID_SP',

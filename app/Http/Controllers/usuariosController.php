@@ -145,7 +145,7 @@ class usuariosController extends Controller
         if($request->perfil == '1' AND $request->unidad == '0'){
             return back()->withErrors(['unidad' => 'No puedes elegir la Unidad Administrativa: ADMINISTRADOR si tiene rol OPERATIVO.']);
         }
-        dd($request->all());
+        //dd($request->all());
         $folio = usuarioModel::max('FOLIO');
         $nuevoUsuario = new usuarioModel();
         $nuevoUsuario->N_PERIODO = date('Y');
@@ -156,7 +156,7 @@ class usuariosController extends Controller
         $nuevoUsuario->PASSWORD = $request->password;
         $nuevoUsuario->AP_PATERNO = strtoupper($request->paterno);
         $nuevoUsuario->AP_MATERNO = strtoupper($request->materno);
-        $nuevoUsuario->NOMBRE = strtoupper($request->nombre);
+        $nuevoUsuario->NOMBRES = strtoupper($request->nombre);
         $nuevoUsuario->NOMBRE_COMPLETO = strtoupper($request->nombre.' '.$request->paterno.' '.$request->materno);
         if($request->perfil == '1')
             $nuevoUsuario->TIPO_USUARIO = 'PG';
@@ -167,11 +167,12 @@ class usuariosController extends Controller
                 $nuevoUsuario->TIPO_USUARIO = 'AD';
         $nuevoUsuario->STATUS_1 = $request->perfil;
         $nuevoUsuario->STATUS_2 = 1;
+        $nuevoUsuario->EMAIL = $request->correo;
         $nuevoUsuario->IP = $ip;
         $nuevoUsuario->FECHA_REGISTRO = date('Y/m/d');
         if($nuevoUsuario->save() == true){
             toastr()->success('El Usuario ha sido creado correctamente.','Ok!',['positionClass' => 'toast-bottom-right']);
-            return redirect()->route('altaUsuario');
+            return redirect()->route('verUsuarios');
         }else{
             toastr()->error('El Usuario no ha sido creado.','Ha ocurrido algo inesperado!',['positionClass' => 'toast-bottom-right']);
             return redirect()->route('altaUsuario');
@@ -180,6 +181,106 @@ class usuariosController extends Controller
     }
 
     public function actionVerUsuario(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        //$id_estruc = session()->get('id_estructura');
+        //$id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        //$ip = session()->get('ip');
+        $usuarios = usuarioModel::select('FOLIO','NOMBRE_COMPLETO','EMAIL','CVE_DEPENDENCIA','LOGIN','PASSWORD','STATUS_1','STATUS_2')
+            ->orderBy('STATUS_1','DESC')
+            ->orderBy('FOLIO','ASC')
+            ->paginate(15);
+            //->get();
+        $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')
+            ->where('ESTRUCGOB_ID','like','%21500%')
+            ->where('CLASIFICGOB_ID','=',1)
+            ->get();
+        //dd($usuarios->all());
+        return view('sicinar.BackOffice.verTodos',compact('nombre','usuario','estructura','rango','usuarios','dependencias'));
+        //dd($usuarios->all());
+    }
 
+    public function actionEditarUsuario($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        //$id_estruc = session()->get('id_estructura');
+        //$id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $user = usuarioModel::select('FOLIO','NOMBRES','AP_PATERNO','AP_MATERNO','LOGIN','PASSWORD','STATUS_1','EMAIL','CVE_DEPENDENCIA')
+            ->where('FOLIO',$id)
+            ->first();
+        $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')
+            ->where('ESTRUCGOB_ID','like','%21500%')
+            ->where('CLASIFICGOB_ID','=',1)
+            ->get();
+        return view('sicinar.BackOffice.editarUsuario',compact('nombre','usuario','estructura','rango','user','dependencias'));
+    }
+
+    public function actionActualizarUsuario(altaUsuarioRequest $request, $id){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        if($request->perfil == '1')
+            $tp = 'PG';
+        else
+            if($request->perfil == '2')
+                $tp = 'GN';
+            else
+                $tp = 'AD';
+        $actUser = usuarioModel::where('FOLIO',$id)
+            ->update([
+                'LOGIN' => $request->usuario,
+                'PASSWORD' => $request->password,
+                'AP_PATERNO' => strtoupper($request->paterno),
+                'AP_MATERNO' => strtoupper($request->materno),
+                'NOMBRES' => strtoupper($request->nombre),
+                'NOMBRE_COMPLETO' => strtoupper($request->nombre.' '.$request->paterno.' '.$request->materno),
+                'EMAIL' => $request->correo,
+                'TIPO_USUARIO' => $tp,
+                'STATUS_1' => $request->perfil
+            ]);
+        toastr()->success('El Usuario ha sido actualizado correctamente.','Ok!',['positionClass' => 'toast-bottom-right']);
+        return redirect()->route('verUsuarios');
+
+    }
+
+    public function actionActivarUsuario($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $activar = usuarioModel::where('FOLIO',$id)
+            ->update([
+                'STATUS_2' => '1'
+            ]);
+        return redirect()->route('verUsuarios');
+    }
+
+    public function actionDesactivarUsuario($id){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $activar = usuarioModel::where('FOLIO',$id)
+            ->update([
+                'STATUS_2' => '0'
+            ]);
+        return redirect()->route('verUsuarios');
     }
 }

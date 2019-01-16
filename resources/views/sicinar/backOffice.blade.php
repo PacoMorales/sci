@@ -109,20 +109,9 @@
                   </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-user-plus"></i> Nuevo Usuario</a></li>
-                            <li><a href="#"><i class="fa fa-search"></i><i class="fa fa-user"></i> Ver Todos</a></li>
+                            <li><a href="{{route('backUsuarios')}}"><i class="fa fa-user-plus"></i> Nuevo Usuario</a></li>
+                            <li><a href="{{route('verUsuarios')}}"><i class="fa fa-search"></i><i class="fa fa-user"></i> Ver Todos</a></li>
                         </ul>
-                    </li>
-                @endif
-
-                @if($rango>1 AND $rango<=4)
-                    <li>
-                        <a href="{{ route('verGraficas') }}">
-                            <i class="fa fa-pie-chart"></i><span>Gráficas</span>
-                            <span class="pull-right-container">
-                    <!--<small class="label pull-right bg-green">new</small>-->
-                  </span>
-                        </a>
                     </li>
                 @endif
             </ul>

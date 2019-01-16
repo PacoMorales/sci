@@ -81,7 +81,7 @@
                     <li class="user-footer">
                       @if($rango>=3)
                       <div class="pull-left">
-                        <a href="{{route('backUsuarios')}}" class="btn btn-success btn-flat" title="BackOffice del Sistema"><i class="fa fa-coffee"></i></a>
+                        <a href="{{route('verUsuarios')}}" class="btn btn-primary btn-flat" title="BackOffice del Sistema"><i class="fa fa-coffee"></i></a>
                       </div>
                       @endif
                       <div class="pull-right">
@@ -184,7 +184,7 @@
                   </ul>
                 </li>
               @endif
-              @if($rango >= 4)
+              @if($rango >= 3)
                 <li  class="treeview">
                   <a href="#"><i class="fa fa-th-large"></i> <span>Administración de Riesgos</span>
                     <span class="pull-right-container">

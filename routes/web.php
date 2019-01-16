@@ -142,5 +142,10 @@ Route::group(['prefix' => 'control-interno'], function() {
     // BACK OFFICE DEL SISTEMA
     Route::get('BackOffice/usuarios','usuariosController@actionBackOffice')->name('backUsuarios');
     Route::post('BackOffice/usuarios/alta','usuariosController@actionAltaUsuario')->name('altaUsuario');
+    Route::get('BackOffice/usuarios/todos','usuariosController@actionVerUsuario')->name('verUsuarios');
+    Route::get('BackOffice/usuarios/{id}/editar','usuariosController@actionEditarUsuario')->name('editarUsuario');
+    Route::put('BackOffice/usuarios/{id}/actualizar','usuariosController@actionActualizarUsuario')->name('actualizarUsuario');
+    Route::get('BackOffice/usuario/{id}/activar','usuariosController@actionActivarUsuario')->name('activarUsuario');
+    Route::get('BackOffice/usuario/{id}/desactivar','usuariosController@actionDesactivarUsuario')->name('desactivarUsuario');
 });
 

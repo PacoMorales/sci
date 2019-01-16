@@ -62,16 +62,16 @@
                                         <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;">{{$estrategia->desc_admon_riesgo}}</td>
                                         <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;">{{$estrategia->desc_accion}}</td>
                                         @if($estrategia->status_1 == 'S')
-                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="#" title="Activo" class="btn btn-success"><i class="fa fa-check"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="{{route('desactivarEstrategia',$estrategia->cve_accion)}}" title="Activo" class="btn btn-success"><i class="fa fa-check"></i></a></td>
                                         @else
-                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="#" title="Inactivo" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="{{route('activarEstrategia',$estrategia->cve_accion)}}" title="Inactivo" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
                                         @endif
                                         @if($estrategia->status_2 == '1')
-                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="#" title="Concluido" class="btn btn-success"><i class="fa fa-check"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="{{route('pendienteEstrategia',$estrategia->cve_accion)}}" title="Concluido" class="btn btn-success"><i class="fa fa-check-square-o"></i></a></td>
                                         @else
-                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="#" title="Pendiente" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
+                                            <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="{{route('concluirEstrategia',$estrategia->cve_accion)}}" title="Pendiente" class="btn btn-danger"><i class="fa fa-square-o"></i></a></td>
                                         @endif
-                                        <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="#" title="Editar" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                                        <td style="text-align:center; vertical-align: middle;border: 2px solid slategray;"><a href="{{route('editarEstrategia',$estrategia->cve_accion)}}" title="Editar" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                                     @endforeach
                                 </tbody>
                                 {!! $estrategias->appends(request()->input())->links() !!}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\usuarioRequest;
+use App\Http\Requests\altaUsuarioRequest;
 use Illuminate\Http\Request;
 use App\usuarioModel;
 use App\estructurasModel;
@@ -12,7 +13,11 @@ class usuariosController extends Controller
 {
     public function actionLogin(usuarioRequest $request){
     	//dd($request->all());
-        $existe = usuarioModel::select('LOGIN','PASSWORD','TIPO_USUARIO','ESTRUCGOB_ID','CVE_DEPENDENCIA','STATUS_1')->where('LOGIN','like','%'.$request->usuario.'%')->where('PASSWORD','like','%'.$request->password.'%')->get();
+        $existe = usuarioModel::select('LOGIN','PASSWORD','TIPO_USUARIO','ESTRUCGOB_ID','CVE_DEPENDENCIA','STATUS_1')
+            ->where('LOGIN','like','%'.$request->usuario.'%')
+            ->where('PASSWORD','like','%'.$request->password.'%')
+            ->where('STATUS_2',1)
+            ->get();
     	//dd($existe);
         if($existe->count()>=1){
             //dd('Entra if.');
@@ -86,7 +91,7 @@ class usuariosController extends Controller
     		toastr()->info($nombre,'Bienvenido ');
     		return view('sicinar.menu.menuInicio',compact('usuario','nombre','estructura','rango'));
     	}else{
-    		return back()->withInput()->withErrors(['LOGIN' => 'Usuario no esta dado de alta.']);
+    		return back()->withInput()->withErrors(['LOGIN' => 'El usuario no esta dado de alta.']);
     	}
     }
 
@@ -102,5 +107,79 @@ class usuariosController extends Controller
 
     public function actionExpirada(){
     	return view('sicinar.login.expirada');
+    }
+
+    public function actionBackOffice(){
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        //$id_estruc = session()->get('id_estructura');
+        //$id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        //$ip = session()->get('ip');
+        $dependencias = dependenciasModel::select('DEPEN_ID','DEPEN_DESC')
+            ->where('ESTRUCGOB_ID','like','%21500%')
+            ->where('CLASIFICGOB_ID','=',1)
+            ->get();
+        return view('sicinar.BackOffice.administracionUsuarios',compact('nombre','usuario','estructura','rango','dependencias'));
+    }
+
+    public function actionAltaUsuario(altaUsuarioRequest $request){
+        //dd($request->all());
+        $nombre = session()->get('userlog');
+        $pass = session()->get('passlog');
+        if($nombre == NULL AND $pass == NULL){
+            return view('sicinar.login.expirada');
+        }
+        $usuario = session()->get('usuario');
+        $estructura = session()->get('estructura');
+        //$id_estruc = session()->get('id_estructura');
+        //$id_estructura = rtrim($id_estruc," ");
+        $rango = session()->get('rango');
+        $ip = session()->get('ip');
+
+        if($request->perfil == '1' AND $request->unidad == '0'){
+            return back()->withErrors(['unidad' => 'No puedes elegir la Unidad Administrativa: ADMINISTRADOR si tiene rol OPERATIVO.']);
+        }
+        dd($request->all());
+        $folio = usuarioModel::max('FOLIO');
+        $nuevoUsuario = new usuarioModel();
+        $nuevoUsuario->N_PERIODO = date('Y');
+        $nuevoUsuario->FOLIO = $folio+1;
+        $nuevoUsuario->ESTRUCGOB_ID = '21500';
+        $nuevoUsuario->CVE_DEPENDENCIA = $request->unidad;
+        $nuevoUsuario->LOGIN = $request->usuario;
+        $nuevoUsuario->PASSWORD = $request->password;
+        $nuevoUsuario->AP_PATERNO = strtoupper($request->paterno);
+        $nuevoUsuario->AP_MATERNO = strtoupper($request->materno);
+        $nuevoUsuario->NOMBRE = strtoupper($request->nombre);
+        $nuevoUsuario->NOMBRE_COMPLETO = strtoupper($request->nombre.' '.$request->paterno.' '.$request->materno);
+        if($request->perfil == '1')
+            $nuevoUsuario->TIPO_USUARIO = 'PG';
+        else
+            if($request->perfil == '2')
+                $nuevoUsuario->TIPO_USUARIO = 'GN';
+            else
+                $nuevoUsuario->TIPO_USUARIO = 'AD';
+        $nuevoUsuario->STATUS_1 = $request->perfil;
+        $nuevoUsuario->STATUS_2 = 1;
+        $nuevoUsuario->IP = $ip;
+        $nuevoUsuario->FECHA_REGISTRO = date('Y/m/d');
+        if($nuevoUsuario->save() == true){
+            toastr()->success('El Usuario ha sido creado correctamente.','Ok!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('altaUsuario');
+        }else{
+            toastr()->error('El Usuario no ha sido creado.','Ha ocurrido algo inesperado!',['positionClass' => 'toast-bottom-right']);
+            return redirect()->route('altaUsuario');
+        }
+
+    }
+
+    public function actionVerUsuario(){
+
     }
 }

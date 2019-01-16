@@ -20,7 +20,7 @@ class usuarioModel extends Model
 	    'PASSWORD',
 	    'TIPO_USUARIO',
       	'STATUS_1', //TIPO DE USUARIO [3 => ADMIN, 2 => GENERAL, 3 => PARTICULAR]
-      	'STATUS_2',
+      	'STATUS_2', //1 ACTIVO      0 INACTIVO
 	    'FECHA_REGISTRO'
     ];
 }

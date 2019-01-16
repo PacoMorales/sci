@@ -20,8 +20,8 @@ class estrategias_accionesModel extends Model
         'CVE_ACCION',
         'DESC_ACCION',
         'ID_SP',
-        'STATUS_1',
-        'STATUS_2',
+        'STATUS_1', //S ACTIVO      N INACTIVO
+        'STATUS_2', //0 PENDIENTE   1 TERMINADO
         'USU',
         'IP',
         'FECHA_REG',

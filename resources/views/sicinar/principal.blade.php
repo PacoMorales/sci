@@ -79,11 +79,13 @@
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                      <!--<div class="pull-left">
-                        <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                      </div>-->
+                      @if($rango>=3)
+                      <div class="pull-left">
+                        <a href="{{route('backUsuarios')}}" class="btn btn-success btn-flat" title="BackOffice del Sistema"><i class="fa fa-coffee"></i></a>
+                      </div>
+                      @endif
                       <div class="pull-right">
-                        <a href="{{ route('terminada') }}" class="btn btn-default btn-flat">Salir</a>
+                        <a href="{{ route('terminada') }}" class="btn btn-danger btn-flat"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
                       </div>
                     </li>
                   </ul>

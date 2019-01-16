@@ -133,5 +133,14 @@ Route::group(['prefix' => 'control-interno'], function() {
     Route::get('admin-de-riesgos/nueva/estrategia','adm_riesgosController@actionNuevaEstrategia')->name('nuevaEstrategia');
     Route::post('admin-de-riesgos/alta/nueva/estrategia','adm_riesgosController@actionAltaEstrategia')->name('altaEstrategia');
     Route::get('admin-de-riesgos/ver/estrategias','adm_riesgosController@actionVerEstrategias')->name('verEstrategias');
+    Route::get('admin-de-riesgos/activar/estrategia/{id}','adm_riesgosController@actionActivarEstrategia')->name('activarEstrategia');
+    Route::get('admin-de-riesgos/desactivar/estrategia/{id}','adm_riesgosController@actionDesactivarEstrategia')->name('desactivarEstrategia');
+    Route::get('admin-de-riesgos/concluir/estrategia/{id}','adm_riesgosController@actionConcluirEstrategia')->name('concluirEstrategia');
+    Route::get('admin-de-riesgos/pendiente/estrategia/{id}','adm_riesgosController@actionPendienteEstrategia')->name('pendienteEstrategia');
+    Route::get('admin-de-riesgos/editar/estrategia/{id}','adm_riesgosController@actionEditarEstrategia')->name('editarEstrategia');
+    Route::put('admin-de-riesgos/actualizar/estrategia/{id}','adm_riesgosController@actionActualizarEstrategia')->name('actualizarEstrategia');
+    // BACK OFFICE DEL SISTEMA
+    Route::get('BackOffice/usuarios','usuariosController@actionBackOffice')->name('backUsuarios');
+    Route::post('BackOffice/usuarios/alta','usuariosController@actionAltaUsuario')->name('altaUsuario');
 });
 

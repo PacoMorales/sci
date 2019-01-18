@@ -1190,6 +1190,7 @@ class adm_riesgosController extends Controller
 
     //VER V. ESTRATEGIAS PARA EVITAR EL RIESGO
     public function actionVerEstrategias(){
+        //COMENTARIO
         $nombre = session()->get('userlog');
         $pass = session()->get('passlog');
         if($nombre == NULL AND $pass == NULL){
